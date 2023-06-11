@@ -19,10 +19,15 @@ module.exports = (sequelize) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
-			creation_date: {
-				type: DataTypes.DATE,
-				allowNull: true,
+			authorID: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
 			},
+			topicID: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+			},
+
 		},
 		{
 			paranoid: true,

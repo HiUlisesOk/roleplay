@@ -2,7 +2,7 @@ const { Router } = require("express");
 const CreateUserRouter = Router();
 
 const { createUser } = require("../../controllers/UserControllers.js");
-//Creamos una receta y la guardamos en la base de datos
+
 CreateUserRouter.post("/create-user", async (req, res) => {
   try {
     const {

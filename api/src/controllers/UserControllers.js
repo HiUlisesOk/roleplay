@@ -40,8 +40,14 @@ async function createUser(
 	if (!password) throw new Error("Falta password");
 	if (!userScore) throw new Error("Falta userScore");
 
+	const matchingUser = await User.findOne({
+		where: {
+			[Op.or]: [{ email: email }, { username: username }],
+		},
+		attributes: ['email', 'password'],
+	});
 
-
+	if (matchingUser) throw new Error("El usuario ya existe");
 
 	// Obtener la contraseña del usuario (por ejemplo, desde req.body)
 	const userPassword = password;
@@ -70,8 +76,8 @@ async function createUser(
 	// Crea un topic asociado al usuario
 	const topic = await Topic.create({
 		title: 'Mi primer topic',
-		creation_date: generateDateTime(),
 		author: username,
+		authorID: user.ID
 		// Otros campos del topic
 	});
 
@@ -79,8 +85,9 @@ async function createUser(
 	const post = await Post.create({
 		title: 'Mi primer post',
 		content: 'Hola! 😎',
-		creation_date: generateDateTime(),
 		author: username,
+		authorID: user.ID,
+		topicID: topic.ID
 		// Otros campos del post
 	});
 
@@ -89,6 +96,7 @@ async function createUser(
 	await post.setTopic(topic);
 
 	const newUser = {
+		username,
 		firstName,
 		lastName,
 		birthDate,

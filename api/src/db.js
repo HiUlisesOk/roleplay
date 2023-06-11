@@ -42,7 +42,7 @@ const { User, Topic, Post } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-// User
+// Users
 User.belongsToMany(Topic, { through: 'UserTopics' });
 User.hasMany(Post);
 
