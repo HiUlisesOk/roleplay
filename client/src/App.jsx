@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Box, CssBaseline, Typography, TextField } from '@mui/material'
+import Button from '@mui/material/Button'
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
+export default function App() {
+  return(
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <CssBaseline />
+    <Box sx={{
+      display: 'flex',
+      justifyContent : 'center',
+      height: '100vh',
+      backgroundColor: '#1CB251',
+    }}>
+      <Box
+      component={'img'}
+      src='https://i.imgur.com/sW11viE.jpg'
+      alt="background-image"
+        sx={{
+          height: '100vh',
+          width: '100vw',
+          objectFit: 'cover',  
+          opacity: 0.8,
+        }}
+      />
+    </Box>
+    <Box sx={{
+      position: 'absolute',
+      top: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100vh',
+      width: '100%',
+      alignItems: 'center',
+      justifyContent: 'space-around',
+    }}>
+      <Box>
+      <Typography variant="h3" align='center' sx={{color: '#f5f5f5'}}>ROLEPLAY</Typography>
+      <Typography variant="subtitle2" align='center' sx={{color: '#f5f5f5'}}>Lorem ipsum dolor sit amet consectetur.</Typography>
+      </Box>
+      <Box component="form" sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 1}}>
+      <TextField id="username" label="Nombre de usario" variant="filled" />
+      <TextField id="password" label="Contraseña" variant="filled" />
+      <Button variant="contained" color="primary">
+        ENTRAR
+      </Button>
+      <Button size="small" variant="text" color="primary">
+        REGISTRARSE
+      </Button>
+      </Box>
+    </Box>
     </>
   )
 }
-
-export default App
