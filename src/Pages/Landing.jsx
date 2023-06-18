@@ -46,10 +46,10 @@ export default function Landing() {
         }}>
           <TextField id="username" label="Nombre de usario" variant="filled" />
           <TextField id="password" label="Contraseña" variant="filled" />
-          <Button component={Link} to="/home" variant="contained" color="primary">
+          <Button component={Link} to="/home" variant="contained" color="secondary">
             ENTRAR
           </Button>
-          <Button component={Link} to="/register" size="small" variant="text" color="primary">
+          <Button component={Link} to="/register" size="small" variant="text" color="secondary">
             REGISTRARSE
           </Button>
         </Box>

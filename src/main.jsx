@@ -8,18 +8,27 @@ import { BrowserRouter } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
+    mode: 'dark',
     primary: {
-      main: '#1CB251',
-      contrastText: '#f5f5f5',
-    },
-    secondary: {
       main: '#171312',
       contrastText: '#f5f5f5',
     },
-    white: {
-      main: '#f5f5f5',
-      contrastText: '#171312',
+    secondary: {
+      main: '#1CB251',
+      contrastText: '#f5f5f5',
     },
+    background: {
+      default: '#171312',
+      paper: '#1f1b1a',
+    },
+    text: {
+      primary: '#F5F5F5',
+      secondary: '#ECEBEB',
+      disabled: '#DCDCDC',
+    },
+  },
+  typography: {
+    fontFamily: 'Poppins',
   },
 });
 

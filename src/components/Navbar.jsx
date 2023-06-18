@@ -11,15 +11,15 @@ export default function Navbar() {
     const [open,setOpen] = useState(false);
 
     const arrayLinks = [
-        { title : "Home", path: "/home", icon: <HomeIcon color="primary" />},
-        { title : "Perfil", path: "/home1", icon: <PersonIcon color="primary" />},
-        { title : "Tienda", path: "/home2", icon: <ShoppingCartIcon color="primary" />},
+        { title : "Home", path: "/home", icon: <HomeIcon color="secondary" />},
+        { title : "Perfil", path: "/home1", icon: <PersonIcon color="secondary" />},
+        { title : "Tienda", path: "/home2", icon: <ShoppingCartIcon color="secondary" />},
     ]
 
     return(
         <nav>
         <Box sx={{ flexGrow: 1 }}>
-        <AppBar color="secondary" position="static" >
+        <AppBar position="static" >
             <Toolbar sx={{padding: 1}}>
                 <Box sx={{display: {xs:'block', sm: 'none'}}}>
                 <Button color="primary" variant="text" onClick={()=>{setOpen(true)}}><MenuIcon /></Button>
@@ -27,7 +27,7 @@ export default function Navbar() {
                 <Box sx={{display : {xs:'none', sm: 'flex'}, gap: 1 }}>
                 {
                     arrayLinks.map((item)=>(
-                        <Button key={item.title + item.lengt} component={Link} to={item.path} color="primary" variant="text" startIcon={item.icon} >{item.title} </Button>
+                        <Button key={item.title + item.lengt} component={Link} to={item.path} color="secondary" variant="text" startIcon={item.icon} >{item.title} </Button>
                     ))
                 }
                 </Box>
