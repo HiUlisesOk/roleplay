@@ -2,9 +2,37 @@ import { Box, Typography, TextField } from '@mui/material'
 import Button from '@mui/material/Button'
 import { Link } from "react-router-dom";
 import BG from '../img/bg.jpg'
-
+import React, { useDebugValue, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { Login } from '../redux/actions/userActions'
+import { loginSelector } from '../redux/selector/userSelector'
 
 export default function Landing() {
+  const dispatch = useDispatch();
+  const { loginInfo } = useSelector(loginSelector);
+
+  const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      dispatch(Login({ email: username, password: password }))
+      console.log(loginInfo)
+    } catch (error) {
+      console.error(error);
+      // Maneja los errores de inicio de sesión.
+    }
+  };
+
+  useEffect(() => {
+    const match = loginInfo.passwordsMatch;
+    match && navigate('/home');
+  }, [loginInfo])
+
   return (
     <>
       <Box sx={{
@@ -44,9 +72,12 @@ export default function Landing() {
           flexDirection: "column",
           gap: 1
         }}>
-          <TextField id="username" label="Nombre de usario" variant="filled" />
-          <TextField id="password" label="Contraseña" variant="filled" />
-          <Button component={Link} to="/home" variant="contained" color="primary">
+          <TextField id="username" onChange={(e) => setUsername(e.target.value)} label="Nombre de usario" variant="filled" />
+          <TextField id="password" onChange={(e) => setPassword(e.target.value)} label="Contraseña" variant="filled" type="password" />
+          {/* <Button component={Link} to="/home" variant="contained" color="primary">
+            ENTRAR
+          </Button> */}
+          <Button onClick={handleLogin} variant="contained" color="primary">
             ENTRAR
           </Button>
           <Button component={Link} to="/register" size="small" variant="text" color="primary">
