@@ -2,13 +2,13 @@ import { Box, Typography } from "@mui/material";
 import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 
-export default function CardSmall({titulo = "Titulo del Topic", user = "Username", date = "dd/mm hh:mm"}) {
+export default function CardSmall({titulo = "Titulo del Topic", user = "Username", date = "dd/mm hh:mm", pic = "https://via.placeholder.com/90x90"}) {
 
   CardSmall.propTypes = {
     titulo: PropTypes.string,
     user: PropTypes.string,
     date: PropTypes.string,
-    hour: PropTypes.string,
+    pic: PropTypes.string,
   };
 
     const theme = useTheme();
@@ -38,7 +38,7 @@ export default function CardSmall({titulo = "Titulo del Topic", user = "Username
                     height: '90px', 
                     borderRadius: '20px'
                 }} 
-                src="https://via.placeholder.com/90x90" />
+                src={pic} />
                 <Box sx={{
                     display: 'flex', 
                     flexDirection: 'column',
