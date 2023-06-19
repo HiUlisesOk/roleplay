@@ -4,10 +4,6 @@ import PropTypes from 'prop-types';
 
 export default function CardSmall({titulo = "Titulo del Topic", user = "Username", date = "dd/mm hh:mm"}) {
 
-    CardSmall.defaultProps = {
-    data: 'dd/mm'
-  };
-  
   CardSmall.propTypes = {
     titulo: PropTypes.string,
     user: PropTypes.string,
@@ -20,6 +16,8 @@ export default function CardSmall({titulo = "Titulo del Topic", user = "Username
             <Box sx={{
                 backgroundColor: theme.palette.primary.light,
                 color: theme.palette.primary.contrastText,
+                minWidth: '550px',
+                flexGrow: 1,
                 display: 'flex',
                 padding: 1,
                 border: '1px solid',
