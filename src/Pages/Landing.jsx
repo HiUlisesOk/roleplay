@@ -2,7 +2,7 @@ import { Box, Typography, TextField } from '@mui/material'
 import Button from '@mui/material/Button'
 import { Link } from "react-router-dom";
 import BG from '../img/bg.jpg'
-import React, { useDebugValue, useState } from 'react';
+import React, { useDebugValue, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,18 +20,18 @@ export default function Landing() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      dispatch(Login({ email: 'uesquivel95@gmail.com', password: 'Pass.001' }))
+      dispatch(Login({ email: username, password: password }))
       console.log(loginInfo)
-      // const response = await axios.post('/api/login', { username, password });
-      // localStorage.setItem('token', response.data.token);
-      // Redirige a la página de inicio.
-      // response && navigate('/home');
     } catch (error) {
       console.error(error);
       // Maneja los errores de inicio de sesión.
     }
   };
 
+  useEffect(() => {
+    const match = loginInfo.passwordsMatch;
+    match && navigate('/home');
+  }, [loginInfo])
 
   return (
     <>
@@ -72,8 +72,8 @@ export default function Landing() {
           flexDirection: "column",
           gap: 1
         }}>
-          <TextField id="username" label="Nombre de usario" variant="filled" />
-          <TextField id="password" label="Contraseña" variant="filled" />
+          <TextField id="username" onChange={(e) => setUsername(e.target.value)} label="Nombre de usario" variant="filled" />
+          <TextField id="password" onChange={(e) => setPassword(e.target.value)} label="Contraseña" variant="filled" type="password" />
           {/* <Button component={Link} to="/home" variant="contained" color="primary">
             ENTRAR
           </Button> */}
