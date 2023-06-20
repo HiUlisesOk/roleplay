@@ -72,6 +72,7 @@ export default function Landing() {
           flexDirection: "column",
           gap: 1
         }}>
+
           <TextField id="username" onChange={(e) => setUsername(e.target.value)} label="Nombre de usario" variant="filled" />
           <TextField id="password" onChange={(e) => setPassword(e.target.value)} label="Contraseña" variant="filled" type="password" />
           {/* <Button component={Link} to="/home" variant="contained" color="primary">
@@ -80,7 +81,7 @@ export default function Landing() {
           <Button onClick={handleLogin} variant="contained" color="primary">
             ENTRAR
           </Button>
-          <Button component={Link} to="/register" size="small" variant="text" color="primary">
+          <Button component={Link} to="/register" size="small" variant="text" color="secondary">
             REGISTRARSE
           </Button>
         </Box>
