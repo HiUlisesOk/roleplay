@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 
-export default function CardSmall({titulo = "Titulo del Topic", user = "Username", date = "dd/mm hh:mm", pic = "https://via.placeholder.com/90x90"}) {
+export default function CardSmall({titulo = "Titulo del Topic", user = "Username", date = "dd/mm hh:mm", pic = "https://via.placeholder.com/70x70"}) {
 
   CardSmall.propTypes = {
     titulo: PropTypes.string,
@@ -16,7 +16,7 @@ export default function CardSmall({titulo = "Titulo del Topic", user = "Username
             <Box sx={{
                 backgroundColor: theme.palette.primary.light,
                 color: theme.palette.primary.contrastText,
-                minWidth: '550px',
+                minWidth: '400px',
                 flexGrow: 1,
                 display: 'flex',
                 padding: 1,
@@ -34,8 +34,8 @@ export default function CardSmall({titulo = "Titulo del Topic", user = "Username
                 component="img" 
                 sx={{
                     objectFit: 'cover', 
-                    width: '90px', 
-                    height: '90px', 
+                    width: '70px', 
+                    height: '70px', 
                     borderRadius: '20px'
                 }} 
                 src={pic} />
@@ -46,17 +46,17 @@ export default function CardSmall({titulo = "Titulo del Topic", user = "Username
                     paddingLeft: 1,
                     justifyContent: 'space-between',
                 }}>
-                    <Typography variant="h6">
+                    <Typography variant="subtitle1">
                         {titulo}
                     </Typography>
                     <Box sx={{
                         display: 'flex', 
                         justifyContent : 'space-between',
                         }}>
-                        <Typography variant="subtitle1">
+                        <Typography variant="subtitle2">
                             {user}
                         </Typography>
-                        <Typography variant="subtitle1">
+                        <Typography variant="subtitle2">
                             {date}
                         </Typography>
                     </Box>
