@@ -3,7 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import { Typography } from "@mui/material";
 
-export default function SimpleCard({pic = "https://via.placeholder.com/250x150", title="Card Title"}) {
+export default function SimpleCard({pic = "https://via.placeholder.com/200x120", title="Card Title"}) {
     SimpleCard.propTypes = {
         pic: PropTypes.string,  
         title: PropTypes.string,
@@ -29,7 +29,7 @@ export default function SimpleCard({pic = "https://via.placeholder.com/250x150",
                     borderRadius: '20px 20px 0px 0px',
                 }} 
                 src={pic} />
-            <Typography variant="h6" sx={{
+            <Typography variant="subtitle2" sx={{
                 ml: 1, mb: 1,
             }}>{title}</Typography>
         </Box>

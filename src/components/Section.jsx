@@ -2,24 +2,23 @@ import { Box, Typography } from "@mui/material";
 import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 
-export default function Section({children, titulo = "Titulo de Section"}){
+export default function Section({children, direction="row", titulo = "Titulo de Section"}){
     const theme = useTheme();
 
     Section.propTypes = {
         titulo: PropTypes.string,
         children: PropTypes.element,
+        direction: PropTypes.string,
       };
     
 
     return(
         <Box sx={{
-            p : 3,
+            p : 1,
             backgroundColor: theme.palette.primary.main,
             borderRadius: 5,
-            margin: 1,
-            width: 'fit-content',
             }}>
-            <Typography variant="h5" sx={{
+            <Typography variant="h6" sx={{
                 m:1,
                 pb: 1,
                 borderBottom: "1px solid",
@@ -27,8 +26,10 @@ export default function Section({children, titulo = "Titulo de Section"}){
                 }}>{titulo}</Typography>
             <Box sx={{
                 display: 'flex',
-                flexWrap: 'wrap', 
-                gap: 2,
+                flexDirection: direction,
+                gap: 1,
+                p:1,
+                width: '100%'
                 }}>
             {children}
             </Box>

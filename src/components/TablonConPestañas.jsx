@@ -44,9 +44,7 @@ export default function TablonConPestañas() {
                 ))
             }
         </Box>
-        <Box sx={{
-            height : 500,
-         }}>
+        <Box>
             {
                 buttons.map(
                     (item)=>(
