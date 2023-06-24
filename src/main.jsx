@@ -10,18 +10,29 @@ import { Provider } from 'react-redux'
 
 const theme = createTheme({
   palette: {
+    mode: 'dark',
     primary: {
-      main: '#1CB251',
+      dark: '#171312',
+      main: '#1F1B1A',
+      light: '#312E2D',
       contrastText: '#f5f5f5',
     },
     secondary: {
-      main: '#171312',
+      main: '#1CB251',
       contrastText: '#f5f5f5',
     },
-    white: {
-      main: '#f5f5f5',
-      contrastText: '#171312',
+    background: {
+      default: '#171312',
+      paper: '#1f1b1a',
     },
+    text: {
+      primary: '#F5F5F5',
+      secondary: '#ECEBEB',
+      disabled: '#DCDCDC',
+    },
+  },
+  typography: {
+    fontFamily: 'Poppins',
   },
 });
 
