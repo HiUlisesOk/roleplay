@@ -6,6 +6,7 @@ import Register from "./Pages/Register.jsx"
 import Playground from "./Pages/Playground.jsx"
 import { Routes, Route}  from "react-router-dom"
 
+
 export default function App() {
   return(
   <>
