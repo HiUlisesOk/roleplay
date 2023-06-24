@@ -11,13 +11,13 @@ export const Login = createAsyncThunk(
 				withCredentials: true,
 			});
 
-			// if (data.code === 2) {
-			// 	return rejectWithValue(data.message);
-			// } else {
-			// 	localStorage.setItem("userInfo", JSON.stringify(data));
-			// 	localStorage.setItem("LastLogin", JSON.stringify(data?.data?.lastSeen));
-			// 	return data;
-			// }
+			if (!data.passwordsMatch) {
+				return rejectWithValue(data.message);
+			} else {
+				localStorage.setItem("userInfo", JSON.stringify(data));
+				localStorage.setItem("LastLogin", JSON.stringify(data?.data?.lastSeen));
+				return data;
+			}
 			return data;
 		} catch (error) {
 			console.log(error);
