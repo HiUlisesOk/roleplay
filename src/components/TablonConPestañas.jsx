@@ -47,7 +47,7 @@ export default function TablonConPestañas() {
             </Box>
             <Box sx={{
                 borderRadius: '0px 0px 8px 8px',
-                height: '340px',
+                height: '320px',
                 backgroundColor: theme.palette.primary.light,
             }}>
                 {

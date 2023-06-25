@@ -10,11 +10,12 @@ export default function Slide ({ arrayItems, column, element }) {
       arrayItems: PropTypes.array,
       column: PropTypes.bool,
       element: PropTypes.string,
+      infinite: PropTypes.bool,
       };
 
 const [pauseAnimation, setPauseAnimation] = useState(false);
 
-  if (arrayItems.length < 5) {
+  if (arrayItems.length < 5 && element == 'simplecard') {
     let newArrayItems = arrayItems;
     for (let i = arrayItems.length; i < 5; i= i + i){
     newArrayItems = newArrayItems.concat(arrayItems);
@@ -30,9 +31,9 @@ const [pauseAnimation, setPauseAnimation] = useState(false);
   const Component = componentType[element];
 
   const styles = useSpring({
-    from: {transform: column == true ? 'translateX(-50%)' : 'translateY(-50%)' },
-    to: {transform: column == true ? 'translateX(0%)' : 'translateY(0%)'},
-    config: {duration: 20000},
+    from: {transform: column == true ? 'translateX(-50%)' : 'translateY(100%)' },
+    to: {transform: column == true ? 'translateX(0%)' : 'translateY(-100%)'},
+    config: {duration: 30000},
     pause: pauseAnimation,
     loop: true,
     });
@@ -45,10 +46,10 @@ onMouseEnter={()=>{setPauseAnimation(true)}}
 onMouseLeave={()=>{setPauseAnimation(false)}}>
     {
         arrayItems.map((item, index)=>(
-          Component && <Component key={String(item) + String(index) + 'a'} title={String(item)} />
+          Component && <Component key={String(item) + String(index) + 'a'} title={String(item)} user={String(item)} date={String(item)} />
         ))
     }
-    {
+    { element == 'simplecard' &&
         arrayItems.map((item,index)=>(
           Component && <Component key={String(item) + String(index) + 'b'} title={String(item)} />
         ))
