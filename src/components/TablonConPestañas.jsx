@@ -34,25 +34,30 @@ export default function TablonConPestañas() {
 
     const theme = useTheme();
     return(
-        <>
-        <Box sx={{
-            backgroundColor: theme.palette.primary.main,
-        }}>
-            {
-                buttons.map((item,index)=>(
-                    <Button key={item.text + index} variant={item.variant} color="secondary" onClick={()=>{handleButton(index)}}>{item.text}</Button>
-                ))
-            }
-        </Box>
         <Box>
-            {
-                buttons.map(
-                    (item)=>(
-                        item.variant === 'disabled' && item.content
+            <Box sx={{
+                backgroundColor: theme.palette.primary.main,
+                borderRadius: '8px 8px 0px 0px'
+            }}>
+                {
+                    buttons.map((item,index)=>(
+                        <Button key={item.text + index} variant={item.variant} color="secondary" onClick={()=>{handleButton(index)}}>{item.text}</Button>
+                    ))
+                }
+            </Box>
+            <Box sx={{
+                borderRadius: '0px 0px 8px 8px',
+                height: '340px',
+                backgroundColor: theme.palette.primary.light,
+            }}>
+                {
+                    buttons.map(
+                        (item)=>(
+                            item.variant === 'disabled' && item.content
+                        )
                     )
-                )
-            }
+                }
+            </Box>
         </Box>
-        </>
     )
 }
