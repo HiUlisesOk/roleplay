@@ -14,11 +14,31 @@ export const Login = createAsyncThunk(
 			if (!data.passwordsMatch) {
 				return rejectWithValue(data.message);
 			} else {
-				localStorage.setItem("userInfo", JSON.stringify(data));
-				localStorage.setItem("LastLogin", JSON.stringify(data?.data?.lastSeen));
+				localStorage.clear();
+				localStorage.setItem("userInfo", JSON.stringify(data.user));
+				localStorage.setItem("userToken", JSON.stringify(data.token));
 				return data;
 			}
-			return data;
+		} catch (error) {
+			console.log(error);
+			return rejectWithValue(error.message);
+		}
+	}
+);
+
+export const Register = createAsyncThunk(
+	"Register",
+	async (user, { rejectWithValue }) => {
+		try {
+			const { data } = await axios.post(`/create-user`, user, {
+				withCredentials: true,
+			});
+
+			if (!data.type) {
+				return rejectWithValue(data.message);
+			} else {
+				return data;
+			}
 		} catch (error) {
 			console.log(error);
 			return rejectWithValue(error.message);

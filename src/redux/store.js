@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {
-	loginReducer,
+	loginReducer, registerReducer
 } from "./reducers/userReducer";
 
 
@@ -18,10 +18,11 @@ const initialState = {
 
 const reducers = combineReducers({
 	loginInfo: loginReducer,
+	registerState: registerReducer,
 });
 
 export const store = configureStore({
 	reducer: reducers,
-	preloadedState: initialState,
+	login: initialState,
 	devTools: process.env.NODE_ENV !== "production",
 });
