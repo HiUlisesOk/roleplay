@@ -19,10 +19,9 @@ export default function CardSmall({titulo = "Titulo del Topic", user = "Username
                 minWidth: '400px',
                 flexGrow: 1,
                 display: 'flex',
-                padding: 1,
                 border: '1px solid',
                 borderColor: 'transparent',
-                borderRadius: '20px',
+                borderRadius: 2,
                 transition: 'borderColor 0.1s ease-in-out, color 0.1s ease-in-out',
                 [`&:hover`]: {
                     borderColor: theme.palette.secondary.main,
@@ -33,17 +32,16 @@ export default function CardSmall({titulo = "Titulo del Topic", user = "Username
                 <Box 
                 component="img" 
                 sx={{
-                    objectFit: 'cover', 
                     width: '70px', 
                     height: '70px', 
-                    borderRadius: '20px'
+                    borderRadius: '8px 0px 0px 8px',
                 }} 
                 src={pic} />
                 <Box sx={{
                     display: 'flex', 
                     flexDirection: 'column',
                     width: '100%',
-                    paddingLeft: 1,
+                    p: 1,
                     justifyContent: 'space-between',
                 }}>
                     <Typography variant="subtitle1">

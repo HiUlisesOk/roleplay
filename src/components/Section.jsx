@@ -16,7 +16,8 @@ export default function Section({children, direction="row", titulo = "Titulo de 
         <Box sx={{
             p : 1,
             backgroundColor: theme.palette.primary.main,
-            borderRadius: 5,
+            borderRadius: 2,
+            height: '100%',
             }}>
             <Typography variant="h6" sx={{
                 m:1,
@@ -29,7 +30,10 @@ export default function Section({children, direction="row", titulo = "Titulo de 
                 flexDirection: direction,
                 gap: 1,
                 p:1,
-                width: '100%'
+                m: '0 auto',
+                width: '99%',
+                overflow: 'hidden',
+                height: '100%'
                 }}>
             {children}
             </Box>
