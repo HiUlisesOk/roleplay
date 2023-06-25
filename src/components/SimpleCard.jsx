@@ -13,7 +13,7 @@ export default function SimpleCard({pic = "https://via.placeholder.com/200x120",
         <Box sx={{
             backgroundColor: theme.palette.primary.light,
             border: '1px solid transparent',
-            borderRadius: '20px',
+            borderRadius: 2,
             [`&:hover`]: {
                 borderColor: theme.palette.secondary.main,
                 color: theme.palette.secondary.main,
@@ -26,7 +26,7 @@ export default function SimpleCard({pic = "https://via.placeholder.com/200x120",
                     objectFit: 'cover', 
                     width: '250', 
                     height: '150', 
-                    borderRadius: '20px 20px 0px 0px',
+                    borderRadius: '8px 8px 0px 0px',
                 }} 
                 src={pic} />
             <Typography variant="subtitle2" sx={{

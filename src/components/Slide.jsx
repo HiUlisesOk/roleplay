@@ -1,11 +1,18 @@
 import { useSpring, animated } from 'react-spring';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import SimpleCard from './SimpleCard';
+import SimpleCard from './SimpleCard.jsx';
+import CardSmall from './CardSmall.jsx'
 import { Box } from '@mui/system';
 
-export default function Slide ({ arrayItems }) {
-  const [pauseAnimation, setPauseAnimation] = useState(false);
+export default function Slide ({ arrayItems, column, element }) {
+   Slide.propTypes = {
+      arrayItems: PropTypes.array,
+      column: PropTypes.bool,
+      element: PropTypes.string,
+      };
+
+const [pauseAnimation, setPauseAnimation] = useState(false);
 
   if (arrayItems.length < 5) {
     let newArrayItems = arrayItems;
@@ -15,14 +22,17 @@ export default function Slide ({ arrayItems }) {
     arrayItems = newArrayItems
   }
 
-  Slide.propTypes = {
-      arrayItems: PropTypes.array,
-      };
+  const componentType = {
+    cardsmall: CardSmall,
+    simplecard: SimpleCard,
+  };
+
+  const Component = componentType[element];
 
   const styles = useSpring({
-    from: {transform: 'translateX(-50%)'},
-    to: {transform: 'translateX(0%)'},
-    config: {duration: 15000},
+    from: {transform: column == true ? 'translateX(-50%)' : 'translateY(-50%)' },
+    to: {transform: column == true ? 'translateX(0%)' : 'translateY(0%)'},
+    config: {duration: 20000},
     pause: pauseAnimation,
     loop: true,
     });
@@ -30,17 +40,17 @@ export default function Slide ({ arrayItems }) {
   return (
     <animated.div style={styles}>
       <Box  
-    sx={{ display: 'flex', gap: 1}}
+    sx={{ display: 'flex', gap: 1, flexDirection: column == true ? 'row' : 'column'}}
 onMouseEnter={()=>{setPauseAnimation(true)}}
 onMouseLeave={()=>{setPauseAnimation(false)}}>
     {
         arrayItems.map((item, index)=>(
-          <SimpleCard key={String(item) + String(index) + 'a'} title={String(item)} />
+          Component && <Component key={String(item) + String(index) + 'a'} title={String(item)} />
         ))
     }
     {
         arrayItems.map((item,index)=>(
-          <SimpleCard key={String(item) + String(index) + 'b'} title={String(item)} />
+          Component && <Component key={String(item) + String(index) + 'b'} title={String(item)} />
         ))
     }
     </Box>
