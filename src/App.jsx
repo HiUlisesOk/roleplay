@@ -12,6 +12,7 @@ export default function App() {
   return (
     <>
       <Routes>
+        <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Landing />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
