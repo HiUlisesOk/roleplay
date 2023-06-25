@@ -18,6 +18,7 @@ export default function Section({children, direction="row", titulo = "Titulo de 
             backgroundColor: theme.palette.primary.main,
             borderRadius: 2,
             height: '100%',
+            overflow: 'hidden'
             }}>
             <Typography variant="h6" sx={{
                 m:1,
@@ -32,10 +33,10 @@ export default function Section({children, direction="row", titulo = "Titulo de 
                 p:1,
                 m: '0 auto',
                 width: '99%',
+                height: '90%',
                 overflow: 'hidden',
-                height: '100%'
                 }}>
-            {children}
+                {children}
             </Box>
         </Box>
     )
