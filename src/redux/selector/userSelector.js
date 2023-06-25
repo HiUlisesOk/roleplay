@@ -5,3 +5,7 @@ export const loginSelector = createSelector(
 	(Login) => Login
 );
 
+export const registerSelector = createSelector(
+	(state) => state.registerState,
+	(Register) => Register
+);

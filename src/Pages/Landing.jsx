@@ -21,7 +21,6 @@ export default function Landing() {
     e.preventDefault();
     try {
       dispatch(Login({ email: username, password: password }))
-      console.log(loginInfo)
     } catch (error) {
       console.error(error);
       // Maneja los errores de inicio de sesión.
@@ -32,6 +31,19 @@ export default function Landing() {
     const match = loginInfo.passwordsMatch;
     match && navigate('/home');
   }, [loginInfo])
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const checkUserToken = () => {
+    const userToken = localStorage.getItem('userToken');
+    if (userToken) {
+      setIsLoggedIn(true);
+      return navigate('/home');
+    }
+    setIsLoggedIn(false);
+  }
+  useEffect(() => {
+    checkUserToken();
+  }, [isLoggedIn]);
 
   return (
     <>
