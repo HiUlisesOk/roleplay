@@ -45,3 +45,44 @@ export const Register = createAsyncThunk(
 		}
 	}
 );
+
+export const uploadImage = createAsyncThunk(
+	"uploadImage",
+	async (imagen64, { rejectWithValue }) => {
+		try {
+			const { data } = await axios.post(`/upload-image`, imagen64, {
+				withCredentials: true,
+			});
+
+			if (!data.type) {
+				return rejectWithValue(data.message);
+			} else {
+				return data;
+			}
+		} catch (error) {
+			console.log(error);
+			return rejectWithValue(error.message);
+		}
+	}
+);
+
+export const updateProfilePicture = createAsyncThunk(
+	"updateProfilePicture",
+	async (params, { rejectWithValue }) => {
+		try {
+			const { imagen64 = "", ID = "", username = "", Email = "" } = params
+			const { data } = await axios.put(`/upload-image`, imagen64, {
+				withCredentials: true,
+			});
+
+			if (!data.type) {
+				return rejectWithValue(data.message);
+			} else {
+				return data;
+			}
+		} catch (error) {
+			console.log(error);
+			return rejectWithValue(error.message);
+		}
+	}
+);

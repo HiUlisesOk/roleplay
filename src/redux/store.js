@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {
-	loginReducer, registerReducer
+	loginReducer, registerReducer, uploadImageReducer, updateProfilePictureReducer
 } from "./reducers/userReducer";
 
 
@@ -19,6 +19,8 @@ const initialState = {
 const reducers = combineReducers({
 	loginInfo: loginReducer,
 	registerState: registerReducer,
+	uploadImageState: uploadImageReducer,
+	updateProfilePictureState: updateProfilePictureReducer
 });
 
 export const store = configureStore({
