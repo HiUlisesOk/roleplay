@@ -5,12 +5,14 @@ import BG from '../img/bg.jpg'
 import React, { useDebugValue, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useTheme } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { Login } from '../redux/actions/userActions'
 import { loginSelector } from '../redux/selector/userSelector'
 
 export default function Landing() {
   const dispatch = useDispatch();
+  const theme = useTheme();
   const { loginInfo } = useSelector(loginSelector);
 
   const navigate = useNavigate();
@@ -51,7 +53,8 @@ export default function Landing() {
         display: 'flex',
         justifyContent: 'center',
         height: '100vh',
-        backgroundColor: '#1CB251',
+        backgroundColor: theme.palette.primary.main,
+        opacity: 0.6,
       }}>
         <Box
           component={'img'}
@@ -61,7 +64,6 @@ export default function Landing() {
             height: '100vh',
             width: '100vw',
             objectFit: 'cover',
-            opacity: 0.8,
           }}
         />
       </Box>
@@ -76,23 +78,29 @@ export default function Landing() {
         justifyContent: 'space-around',
       }}>
         <Box>
-          <Typography variant="h3" align='center' sx={{ color: '#f5f5f5' }}>ROLEPLAY</Typography>
+          <Typography variant="h1" align='center' color='secondary'>Fiction</Typography>
           <Typography variant="subtitle2" align='center' sx={{ color: '#f5f5f5' }}>Lorem ipsum dolor sit amet consectetur.</Typography>
         </Box>
         <Box component="form" sx={{
           display: "flex",
           flexDirection: "column",
-          gap: 1
+          gap: 1,
+          backgroundColor: theme.palette.primary.light,
+          borderRadius: '4px',
+          padding: '32px',
+          width: '400px',
         }}>
+          
+          <Typography variant="h4" align='center' color='secondary' sx={{mb: '24px'}}>Sign In</Typography>
           <TextField id="username" onChange={(e) => setUsername(e.target.value)} label="Nombre de usario" variant="filled" />
           <TextField id="password" onChange={(e) => setPassword(e.target.value)} label="Contraseña" variant="filled" type="password" />
           {/* <Button component={Link} to="/home" variant="contained" color="primary">
             ENTRAR
           </Button> */}
-          <Button onClick={handleLogin} variant="contained" color="primary">
+          <Button onClick={handleLogin} variant="contained" color="secondary">
             ENTRAR
           </Button>
-          <Button component={Link} to="/register" size="small" variant="text" color="primary">
+          <Button component={Link} to="/register" size="small" variant="text" color="secondary">
             REGISTRARSE
           </Button>
         </Box>

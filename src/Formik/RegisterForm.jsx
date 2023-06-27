@@ -1,5 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Link } from "react-router-dom";
 import * as Yup from 'yup';
 import { Box, Typography, TextField, Button, InputAdornment } from '@mui/material';
 import BG from '../img/medieval_street.jpg'
@@ -134,9 +135,12 @@ const RegistrationForm = () => {
 
 							</Box>
 
-							<Button type="submit" variant="contained" color="secondary" fullWidth>
+							<Button type="submit" variant="contained" color="secondary" fullWidth sx={{mb: 2}}>
 								Register
 							</Button>
+							<Button component={Link} to="/login" variant="text" color="secondary" fullWidth>
+            				LOGIN
+          					</Button>
 						</Form>
 					)}
 				</Formik>
