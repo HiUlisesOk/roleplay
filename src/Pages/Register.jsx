@@ -6,37 +6,6 @@ import { registerSelector } from "../redux/selector/userSelector";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
-const theme = createTheme({
-    palette: {
-        mode: 'dark',
-        primary: {
-            dark: '#171312',
-            main: '#1F1B1A',
-            light: '#312E2D',
-            contrastText: '#f5f5f5',
-        },
-        secondary: {
-            main: '#1CB251',
-            contrastText: '#f5f5f5',
-        },
-        background: {
-            default: '#171312',
-            paper: '#1f1b1a',
-        },
-        text: {
-            primary: '#F5F5F5',
-            secondary: '#ECEBEB',
-            disabled: '#DCDCDC',
-        },
-    },
-    typography: {
-        fontFamily: 'Poppins',
-    },
-});
-
-
-
-
 export default function Home() {
     const navigate = useNavigate()
 
@@ -55,7 +24,6 @@ export default function Home() {
 
 
     return (
-        <ThemeProvider theme={theme}>
             <Box
                 sx={{
                     display: 'flex',
@@ -110,7 +78,6 @@ export default function Home() {
 
                 </Box>
             </Box>
-        </ThemeProvider>
 
 
     )
