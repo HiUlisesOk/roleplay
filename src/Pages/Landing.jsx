@@ -49,61 +49,47 @@ export default function Landing() {
 
   return (
     <>
-      <Box sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        height: '100vh',
-        backgroundColor: theme.palette.primary.main,
-        opacity: 0.6,
-      }}>
-        <Box
-          component={'img'}
-          src={BG}
-          alt="background-image"
-          sx={{
-            height: '100vh',
-            width: '100vw',
-            objectFit: 'cover',
-          }}
-        />
-      </Box>
-      <Box sx={{
-        position: 'absolute',
-        top: 0,
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100vh',
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'space-around',
-      }}>
-        <Box>
-          <Typography variant="h1" align='center' color='secondary'>Fiction</Typography>
-          <Typography variant="subtitle2" align='center' sx={{ color: '#f5f5f5' }}>Lorem ipsum dolor sit amet consectetur.</Typography>
-        </Box>
-        <Box component="form" sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 1,
-          backgroundColor: theme.palette.primary.light,
-          borderRadius: '4px',
-          padding: '32px',
-          width: '400px',
-        }}>
-          
-          <Typography variant="h4" align='center' color='secondary' sx={{mb: '24px'}}>Sign In</Typography>
-          <TextField id="username" onChange={(e) => setUsername(e.target.value)} label="Nombre de usario" variant="filled" />
-          <TextField id="password" onChange={(e) => setPassword(e.target.value)} label="Contraseña" variant="filled" type="password" />
-          {/* <Button component={Link} to="/home" variant="contained" color="primary">
-            ENTRAR
-          </Button> */}
-          <Button onClick={handleLogin} variant="contained" color="secondary">
-            ENTRAR
-          </Button>
-          <Button component={Link} to="/register" size="small" variant="text" color="secondary">
-            REGISTRARSE
-          </Button>
-        </Box>
+      <Box
+        sx={{
+                    display: 'flex',
+                    height: '100vh',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${BG})`,
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    p: 5
+                }}
+            >
+          <Box sx={{width: '400px'}}>
+            <Typography variant="h1" align='center' color='secondary'>Fiction </Typography>
+            <Typography variant="subtitle2" align='center' sx={{ color: '#f5f5f5' }}>A unique and immersive role-playing experience that combines elements of fantasy, literature, games, manga, music, and anime to create a one-of-a-kind journey through enchanted lands.</Typography>
+          </Box>
+          <Box>
+            <Box component="form" sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 1,
+              backgroundColor: theme.palette.primary.main,
+              borderRadius: '4px',
+              padding: '32px',
+              width: '400px',
+            }}>
+              
+              <Typography variant="h4" align='center' color='secondary' sx={{mb: '24px'}}>Sign In</Typography>
+              <TextField id="username" onChange={(e) => setUsername(e.target.value)} label="Nombre de usario" variant="filled" />
+              <TextField id="password" onChange={(e) => setPassword(e.target.value)} label="Contraseña" variant="filled" type="password" />
+              {/* <Button component={Link} to="/home" variant="contained" color="primary">
+                ENTRAR
+              </Button> */}
+              <Button onClick={handleLogin} variant="contained" color="secondary">
+                ENTRAR
+              </Button>
+              <Button component={Link} to="/register" size="small" variant="text" color="secondary">
+                REGISTRARSE
+              </Button>
+            </Box>
+          </Box>
       </Box>
     </>
   )
