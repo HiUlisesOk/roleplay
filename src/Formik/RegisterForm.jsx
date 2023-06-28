@@ -1,37 +1,12 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Link } from "react-router-dom";
 import * as Yup from 'yup';
-import { Box, Typography, TextField, Button, ThemeProvider, createTheme, InputAdornment } from '@mui/material';
+import { Box, Typography, TextField, Button, InputAdornment } from '@mui/material';
 import BG from '../img/medieval_street.jpg'
 import { useDispatch } from 'react-redux';
 import { Register } from '../redux/actions/userActions';
-const theme = createTheme({
-	palette: {
-		mode: 'dark',
-		primary: {
-			dark: '#171312',
-			main: '#1F1B1A',
-			light: '#312E2D',
-			contrastText: '#f5f5f5',
-		},
-		secondary: {
-			main: '#1CB251',
-			contrastText: '#f5f5f5',
-		},
-		background: {
-			default: '#171312',
-			paper: '#1f1b1a',
-		},
-		text: {
-			primary: '#F5F5F5',
-			secondary: '#ECEBEB',
-			disabled: '#DCDCDC',
-		},
-	},
-	typography: {
-		fontFamily: 'Poppins',
-	},
-});
+
 
 const RegistrationForm = () => {
 	const dispatch = useDispatch()
@@ -62,7 +37,6 @@ const RegistrationForm = () => {
 
 
 	return (
-		<ThemeProvider theme={theme}>
 			<Box
 				sx={{
 					width: '400px',
@@ -98,7 +72,9 @@ const RegistrationForm = () => {
 									) : 'Username'}
 									variant="filled"
 									fullWidth
-									sx={{ '& .MuiFilledInput-root': { borderRadius: '4px' } }}
+									sx={{ 
+										'& .MuiFilledInput-root': { borderRadius: '4px' },
+									}}
 									error={touched.username && errors.username}
 								/>
 
@@ -159,15 +135,17 @@ const RegistrationForm = () => {
 
 							</Box>
 
-							<Button type="submit" variant="contained" color="secondary" fullWidth>
+							<Button type="submit" variant="contained" color="secondary" fullWidth sx={{mb: 2}}>
 								Register
 							</Button>
+							<Button component={Link} to="/login" variant="text" color="secondary" fullWidth>
+            				LOGIN
+          					</Button>
 						</Form>
 					)}
 				</Formik>
 
 			</Box>
-		</ThemeProvider>
 	);
 };
 
