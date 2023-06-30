@@ -52,18 +52,19 @@ export default function Landing() {
       <Box
         sx={{
                     display: 'flex',
+                    flexDirection: 'column',
                     height: '100vh',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${BG})`,
-                    alignItems: 'center',
+                    alignItems: 'start',
                     justifyContent: 'space-between',
                     p: 5
                 }}
             >
           <Box sx={{width: '400px'}}>
-            <Typography variant="h1" align='center' color='secondary'>Fiction </Typography>
-            <Typography variant="subtitle2" align='center' sx={{ color: '#f5f5f5' }}>A unique and immersive role-playing experience that combines elements of fantasy, literature, games, manga, music, and anime to create a one-of-a-kind journey through enchanted lands.</Typography>
+            <Typography variant="h1" align='start' color='secondary'>Fiction </Typography>
+            <Typography variant="subtitle2" align='start' sx={{ color: '#f5f5f5' }}>A unique and immersive role-playing experience that combines elements of fantasy, literature, games, manga, music, and anime to create a one-of-a-kind journey through enchanted lands.</Typography>
           </Box>
           <Box>
             <Box component="form" sx={{
