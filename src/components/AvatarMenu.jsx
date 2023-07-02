@@ -2,27 +2,44 @@ import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
-import { useState } from 'react'
-
-export default function AvatarMenu(){
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
+import { useEffect, useState } from 'react'
+import { logout } from '../utils/Logout'
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginSelector, getUserByIdSelector } from '../redux/selector/userSelector';
+import { getUserById } from '../redux/actions/userActions'
+export default function AvatarMenu() {
+  const dispatch = useDispatch()
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-    return(
-        <>
-        <IconButton
-        sx={{ width: 50, height: 50 }} 
+  const { userData } = useSelector((state) => state);
+  const userId = userData?.userInfo?.ID;
+
+  const { getUserByIdState } = useSelector(getUserByIdSelector)
+
+
+  useEffect(() => {
+    dispatch(getUserById(userId))
+  }, [getUserByIdSelector, userId])
+  console.log(userId)
+
+  return (
+
+    <>
+      <IconButton
+        sx={{ width: 50, height: 50 }}
         onClick={handleClick}>
-        <Avatar sx={{ width: 40, height: 40 }}></Avatar>
-        </IconButton>
-        <Menu
-         anchorOrigin={{
+        <Avatar sx={{ width: 40, height: 40 }} src={getUserByIdState?.profilePicture || ""}></Avatar>
+      </IconButton>
+      <Menu
+        anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'right',
         }}
@@ -34,11 +51,14 @@ export default function AvatarMenu(){
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Perfil</MenuItem>
+        <MenuItem onClick={handleClose}><Link to={`/profile/${userId}`}>Perfil</Link> </MenuItem>
         <MenuItem onClick={handleClose}>Personajes</MenuItem>
         <MenuItem onClick={handleClose}>Mensajes</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={() => {
+          handleClose()
+          logout()
+        }}>Logout</MenuItem>
       </Menu>
-        </>
-    )
+    </>
+  )
 }

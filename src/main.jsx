@@ -34,18 +34,18 @@ const theme = createTheme({
   typography: {
     fontFamily: 'Poppins',
   },
-components: {
-  MuiTextField: {
-    styleOverrides:{
-      root:{
-      '& .css-1t23tt6-MuiInputBase-input-MuiFilledInput-input:-webkit-autofill': {
-        '-webkitBoxShadow': '0 0 0 100px #312E2D inset',
-        borderRadius: '0px'
-      }
+  components: {
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          '& .css-1t23tt6-MuiInputBase-input-MuiFilledInput-input:-webkit-autofill': {
+            '-webkitBoxShadow': '0 0 0 100px #312E2D inset',
+            borderRadius: '0px'
+          }
+        }
       }
     }
   }
-}
 });
 
 
