@@ -52,6 +52,7 @@ export default function Landing() {
       <Box
         sx={{
                     display: 'flex',
+                    flexDirection: 'column',
                     height: '100vh',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
