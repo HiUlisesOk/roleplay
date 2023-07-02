@@ -19,3 +19,8 @@ export const updateProfilePictureSelector = createSelector(
 	(state) => state.updateProfilePictureState,
 	(updateProfilePicture) => updateProfilePicture
 );
+
+export const getUserByIdSelector = createSelector(
+	(state) => state.getUserByIdState,
+	(getUserById) => getUserById
+);

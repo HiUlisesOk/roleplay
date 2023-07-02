@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 
-import { Login, Register, uploadImage, updateProfilePicture } from "../actions/userActions";
+import { Login, Register, uploadImage, updateProfilePicture, getUserById } from "../actions/userActions";
 
 const initialState = {
 	loading: false,
@@ -8,7 +8,8 @@ const initialState = {
 	loginInfo: {},
 	registerState: {},
 	uploadImageState: {},
-	updateProfilePictureState: {}
+	updateProfilePictureState: {},
+	getUserByIdState: {},
 };
 
 export const loginReducer = createReducer(initialState, builder => {
@@ -75,6 +76,23 @@ export const updateProfilePictureReducer = createReducer(initialState, builder =
 		console.log(action);
 	});
 	builder.addCase(updateProfilePicture.rejected, (state, action) => {
+		state.loading = false;
+		state.error = action.payload;
+	})
+});
+
+export const getUserByIdReducer = createReducer(initialState, builder => {
+	builder.addCase(getUserById.pending, (state, action) => {
+		state.loading = true;
+		state.error = false;
+	});
+	builder.addCase(getUserById.fulfilled, (state, action) => {
+		state.loading = false;
+		state.error = false;
+		state.getUserByIdState = action.payload;
+		console.log(action);
+	});
+	builder.addCase(getUserById.rejected, (state, action) => {
 		state.loading = false;
 		state.error = action.payload;
 	})

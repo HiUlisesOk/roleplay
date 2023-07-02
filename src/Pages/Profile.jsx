@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import banner from '../img/DreamShaper_v6_A_vibrant_4K_landscape_of_a_fantasy_romance_wor_0.jpg';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
+import { getUserById } from '../redux/actions/userActions'
+import { getUserByIdSelector } from '../redux/selector/userSelector';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const useStyles = {
 	container: {
@@ -20,7 +24,7 @@ const useStyles = {
 	},
 	banner: {
 		flex: 1, // Added to fill remaining space
-		backgroundImage: `url(${banner})`,
+		// backgroundImage: `url(${banner})`,
 		backgroundSize: 'cover',
 		backgroundPosition: 'center',
 		marginBottom: '0',
@@ -36,7 +40,17 @@ const useStyles = {
 };
 
 function Profile() {
+	const dispatch = useDispatch()
+
 	const { id } = useParams();
+
+	const { getUserByIdState } = useSelector(getUserByIdSelector)
+
+
+	useEffect(() => {
+		dispatch(getUserById(id))
+	}, [id])
+
 
 	return (
 		<Container style={useStyles.container}>
@@ -45,9 +59,10 @@ function Profile() {
 				<Grid item xs={6}>
 					<Avatar
 						alt="Remy Sharp"
-						src="/static/images/avatar/1.jpg"
-						sx={{ width: 56, height: 56 }}
+						src={getUserByIdState.profilePicture || ""}
+						sx={{ width: 150, height: 150, mt: -10, }}
 					/>
+					<Typography variant="h3" color="primary.contrastText">{getUserByIdState.username || ""}</Typography>
 					<Box style={useStyles.section}>User Info</Box>
 				</Grid>
 				<Grid item xs={6}>

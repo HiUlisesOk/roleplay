@@ -1,5 +1,6 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { logout } from '../../utils/Logout'
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_API_URL;
 
@@ -80,6 +81,43 @@ export const updateProfilePicture = createAsyncThunk(
 			} else {
 				return data;
 			}
+		} catch (error) {
+			console.log(error);
+			return rejectWithValue(error.message);
+		}
+	}
+);
+
+export const getUserById = createAsyncThunk(
+	"getUserById",
+	async (id, { rejectWithValue, getState, dispatch }) => {
+		try {
+
+
+			const userTokenLocalStorage =
+				typeof window != "undefined"
+					? localStorage.getItem("userToken")
+						? JSON.parse(localStorage.getItem("userToken"))
+						: null
+					: null;
+
+			!userTokenLocalStorage && logout()
+
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userTokenLocalStorage}`,
+					"Content-Type": "application/json",
+				},
+			};
+
+			const response = await axios.get(`/get-user-info/${id}`, config);
+
+			const data = response.data;
+
+
+
+			return data;
+
 		} catch (error) {
 			console.log(error);
 			return rejectWithValue(error.message);
