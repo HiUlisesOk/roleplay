@@ -19,11 +19,10 @@ export default function AvatarMenu() {
     setAnchorEl(null);
   };
 
-  const { userData } = useSelector((state) => state);
-  const userId = userData?.userInfo?.ID;
+  const { userData, loginInfo } = useSelector((state) => state);
+  const userId = loginInfo?.loginInfo?.user?.ID || userData?.userInfo?.ID;
 
   const { getUserByIdState } = useSelector(getUserByIdSelector)
-
 
   useEffect(() => {
     dispatch(getUserById(userId))
