@@ -29,13 +29,16 @@ export default function AvatarMenu() {
   }, [getUserByIdSelector, userId])
   console.log(userId)
 
+  const AvatarStyle = { width: 40, height: 40 };
+  const ProfilePicture = getUserByIdState?.profilePicture || "";
+
   return (
 
-    <>
+    <div>
       <IconButton
         sx={{ width: 50, height: 50 }}
         onClick={handleClick}>
-        <Avatar sx={{ width: 40, height: 40 }} src={getUserByIdState?.profilePicture || ""}></Avatar>
+        <Avatar sx={AvatarStyle} src={ProfilePicture}></Avatar>
       </IconButton>
       <Menu
         anchorOrigin={{
@@ -58,6 +61,6 @@ export default function AvatarMenu() {
           logout()
         }}>Logout</MenuItem>
       </Menu>
-    </>
+    </div>
   )
 }
