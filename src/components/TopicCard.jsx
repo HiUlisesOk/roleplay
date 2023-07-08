@@ -16,8 +16,8 @@ export default function TopicCard({topic}) {
                 <CardMedia
                 component="img"
                 height="300"
-                image={topic.author.pfp}
-                alt={topic.author.name}
+                image='https://via.placeholder.com/300x300'
+                alt={topic.author}
                 />
                 <CardContent sx={{height: '100px'}}>
                 <Typography noWrap gutterBottom variant="h5" component="div">
@@ -27,17 +27,17 @@ export default function TopicCard({topic}) {
                     display: 'flex', justifyContent: 'space-between'
                 }}>
                 <Typography variant="body2" color="text.secondary">
-                    {topic.author.name}
+                    {topic.author}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    {topic.creationDate}
+                    {topic.createdAt}
                 </Typography>
                 </Box>
                 </CardContent>
             </CardActionArea>
                 
         </Card>
-        { topic.users.length > 4 &&
+        {  topic.users && topic.users.length > 4 &&
             <Box>
             <Card sx={{ width: '100px', height: '100px' }}>
                 <CardActionArea onClick={()=>{navigate(topic.users[1].url)}}>
