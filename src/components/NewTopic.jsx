@@ -1,7 +1,9 @@
-import { Box, Button } from "@mui/material"
+import { Box, Button, TextField } from "@mui/material"
 import { createTopic } from "../redux/actions/topicActions"
 import { createTopicSelector } from "../redux/selector/topicSelector"
 import { useDispatch, useSelector } from "react-redux"
+import { useState } from "react"
+
 export default function  NewTopic (){
     const dispatch = useDispatch()
 
@@ -12,18 +14,31 @@ export default function  NewTopic (){
 
     console.log(userId , ' USER ID')
 
-    const handleClick = () => {
-      dispatch(createTopic({
-        title : 'Hola soy un titulo!',
-        authorID : userId 
-      }))
-      console.log('new topic created!')
+    const [ topicInfo, setTopicInfo ] = useState({})
+    const handleChange = (e) => {
+      setTopicInfo(
+        {
+          title: e.target.value,
+          authorID: userId
+        }
+      )
     }
+
+    const handleSubmit = () => {
+      dispatch(createTopic(topicInfo))
+      console.log(topicInfo)
+    }
+
     return(
         <>
-         <Box>
-            <Button color="secondary" onClick={()=>{handleClick()}}>Click me!</Button>
+         <Box component="form" onSubmit={handleSubmit}>
+            <TextField
+              id="titleTopic"
+              label="Titulo del Topic"
+              onChange={handleChange}
+            />
+            <Button type="submit" color="secondary">Click me!</Button>
         </Box>
         </>
-    )
+    ) 
 }
