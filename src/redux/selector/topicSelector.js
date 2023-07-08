@@ -9,3 +9,8 @@ export const createTopicSelector = createSelector(
 	(state) => state.createTopicState,
 	(createTopic) => createTopic
 );
+
+export const updateTopicTitleSelector = createSelector(
+	(state) => state.updateTopicTitleState,
+	(updateTopicTitle) => updateTopicTitle
+);

@@ -7,6 +7,7 @@ import { Box, Button, CardActionArea, } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteTopic } from '../redux/actions/topicActions';
+import EditTopic from './EditTopic';
 
 export default function TopicCard({topic}) {
     const navigate = useNavigate();
@@ -83,6 +84,7 @@ export default function TopicCard({topic}) {
         }
     </Box>
     <Button onClick={handleDelete} variant='contained' color="secondary" >DELETE ME!</Button>
+    <EditTopic topic={topic} />
     </>
   );
 }

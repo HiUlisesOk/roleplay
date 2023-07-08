@@ -81,3 +81,39 @@ export const getAllTopic = createAsyncThunk(
          }
         }
       );
+
+      
+export const updateTopicTitle = createAsyncThunk(
+	"updateTopicTitle",
+	async (params, { rejectWithValue }) => {
+		try {
+            const userTokenLocalStorage =
+            typeof window != "undefined"
+                ? localStorage.getItem("userToken")
+                    ? JSON.parse(localStorage.getItem("userToken"))
+                    : null
+                : null;
+
+        !userTokenLocalStorage && logout()
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${userTokenLocalStorage}`,
+                    "Content-Type": "application/json",
+                },
+            };
+			const { title, authorID, topicID } = params
+			const { data } = await axios.put(`/update-topic`, params ,config);
+
+			if (!data.type) {
+				return rejectWithValue(data.message);
+			} else {
+                dispatch(getAllTopic())
+				return data;
+			}
+		} catch (error) {
+			console.log(error);
+			return rejectWithValue(error.message);
+		}
+	}
+);

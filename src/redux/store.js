@@ -8,7 +8,8 @@ import {
 } from "./reducers/userReducer";
 import { 
 	getAllTopicReducer, 
-	createTopicReducer 
+	createTopicReducer,
+	updateTopicTitleReducer
 } from './reducers/topicReducer'
 
 const userInfoLocalStorage =
@@ -35,6 +36,7 @@ const reducers = combineReducers({
 	getUserByIdState: getUserByIdReducer,
 	allTopicState : getAllTopicReducer,
 	createTopicState : createTopicReducer,
+	updateTopicTitleState: updateTopicTitleReducer,
 });
 
 export const store = configureStore({
