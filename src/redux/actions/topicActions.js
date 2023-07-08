@@ -52,3 +52,32 @@ export const getAllTopic = createAsyncThunk(
             }
         }
     );
+    export const deleteTopic = createAsyncThunk(
+        "deleteTopic",
+        
+        async (topicID,  { rejectWithValue, dispatch }) => {
+          try {
+            const userTokenLocalStorage =
+            typeof window != "undefined"
+                ? localStorage.getItem("userToken")
+                    ? JSON.parse(localStorage.getItem("userToken"))
+                    : null
+                : null;
+
+        !userTokenLocalStorage && logout()
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${userTokenLocalStorage}`,
+                    "Content-Type": "application/json",
+                },
+            };
+            await axios.delete(`/delete-topic?ID=${topicID}`, config);
+            dispatch(getAllTopic())
+            return topicID; 
+          } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+         }
+        }
+      );

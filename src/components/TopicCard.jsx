@@ -3,11 +3,17 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Box, CardActionArea, } from '@mui/material';
+import { Box, Button, CardActionArea, } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { deleteTopic } from '../redux/actions/topicActions';
 
 export default function TopicCard({topic}) {
     const navigate = useNavigate();
+    const dispatch = useDispatch()
+    const handleDelete = () => {
+        dispatch(deleteTopic(topic.ID))
+    }
   return (
     <>
     <Box sx={{display: 'flex', backgroundColor: 'primary.main', width: '400px',}}>
@@ -76,6 +82,7 @@ export default function TopicCard({topic}) {
         </Box>
         }
     </Box>
+    <Button onClick={handleDelete} variant='contained' color="secondary" >DELETE ME!</Button>
     </>
   );
 }
