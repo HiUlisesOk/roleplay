@@ -5,7 +5,8 @@ import TablonConPestañas from "../components/TablonConPestañas.jsx";
 import Slide from "../components/Slide.jsx";
 import { loginSelector } from '../redux/selector/userSelector.js'
 import { useSelector } from "react-redux";
-
+import AllTopic from "../components/AllTopic.jsx";
+import NewTopic from "../components/NewTopic.jsx";
 
 export default function Home() {
     const { userData } = useSelector((state) => state);
@@ -52,6 +53,10 @@ export default function Home() {
                         <Slide arrayItems={postsArray} column={false} element='cardsmall' />
                     </Section>
                 </Box>
+            </Box>
+            <Box sx={{pl: 10,}}>
+            <AllTopic />
+            <NewTopic />
             </Box>
         </>
     );

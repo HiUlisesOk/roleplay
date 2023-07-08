@@ -6,6 +6,10 @@ import {
 	updateProfilePictureReducer,
 	getUserByIdReducer
 } from "./reducers/userReducer";
+import { 
+	getAllTopicReducer, 
+	createTopicReducer 
+} from './reducers/topicReducer'
 
 const userInfoLocalStorage =
 	typeof window !== "undefined" && localStorage.getItem("userInfo")
@@ -29,6 +33,8 @@ const reducers = combineReducers({
 	uploadImageState: uploadImageReducer,
 	updateProfilePictureState: updateProfilePictureReducer,
 	getUserByIdState: getUserByIdReducer,
+	allTopicState : getAllTopicReducer,
+	createTopicState : createTopicReducer,
 });
 
 export const store = configureStore({
