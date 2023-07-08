@@ -1,4 +1,4 @@
-import banner from '../img/DreamShaper_v6_Naruto_fire_abstract_high_quality_UHD_Luminous_0.jpg'
+import banner from '../img/Naruto_fire_abstract_high_quality_UHD_Luminous_01.jpg'
 
 export const ProfileStyles = {
 	container: {
@@ -27,6 +27,6 @@ export const ProfileStyles = {
 		justifyContent: 'center'
 	},
 	Avatar: { width: 150, height: 150, mt: -10, ml: 4 },
-	userName: { m: 0, p: 0 },
+	userName: { m: 0, p: 0, fontWeight: 600 },
 	userPrimarySection: { display: 'flex', flexDirection: 'column', width: '100%', padding: '0px 70px' },
 };
