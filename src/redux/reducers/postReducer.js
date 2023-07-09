@@ -1,30 +1,50 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { getAllTopic, createTopic, updateTopicTitle, deleteTopic } from "../actions/topicActions";
+import { getAllPost , createPost } from "../actions/postActions.js"
+
 
 const initialState = {
 	loading: false,
 	error: false,
-	allTopicState : {},
-	createTopicState : {},
-	updateTopicTile: {},
-	deleteTopicState: {}
+	getAllPostState : {},
+	createPostState: {},
 };
 
-export const getAllTopicReducer = createReducer(initialState, builder => {
-	builder.addCase(getAllTopic.pending, (state, action) => {
+export const getAllPostReducer = createReducer(initialState, builder => {
+	builder.addCase(getAllPost.pending, (state, action) => {
 		state.loading = true;
 		state.error = false;
 	});
-	builder.addCase(getAllTopic.fulfilled, (state, action) => {
+	builder.addCase(getAllPost.fulfilled, (state, action) => {
 		state.loading = false;
 		state.error = false;
-		state.allTopicState = action.payload;
+		state.getAllPostState = action.payload;
 	});
-	builder.addCase(getAllTopic.rejected, (state, action) => {
+	builder.addCase(getAllPost.rejected, (state, action) => {
 		state.loading = false;
 		state.error = action.payload;
 	})
 });
+
+export const createPostReducer = createReducer(initialState, builder => {
+	builder.addCase(createPost.pending, (state, action) => {
+		state.loading = true;
+		state.error = false;
+	});
+	builder.addCase(createPost.fulfilled, (state, action) => {
+		state.loading = false;
+		state.error = false;
+		state.createPostState = action.payload;
+		console.log(action);
+	});
+	builder.addCase(createPost.rejected, (state, action) => {
+		state.loading = false;
+		state.error = action.payload;
+	})
+});
+
+
+
+/*
 
 export const createTopicReducer = createReducer(initialState, builder => {
 	builder.addCase(createTopic.pending, (state, action) => {
@@ -73,4 +93,4 @@ export const deleteTopicReducer = createReducer(initialState, builder => {
 		state.loading = false;
 		state.error = action.payload;
 	})
-});
+});*/
