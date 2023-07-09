@@ -19,7 +19,7 @@ export default function TopicCard({topic}) {
     <>
     <Box sx={{display: 'flex', backgroundColor: 'primary.main', width: '400px',}}>
         <Card sx={{ width: '300px', height: 'fit-content', width: '100%' }}>
-            <CardActionArea onClick={()=>{navigate(topic.url)}}>
+            <CardActionArea onClick={()=>{navigate(`/topic/${topic.ID}`)}}>
                 <CardMedia
                 component="img"
                 height="300"
