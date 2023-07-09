@@ -1,6 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { getAllTopic, createTopic, updateTopicTitle } from "../actions/topicActions";
-import { updateProfilePicture } from "../actions/userActions";
+import { getAllTopic, createTopic, updateTopicTitle, deleteTopic } from "../actions/topicActions";
 
 const initialState = {
 	loading: false,
@@ -8,6 +7,7 @@ const initialState = {
 	allTopicState : {},
 	createTopicState : {},
 	updateTopicTile: {},
+	deleteTopicState: {}
 };
 
 export const getAllTopicReducer = createReducer(initialState, builder => {
@@ -54,6 +54,22 @@ export const updateTopicTitleReducer = createReducer(initialState, builder => {
 		console.log(action);
 	});
 	builder.addCase(updateTopicTitle.rejected, (state, action) => {
+		state.loading = false;
+		state.error = action.payload;
+	})
+});
+export const deleteTopicReducer = createReducer(initialState, builder => {
+	builder.addCase(deleteTopic.pending, (state, action) => {
+		state.loading = true;
+		state.error = false;
+	});
+	builder.addCase(deleteTopic.fulfilled, (state, action) => {
+		state.loading = false;
+		state.error = false;
+		state.deleteTopic = action.payload;
+		console.log(action);
+	});
+	builder.addCase(deleteTopic.rejected, (state, action) => {
 		state.loading = false;
 		state.error = action.payload;
 	})

@@ -36,7 +36,7 @@ export default function  EditTopic ({topic}){
         {
         show && 
         <Box component="form" onSubmit={handleSubmit} sx={{
-            backgroundColor: '#1f1b1a33',
+            backgroundColor: '#1f1b1add',
             position: 'fixed',
             top: 0,
             width: '100%',
@@ -49,6 +49,7 @@ export default function  EditTopic ({topic}){
               id="newTitleTopic"
               label="Nuevo titulo del Topic"
               onChange={handleChange}
+              autoFocus={true}
             />
             <Button type="submit" color="secondary">Change me!</Button>
             

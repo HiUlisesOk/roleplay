@@ -14,3 +14,8 @@ export const updateTopicTitleSelector = createSelector(
 	(state) => state.updateTopicTitleState,
 	(updateTopicTitle) => updateTopicTitle
 );
+
+export const deleteTopicSelector = createSelector(
+	(state) => state.deleteTopicState,
+	(deleteTopic) => deleteTopic
+);

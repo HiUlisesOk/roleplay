@@ -1,8 +1,8 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { logout } from '../../utils/Logout'
-
 // axios.defaults.baseURL = import.meta.env.VITE_BASE_API_URL;
+
 
 export const getAllTopic = createAsyncThunk(
 	"getAllTopic",
@@ -85,7 +85,7 @@ export const getAllTopic = createAsyncThunk(
       
 export const updateTopicTitle = createAsyncThunk(
 	"updateTopicTitle",
-	async (params, { rejectWithValue }) => {
+	async (params, { rejectWithValue, dispatch }) => {
 		try {
             const userTokenLocalStorage =
             typeof window != "undefined"
@@ -102,15 +102,10 @@ export const updateTopicTitle = createAsyncThunk(
                     "Content-Type": "application/json",
                 },
             };
-			const { title, authorID, topicID } = params
 			const { data } = await axios.put(`/update-topic`, params ,config);
-
-			if (!data.type) {
-				return rejectWithValue(data.message);
-			} else {
-                dispatch(getAllTopic())
-				return data;
-			}
+            dispatch(getAllTopic())
+			return data;
+			
 		} catch (error) {
 			console.log(error);
 			return rejectWithValue(error.message);
