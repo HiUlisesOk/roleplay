@@ -17,7 +17,7 @@ export default function  AllTopic (){
     console.log(state.allTopicState)
     return(
         <>
-         <Box>
+         <Box sx={{display: 'flex', justifyContent:'space-around', flexWrap: 'wrap'}}>
             {state.allTopicState.length > 0 ? (
              state.allTopicState.map(topic => (
             <TopicCard key={topic.id} topic={topic} />

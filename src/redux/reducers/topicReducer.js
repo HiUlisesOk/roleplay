@@ -35,7 +35,7 @@ export const createTopicReducer = createReducer(initialState, builder => {
 		state.loading = false;
 		state.error = false;
 		state.createTopicState = action.payload;
-		console.log(action);
+		console.log('action', action);
 	});
 	builder.addCase(createTopic.rejected, (state, action) => {
 		state.loading = false;

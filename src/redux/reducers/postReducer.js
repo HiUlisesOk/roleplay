@@ -45,23 +45,6 @@ export const createPostReducer = createReducer(initialState, builder => {
 
 
 /*
-
-export const createTopicReducer = createReducer(initialState, builder => {
-	builder.addCase(createTopic.pending, (state, action) => {
-		state.loading = true;
-		state.error = false;
-	});
-	builder.addCase(createTopic.fulfilled, (state, action) => {
-		state.loading = false;
-		state.error = false;
-		state.createTopicState = action.payload;
-		console.log(action);
-	});
-	builder.addCase(createTopic.rejected, (state, action) => {
-		state.loading = false;
-		state.error = action.payload;
-	})
-});
 export const updateTopicTitleReducer = createReducer(initialState, builder => {
 	builder.addCase(updateTopicTitle.pending, (state, action) => {
 		state.loading = true;

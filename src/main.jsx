@@ -8,6 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import { store } from './redux/store.js'
 import { Provider } from 'react-redux'
 import theme from './css/ThemeStyles.js'
+import Nav from './components/utils/Nav.jsx';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -16,6 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <BrowserRouter>
         <CssBaseline />
         <Provider store={store}>
+        <Nav />
           <App />
         </Provider>
       </BrowserRouter>

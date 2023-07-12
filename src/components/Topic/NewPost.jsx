@@ -1,18 +1,13 @@
 import { Box, Button, TextField } from "@mui/material"
 import { createPost } from "../../redux/actions/postActions"
-import { createPostSelector } from "../../redux/selector/postSelector"
 import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
 
 export default function  NewPost ({topicId}){
     const dispatch = useDispatch()
-
-    const postSelector = useSelector(createPostSelector)
     
     const { userData } = useSelector((state) => state);
     const userId = userData?.userInfo?.ID;
-
-    console.log(userId , ' USER ID')
 
     const [ postContent, setPostContent ] = useState('')
     const handleChange = (e) => {
