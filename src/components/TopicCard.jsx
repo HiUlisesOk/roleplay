@@ -16,7 +16,6 @@ export default function TopicCard({topic}) {
         dispatch(deleteTopic(topic.ID))
     }
   return (
-    <>
     <Box sx={{display: 'flex', backgroundColor: 'primary.main', width: '400px',}}>
         <Card sx={{ width: '300px', height: 'fit-content', width: '100%' }}>
             <CardActionArea onClick={()=>{navigate(`/topic/${topic.ID}`)}}>
@@ -83,8 +82,5 @@ export default function TopicCard({topic}) {
         </Box>
         }
     </Box>
-    <Button onClick={handleDelete} variant='contained' color="secondary" >DELETE ME!</Button>
-    <EditTopic topic={topic} />
-    </>
   );
 }

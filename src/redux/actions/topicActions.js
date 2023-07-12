@@ -25,6 +25,7 @@ export const getAllTopic = createAsyncThunk(
                 };
                 const response = await axios.get(`/get-all-topics`, config);
                 const data = response.data;
+                console.log(data)
                 return data;
             } catch (error) {
                 console.log(error);
@@ -39,8 +40,8 @@ export const getAllTopic = createAsyncThunk(
                 const { data } = await axios.post(`/create-topic`, topic, {
                     withCredentials: true,
                 });
-    
-                if (!data.type) {
+   
+                if (data.type) {
                     return rejectWithValue(data.message);
                 } else {
                     dispatch(getAllTopic())

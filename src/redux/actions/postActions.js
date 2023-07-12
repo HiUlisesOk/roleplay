@@ -50,34 +50,10 @@ export const getAllPost = createAsyncThunk(
             }
         }
     );
-    
-
-
-/*
-    export const createTopic = createAsyncThunk(
-        "createTopic",
-        async (topic, { rejectWithValue, dispatch }) => {
-            try {
-                const { data } = await axios.post(`/create-topic`, topic, {
-                    withCredentials: true,
-                });
-    
-                if (!data.type) {
-                    return rejectWithValue(data.message);
-                } else {
-                    dispatch(getAllTopic())
-                    return data;
-                }
-            } catch (error) {
-                console.log(error);
-                return rejectWithValue(error.message);
-            }
-        }
-    );
-    export const deleteTopic = createAsyncThunk(
-        "deleteTopic",
+    export const deletePost = createAsyncThunk(
+        "deletePost",
         
-        async (topicID,  { rejectWithValue, dispatch }) => {
+        async (postID,  { rejectWithValue, dispatch }) => {
           try {
             const userTokenLocalStorage =
             typeof window != "undefined"
@@ -94,9 +70,9 @@ export const getAllPost = createAsyncThunk(
                     "Content-Type": "application/json",
                 },
             };
-            await axios.delete(`/delete-topic?ID=${topicID}`, config);
-            dispatch(getAllTopic())
-            return topicID; 
+            await axios.delete(`/delete-post?ID=${postID}`, config);
+            dispatch(getAllPost())
+            return postID; 
           } catch (error) {
             console.log(error);
             return rejectWithValue(error.message);
@@ -104,7 +80,8 @@ export const getAllPost = createAsyncThunk(
         }
       );
 
-      
+
+/*   
 export const updateTopicTitle = createAsyncThunk(
 	"updateTopicTitle",
 	async (params, { rejectWithValue, dispatch }) => {

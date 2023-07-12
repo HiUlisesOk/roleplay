@@ -1,11 +1,14 @@
 import { Box, Button, Typography } from "@mui/material";
+import { deletePost } from '../../redux/actions/postActions';
+import { useDispatch } from "react-redux";
 
-export default function Post({author , createdAt, children}) {
+export default function Post({author, createdAt, children, id}) {
+    const dispatch = useDispatch()
     const editarPost = () =>{
 
     }
     const borrarPost = () => {
-
+        dispatch(deletePost(id))
     }
     return(
         <Box>

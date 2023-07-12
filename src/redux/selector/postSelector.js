@@ -11,7 +11,6 @@ export const createPostSelector = createSelector(
 );
 
 /*
-
 export const updateTopicTitleSelector = createSelector(
 	(state) => state.updateTopicTitleState,
 	(updateTopicTitle) => updateTopicTitle

@@ -1,24 +1,15 @@
-import { Box } from "@mui/material";
-import Navbar from "../components/Navbar.jsx"
+import { Box, Button } from "@mui/material";
 import Section from "../components/Section.jsx";
 import TablonConPestañas from "../components/TablonConPestañas.jsx";
 import Slide from "../components/Slide.jsx";
-import { loginSelector } from '../redux/selector/userSelector.js'
-import { useSelector } from "react-redux";
-import AllTopic from "../components/AllTopic.jsx";
-import NewTopic from "../components/NewTopic.jsx";
+import { Link } from "react-router-dom";
 
 export default function Home() {
-    const { userData } = useSelector((state) => state);
-    const userId = userData?.userInfo?.ID;
-
-
     const anunciosArray = ['Anuncio 1', 'Anuncio 2', 'Anuncio 3', 'Anuncio 4', 'Anuncio 5'];
     const postsArray = ['Tema 1', 'Tema 2', 'Tema 3', 'Tema 4', 'Tema 5', 'Tema 6', 'Tema 7'];
 
     return (
         <>
-            <Navbar></Navbar>
             <Box
                 sx={{
                     pl: 10, pt: 10, pb: 1,
@@ -45,7 +36,7 @@ export default function Home() {
                     </Section>
                 </Box>
                 <Box
-                    sx={{
+                    sx={{ 
                         maxHeight: '100%',
                     }}
                 >
@@ -55,8 +46,9 @@ export default function Home() {
                 </Box>
             </Box>
             <Box sx={{pl: 10,}}>
-            <AllTopic />
-            <NewTopic />
+            <Button component={Link} to="/newtopic" variant="contained" color="secondary">
+                Nuevo Topic
+            </Button>
             </Box>
         </>
     );

@@ -3,11 +3,11 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import { useEffect, useState } from 'react'
-import { logout } from '../utils/Logout'
+import { logout } from '../../utils/Logout'
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginSelector, getUserByIdSelector } from '../redux/selector/userSelector';
-import { getUserById } from '../redux/actions/userActions'
+import { loginSelector, getUserByIdSelector } from '../../redux/selector/userSelector';
+import { getUserById } from '../../redux/actions/userActions'
 export default function AvatarMenu() {
   const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = useState(null);
