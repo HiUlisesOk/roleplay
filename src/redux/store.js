@@ -8,8 +8,14 @@ import {
 } from "./reducers/userReducer";
 import { 
 	getAllTopicReducer, 
-	createTopicReducer 
+	createTopicReducer,
+	updateTopicTitleReducer,
+	deleteTopicReducer
 } from './reducers/topicReducer'
+import {
+	getAllPostReducer,
+	createPostReducer,
+} from './reducers/postReducer.js'
 
 const userInfoLocalStorage =
 	typeof window !== "undefined" && localStorage.getItem("userInfo")
@@ -35,6 +41,10 @@ const reducers = combineReducers({
 	getUserByIdState: getUserByIdReducer,
 	allTopicState : getAllTopicReducer,
 	createTopicState : createTopicReducer,
+	updateTopicTitleState: updateTopicTitleReducer,
+	deleteTopicState : deleteTopicReducer,
+	getAllPostState : getAllPostReducer,
+	createPostState: createPostReducer,
 });
 
 export const store = configureStore({

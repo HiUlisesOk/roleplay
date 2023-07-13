@@ -1,15 +1,16 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-export const getAllTopicSelector = createSelector(
-	(state) => state.allTopicState,
-	(getAllTopic) => getAllTopic
+export const getAllPostSelector = createSelector(
+	(state) => state.getAllPostState,
+	(getAllPost) => getAllPost
 );
 
-export const createTopicSelector = createSelector(
-	(state) => state.createTopicState,
-	(createTopic) => createTopic
+export const createPostSelector = createSelector(
+	(state) => state.createPostState,
+	(createPost) => createPost
 );
 
+/*
 export const updateTopicTitleSelector = createSelector(
 	(state) => state.updateTopicTitleState,
 	(updateTopicTitle) => updateTopicTitle
@@ -18,4 +19,4 @@ export const updateTopicTitleSelector = createSelector(
 export const deleteTopicSelector = createSelector(
 	(state) => state.deleteTopicState,
 	(deleteTopic) => deleteTopic
-);
+);*/

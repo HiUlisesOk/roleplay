@@ -6,8 +6,6 @@ import { useState } from "react"
 
 export default function  NewTopic (){
     const dispatch = useDispatch()
-
-    const state = useSelector(createTopicSelector)
     
     const { userData } = useSelector((state) => state);
     const userId = userData?.userInfo?.ID;

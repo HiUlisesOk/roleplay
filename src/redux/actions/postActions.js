@@ -1,11 +1,9 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { logout } from '../../utils/Logout'
-// axios.defaults.baseURL = import.meta.env.VITE_BASE_API_URL;
 
-
-export const getAllTopic = createAsyncThunk(
-	"getAllTopic",
+export const getAllPost = createAsyncThunk(
+	"getAllPost",
 	async (params,  { rejectWithValue}) => {
 			try {
                 const userTokenLocalStorage =
@@ -23,9 +21,8 @@ export const getAllTopic = createAsyncThunk(
                         "Content-Type": "application/json",
                     },
                 };
-                const response = await axios.get(`/get-all-topics`, config);
+                const response = await axios.get(`/get-all-post`, config);
                 const data = response.data;
-                console.log(data)
                 return data;
             } catch (error) {
                 console.log(error);
@@ -33,18 +30,18 @@ export const getAllTopic = createAsyncThunk(
             }
         }
     );
-    export const createTopic = createAsyncThunk(
-        "createTopic",
-        async (topic, { rejectWithValue, dispatch }) => {
+    export const createPost = createAsyncThunk(
+        "createPost",
+        async (post, { rejectWithValue, dispatch }) => {
             try {
-                const { data } = await axios.post(`/create-topic`, topic, {
+                const { data } = await axios.post(`/create-post`, post, {
                     withCredentials: true,
                 });
-   
-                if (data.type) {
+    
+                if (!data.type) {
                     return rejectWithValue(data.message);
                 } else {
-                    dispatch(getAllTopic())
+                    dispatch(getAllPost())
                     return data;
                 }
             } catch (error) {
@@ -53,10 +50,10 @@ export const getAllTopic = createAsyncThunk(
             }
         }
     );
-    export const deleteTopic = createAsyncThunk(
-        "deleteTopic",
+    export const deletePost = createAsyncThunk(
+        "deletePost",
         
-        async (topicID,  { rejectWithValue, dispatch }) => {
+        async (postID,  { rejectWithValue, dispatch }) => {
           try {
             const userTokenLocalStorage =
             typeof window != "undefined"
@@ -73,9 +70,9 @@ export const getAllTopic = createAsyncThunk(
                     "Content-Type": "application/json",
                 },
             };
-            await axios.delete(`/delete-topic?ID=${topicID}`, config);
-            dispatch(getAllTopic())
-            return topicID; 
+            await axios.delete(`/delete-post?ID=${postID}`, config);
+            dispatch(getAllPost())
+            return postID; 
           } catch (error) {
             console.log(error);
             return rejectWithValue(error.message);
@@ -83,7 +80,8 @@ export const getAllTopic = createAsyncThunk(
         }
       );
 
-      
+
+/*   
 export const updateTopicTitle = createAsyncThunk(
 	"updateTopicTitle",
 	async (params, { rejectWithValue, dispatch }) => {
@@ -112,4 +110,4 @@ export const updateTopicTitle = createAsyncThunk(
 			return rejectWithValue(error.message);
 		}
 	}
-);
+);*/

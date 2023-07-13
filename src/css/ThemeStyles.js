@@ -34,6 +34,10 @@ const theme = createTheme({
 						'-webkitBoxShadow': '0 0 0 100px #312E2D inset',
 						borderRadius: '0px',
 					},
+					'.css-78t69-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill' : {
+						'-webkitBoxShadow': '0 0 0 100px #312E2D inset',
+						borderRadius: '0px',
+					}
 				},
 			},
 		},
