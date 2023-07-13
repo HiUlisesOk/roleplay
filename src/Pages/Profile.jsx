@@ -27,19 +27,19 @@ function Profile() {
 
 
 	console.log(theme)
-	return (
+	return (<>
+		<div style={ProfileStyles.banner}></div>
 		<Container style={ProfileStyles.container}>
-			<div style={ProfileStyles.banner}></div>
 			<Grid container spacing={0} style={{ flex: 1 }}>
 				<Grid item xs={6}>
 					<UserInfo />
-					<Box style={ProfileStyles.section}>User Info</Box>
 				</Grid>
 				<Grid item xs={6}>
 					<Box style={ProfileStyles.section}>Character Info</Box>
 				</Grid>
 			</Grid>
 		</Container>
+	</>
 	);
 }
 
