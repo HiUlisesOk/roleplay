@@ -34,7 +34,7 @@ function Profile() {
 		<Container style={ProfileStyles.container}>
 			<Grid container spacing={0} style={{ flex: 1 }}>
 				<Grid item xs={6}>
-					<UserInfo />
+					<UserInformation />
 				</Grid>
 				<Grid item xs={6}>
 					<Box style={ProfileStyles.section}>Character Info</Box>
