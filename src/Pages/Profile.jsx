@@ -11,7 +11,7 @@ import { getUserById } from '../redux/actions/userActions'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useTheme } from '@emotion/react';
-import UserInfo from '../components/Profile/userInfo';
+import UserInformation from '../components/Profile/UserInformation';
 import { ProfileStyles } from '../css/ProfileStyles';
 import Nav from '../components/utils/Nav';
 
