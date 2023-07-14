@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 import { useTheme } from '@emotion/react';
 import UserInfo from '../components/Profile/userInfo';
 import { ProfileStyles } from '../css/ProfileStyles';
+import Nav from '../components/utils/Nav';
 
 
 function Profile() {
@@ -28,6 +29,7 @@ function Profile() {
 
 	console.log(theme)
 	return (<>
+		<Nav />
 		<div style={ProfileStyles.banner}></div>
 		<Container style={ProfileStyles.container}>
 			<Grid container spacing={0} style={{ flex: 1 }}>

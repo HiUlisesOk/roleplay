@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import styles from "../css/HomeStyles.js";
 import { useTheme } from '@mui/material/styles';
 import { useState } from 'react';
+import Nav from '../components/utils/Nav'
 
 export default function Home() {
     const anunciosArray = ['Anuncio 1', 'Anuncio 2', 'Anuncio 3', 'Anuncio 4', 'Anuncio 5'];
@@ -43,6 +44,8 @@ export default function Home() {
     return (
 
         <>
+
+            <Nav />
             <Box
                 sx={styles.box1}
             >
