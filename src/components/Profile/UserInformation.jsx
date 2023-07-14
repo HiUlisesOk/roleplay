@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import FollowButton from '../utils/FollowButton';
 import UserStats from './UserStats';
 
-const UserInfo = () => {
+const UserInformation = () => {
 
 	const { getUserByIdState } = useSelector(getUserByIdSelector)
 
@@ -105,4 +105,4 @@ const UserInfo = () => {
 	)
 }
 
-export default UserInfo
+export default UserInformation
