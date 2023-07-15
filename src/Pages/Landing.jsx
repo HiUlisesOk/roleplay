@@ -1,4 +1,4 @@
-import { Box, Typography, TextField } from '@mui/material';
+import { Box, Typography, TextField, InputAdornment, IconButton } from '@mui/material';
 import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
 import BG from '../img/bg.jpg';
@@ -9,12 +9,14 @@ import { useTheme } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { Login } from '../redux/actions/userActions';
 import { loginSelector } from '../redux/selector/userSelector';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 export default function Landing() {
   const dispatch = useDispatch();
   const theme = useTheme();
   const { loginInfo } = useSelector(loginSelector);
-
+  const [visibility, setVisibility] = useState(false);
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -82,7 +84,20 @@ export default function Landing() {
             <Typography variant="h4" align='center' color='secondary' sx={{ mb: '24px' }}>Sign In</Typography>
 
             <TextField id="username" onChange={(e) => setUsername(e.target.value)} label="Nombre de usario" variant="filled" />
-            <TextField id="password" onChange={(e) => setPassword(e.target.value)} label="Contraseña" variant="filled" type="password" />
+            <TextField id="password" onChange={(e) => setPassword(e.target.value)} label="Contraseña" variant="filled" type={visibility ? "text" : "password"}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => { setVisibility((visibility) => !visibility); }}
+                      edge="end"
+                    >
+                      {visibility ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }} />
             {/* <Button component={Link} to="/home" variant="contained" color="primary">
                 ENTRAR
               </Button> */}
