@@ -10,13 +10,7 @@ export const createPostSelector = createSelector(
 	(createPost) => createPost
 );
 
-/*
-export const updateTopicTitleSelector = createSelector(
-	(state) => state.updateTopicTitleState,
-	(updateTopicTitle) => updateTopicTitle
+export const updatePostSelector = createSelector(
+	(state) => state.updatePostState,
+	(updatePost) => updatePost
 );
-
-export const deleteTopicSelector = createSelector(
-	(state) => state.deleteTopicState,
-	(deleteTopic) => deleteTopic
-);*/
