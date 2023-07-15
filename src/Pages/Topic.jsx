@@ -9,32 +9,30 @@ import { Box, Button, Typography } from "@mui/material";
 import NewPost from "../components/Topic/NewPost";
 import Post from "../components/Topic/Post";
 import EditTopic from "../components/EditTopic";
-import Nav from "../components/utils/Nav";
 
 
 export default function Topic() {
     const { id } = useParams();
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getAllTopic()),
-            dispatch(getAllPost())
-    }, [id])
+            dispatch(getAllPost());
+    }, [id]);
     const allTopicSelector = useSelector(getAllTopicSelector);
     const allPostSelector = useSelector(getAllPostSelector);
 
-    const topic = allTopicSelector.allTopicState.length ? allTopicSelector.allTopicState.find((topic) => (topic.ID == id)) : false
+    const topic = allTopicSelector.allTopicState.length ? allTopicSelector.allTopicState.find((topic) => (topic.ID == id)) : false;
     console.log(topic);
-    const posts = allPostSelector.getAllPostState.length ? allPostSelector.getAllPostState.filter((post) => (post.topicID == id)) : false
-    console.log(posts)
+    const posts = allPostSelector.getAllPostState.length ? allPostSelector.getAllPostState.filter((post) => (post.topicID == id)) : false;
+    console.log(posts);
 
     const handleDelete = () => {
-        dispatch(deleteTopic(topic.ID))
-    }
+        dispatch(deleteTopic(topic.ID));
+    };
 
     return (
         <>
-            <Nav />
             {topic ? (
                 <>
                     <Typography variant="h2">{topic.title}</Typography>
@@ -58,5 +56,5 @@ export default function Topic() {
                 <Box>Error</Box>
             )}
         </>
-    )
+    );
 }

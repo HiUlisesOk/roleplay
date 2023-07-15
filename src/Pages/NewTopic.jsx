@@ -1,16 +1,15 @@
-import { Box, Button, TextField } from "@mui/material"
-import { createTopic } from "../redux/actions/topicActions"
-import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState } from "react"
-import { useLocation } from "react-router-dom"
-import Nav from "../components/utils/Nav"
+import { Box, Button, TextField } from "@mui/material";
+import { createTopic } from "../redux/actions/topicActions";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function NewTopic() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const location = useLocation();
-  const [topicTitle, setTopicTitle] = useState('')
-  const [postContent, setPostContent] = useState('')
-  const response = useSelector((state) => state.createTopicState.createTopicState)
+  const [topicTitle, setTopicTitle] = useState('');
+  const [postContent, setPostContent] = useState('');
+  const response = useSelector((state) => state.createTopicState.createTopicState);
   const { userData } = useSelector((state) => state);
   const userId = userData?.userInfo?.ID;
 
@@ -21,23 +20,22 @@ export default function NewTopic() {
       authorID: userId,
       content: postContent
     }));
-  }
+  };
 
-  console.log(!response.topic ? response.topic : response.topic.ID)
+  console.log(!response.topic ? response.topic : response.topic.ID);
 
   useEffect(() => {
     if (response.topic !== undefined) {
       const nuevaURL = `/topic/${response.topic.ID}`;
       window.history.replaceState(null, null, nuevaURL);
       location.pathname = nuevaURL;
-      window.location.reload()
+      window.location.reload();
     }
   }, [response]
-  )
+  );
 
   return (
     <>
-      <Nav />
       <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', margin: '10px auto', width: '50%' }}>
         <TextField
           id="titleTopic"
@@ -45,7 +43,7 @@ export default function NewTopic() {
           autoFocus
           required
           onChange={(e) => {
-            setTopicTitle(e.target.value)
+            setTopicTitle(e.target.value);
           }}
         />{
           <TextField
@@ -53,11 +51,11 @@ export default function NewTopic() {
             label="Contenido del Post"
             required
             onChange={(e) => {
-              setPostContent(e.target.value)
+              setPostContent(e.target.value);
             }}
           />}
         <Button type="submit" color="secondary">Crear Topic!</Button>
       </Box>
     </>
-  )
+  );
 }
