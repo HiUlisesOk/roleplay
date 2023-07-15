@@ -2,7 +2,7 @@
 import Landing from "./Pages/Landing.jsx";
 import Home from "./Pages/Home.jsx";
 import Register from "./Pages/Register.jsx";
-
+import EditPost from "./Pages/EditPost.jsx";
 import Playground from "./Pages/Playground.jsx";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./utils/ProtectedRoute.jsx";
@@ -19,6 +19,7 @@ export default function App() {
       <Routes>
         <Route path="/profile/:id" element={<ProtectedRoute><Nav /><Profile /></ProtectedRoute>} />
         <Route path="/topic/:id" element={<ProtectedRoute><Nav /><Topic /></ProtectedRoute>} />
+        <Route path="/editpost" element={<ProtectedRoute><Nav /><EditPost /></ProtectedRoute>} />
         <Route path="/newtopic" element={<ProtectedRoute><Nav /><NewTopic /></ProtectedRoute>} />
         <Route path="/home" element={<ProtectedRoute><Nav /><Home /></ProtectedRoute>} />
         <Route path="/login" element={<Landing />} />
