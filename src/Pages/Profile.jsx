@@ -6,30 +6,27 @@ import Grid from '@mui/material/Grid';
 
 import { Box, Typography } from '@mui/material';
 
-import { getUserById } from '../redux/actions/userActions'
+import { getUserById } from '../redux/actions/userActions';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useTheme } from '@emotion/react';
 import UserInformation from '../components/Profile/UserInformation';
 import { ProfileStyles } from '../css/ProfileStyles';
-import Nav from '../components/utils/Nav';
-
 
 function Profile() {
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 	const theme = useTheme();
 
 	const { id } = useParams();
 
 	useEffect(() => {
-		dispatch(getUserById(id))
-	}, [id])
+		dispatch(getUserById(id));
+	}, [id]);
 
 
-	console.log(theme)
+	console.log(theme);
 	return (<>
-		<Nav />
 		<div style={ProfileStyles.banner}></div>
 		<Container style={ProfileStyles.container}>
 			<Grid container spacing={0} style={{ flex: 1 }}>
