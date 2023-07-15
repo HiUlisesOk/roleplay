@@ -10,7 +10,7 @@ import { getLastActiveTopics } from "../redux/actions/topicActions.js";
 import { getLastActiveTopicsSelector } from "../redux/selector/topicSelector.js";
 import CardSmall from "../components/Home_/CardSmall.jsx";
 import SimpleCard from "../components/Home_/SimpleCard.jsx";
-import { useSpring, animated } from 'react-spring';
+import { useSpring, animated } from 'react-spring'
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -71,6 +71,8 @@ export default function Home() {
     return (
 
         <>
+
+            <Nav />
             <Box
                 sx={styles.box1}
             >
