@@ -7,7 +7,6 @@ const styles = {
         height: 'calc(100vh - 65px)',
         display: 'flex',
         margin: '0px auto',
-        overflow: 'hidden',
         gap: 1,
     },
     box2: {

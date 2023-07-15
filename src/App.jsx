@@ -1,33 +1,34 @@
 
-import Landing from "./Pages/Landing.jsx"
-import Home from "./Pages/Home.jsx"
-import Register from "./Pages/Register.jsx"
+import Landing from "./Pages/Landing.jsx";
+import Home from "./Pages/Home.jsx";
+import Register from "./Pages/Register.jsx";
 
-import Playground from "./Pages/Playground.jsx"
-import { Routes, Route } from "react-router-dom"
-import ProtectedRoute from "./utils/ProtectedRoute.jsx"
-import Profile from "./Pages/Profile.jsx"
-import Topic from "./Pages/Topic.jsx"
-import NewTopic from "./Pages/NewTopic.jsx"
-import AllTopic from "./Pages/AllTopic.jsx"
+import Playground from "./Pages/Playground.jsx";
+import { Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./utils/ProtectedRoute.jsx";
+import Profile from "./Pages/Profile.jsx";
+import Topic from "./Pages/Topic.jsx";
+import NewTopic from "./Pages/NewTopic.jsx";
+import AllTopic from "./Pages/AllTopic.jsx";
+import Nav from "./components/utils/Nav.jsx";
 
 
 export default function App() {
   return (
     <>
       <Routes>
-        <Route path="/profile/:id" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        <Route path="/topic/:id" element={<ProtectedRoute><Topic /></ProtectedRoute>} />
-        <Route path="/newtopic" element={<ProtectedRoute><NewTopic /></ProtectedRoute>} />
-        <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        <Route path="/profile/:id" element={<ProtectedRoute><Nav /><Profile /></ProtectedRoute>} />
+        <Route path="/topic/:id" element={<ProtectedRoute><Nav /><Topic /></ProtectedRoute>} />
+        <Route path="/newtopic" element={<ProtectedRoute><Nav /><NewTopic /></ProtectedRoute>} />
+        <Route path="/home" element={<ProtectedRoute><Nav /><Home /></ProtectedRoute>} />
         <Route path="/login" element={<Landing />} />
-        <Route path="/all-topics" element={<AllTopic />} />
+        <Route path="/all-topics" element={<><Nav /><AllTopic /></>} />
         <Route path="/register" element={<Register />} />
-        <Route path="/playground" element={<Playground />} />
+        <Route path="/playground" element={<><Nav /><Playground /></>} />
         <Route path="/" element={<Landing />} />
 
       </Routes>
     </>
 
-  )
+  );
 }

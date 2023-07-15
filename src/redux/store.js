@@ -6,16 +6,17 @@ import {
 	updateProfilePictureReducer,
 	getUserByIdReducer
 } from "./reducers/userReducer";
-import { 
-	getAllTopicReducer, 
+import {
+	getAllTopicReducer,
 	createTopicReducer,
 	updateTopicTitleReducer,
-	deleteTopicReducer
-} from './reducers/topicReducer'
+	deleteTopicReducer,
+	getLastActiveTopicsReducer
+} from './reducers/topicReducer';
 import {
 	getAllPostReducer,
 	createPostReducer,
-} from './reducers/postReducer.js'
+} from './reducers/postReducer.js';
 
 const userInfoLocalStorage =
 	typeof window !== "undefined" && localStorage.getItem("userInfo")
@@ -39,12 +40,13 @@ const reducers = combineReducers({
 	uploadImageState: uploadImageReducer,
 	updateProfilePictureState: updateProfilePictureReducer,
 	getUserByIdState: getUserByIdReducer,
-	allTopicState : getAllTopicReducer,
-	createTopicState : createTopicReducer,
+	allTopicState: getAllTopicReducer,
+	createTopicState: createTopicReducer,
 	updateTopicTitleState: updateTopicTitleReducer,
-	deleteTopicState : deleteTopicReducer,
-	getAllPostState : getAllPostReducer,
+	deleteTopicState: deleteTopicReducer,
+	getAllPostState: getAllPostReducer,
 	createPostState: createPostReducer,
+	lastActiveTopicsState: getLastActiveTopicsReducer,
 });
 
 export const store = configureStore({

@@ -4,11 +4,27 @@ import { Link } from "react-router-dom";
 import styles from "../css/HomeStyles.js";
 import { useTheme } from '@mui/material/styles';
 import { useState } from 'react';
-import Nav from '../components/utils/Nav'
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getLastActiveTopics } from "../redux/actions/topicActions.js";
+import { getLastActiveTopicsSelector } from "../redux/selector/topicSelector.js";
+import CardSmall from "../components/Home_/CardSmall.jsx";
+import SimpleCard from "../components/Home_/SimpleCard.jsx";
+import { useSpring, animated } from 'react-spring'
 
 export default function Home() {
+    const dispatch = useDispatch();
+
+    const LastActiveTopics = useSelector(getLastActiveTopicsSelector);
+
+    useEffect(() => {
+        dispatch(getLastActiveTopics());
+    }, []);
+
+    console.log('Last', LastActiveTopics.lastActiveTopicsState);
+
     const anunciosArray = ['Anuncio 1', 'Anuncio 2', 'Anuncio 3', 'Anuncio 4', 'Anuncio 5'];
-    const postsArray = ['Tema 1', 'Tema 2', 'Tema 3', 'Tema 4', 'Tema 5', 'Tema 6', 'Tema 7'];
+    const lastActives = LastActiveTopics?.lastActiveTopicsState?.lastActiveTopics;
     const [buttons, setButtons] = useState([
         {
             text: 'Button 1',
@@ -27,9 +43,20 @@ export default function Home() {
         },
     ]);
 
+
+    const [pauseAnimation, setPauseAnimation] = useState(false);
+
+    const animStyles = useSpring({
+        from: { transform: 'translateY(100%)' },
+        to: { transform: 'translateY(-100%)' },
+        config: { duration: 30000 },
+        pause: pauseAnimation,
+        loop: true,
+    });
+
     const handleButton = (i) => {
         setButtons(
-            buttons.map(
+            buttons?.map(
                 (item, index) => (
                     index == i
                         ? { text: item.text, variant: 'disabled', content: item.content }
@@ -79,7 +106,22 @@ export default function Home() {
                 <Box>
                     <Box sx={styles.containerSection2}>
                         <Box sx={styles.section}>
-                            <Slide arrayItems={postsArray} column={false} element='cardsmall' />
+
+                            <animated.div style={animStyles}>
+                                <Box
+                                    sx={{ display: 'flex', gap: 1, flexDirection: 'column' }}
+                                    onMouseEnter={() => { setPauseAnimation(true); }}
+                                    onMouseLeave={() => { setPauseAnimation(false); }}>
+                                    {
+                                        lastActives?.map((item, index) => (
+                                            item !== null &&
+                                            <CardSmall key={item.ID + index} title={item.title} user={item.author} date={item.updatedAt} topicID={item.ID} />
+                                        ))
+                                    }
+                                </Box>
+                            </animated.div>
+                            {//<Slide arrayItems={postsArray} column={false} element='cardsmall' />
+                            }
                         </Box>
                     </Box>
                 </Box>
