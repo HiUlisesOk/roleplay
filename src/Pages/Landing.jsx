@@ -67,8 +67,8 @@ export default function Landing() {
           <Typography variant="subtitle2" align='center' sx={{ color: '#f5f5f5' }}>A unique and immersive role-playing experience that combines elements of fantasy, literature, games, manga, music, and anime to create a one-of-a-kind journey through enchanted lands.</Typography>
         </Box>
         <Box>
-          <Box component="form"
-            onSubmit={handleLogin}
+          <Box
+            component="form" onSubmit={handleLogin}
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -80,12 +80,13 @@ export default function Landing() {
             }}>
 
             <Typography variant="h4" align='center' color='secondary' sx={{ mb: '24px' }}>Sign In</Typography>
+
             <TextField id="username" onChange={(e) => setUsername(e.target.value)} label="Nombre de usario" variant="filled" />
             <TextField id="password" onChange={(e) => setPassword(e.target.value)} label="Contraseña" variant="filled" type="password" />
             {/* <Button component={Link} to="/home" variant="contained" color="primary">
                 ENTRAR
               </Button> */}
-            <Button onClick={handleLogin} variant="contained" color="secondary">
+            <Button type="submit" variant="contained" color="secondary">
               ENTRAR
             </Button>
             <Button component={Link} to="/register" size="small" variant="text" color="secondary">
