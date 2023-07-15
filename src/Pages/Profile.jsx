@@ -11,8 +11,9 @@ import { getUserById } from '../redux/actions/userActions'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useTheme } from '@emotion/react';
-import UserInfo from '../components/Profile/userInfo';
+import UserInformation from '../components/Profile/UserInformation';
 import { ProfileStyles } from '../css/ProfileStyles';
+import Nav from '../components/utils/Nav';
 
 
 function Profile() {
@@ -27,19 +28,20 @@ function Profile() {
 
 
 	console.log(theme)
-	return (
+	return (<>
+		<Nav />
+		<div style={ProfileStyles.banner}></div>
 		<Container style={ProfileStyles.container}>
-			<div style={ProfileStyles.banner}></div>
 			<Grid container spacing={0} style={{ flex: 1 }}>
 				<Grid item xs={6}>
-					<UserInfo />
-					<Box style={ProfileStyles.section}>User Info</Box>
+					<UserInformation />
 				</Grid>
 				<Grid item xs={6}>
 					<Box style={ProfileStyles.section}>Character Info</Box>
 				</Grid>
 			</Grid>
 		</Container>
+	</>
 	);
 }
 
