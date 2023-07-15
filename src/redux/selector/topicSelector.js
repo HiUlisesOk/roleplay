@@ -5,6 +5,11 @@ export const getAllTopicSelector = createSelector(
 	(getAllTopic) => getAllTopic
 );
 
+export const getLastActiveTopicsSelector = createSelector(
+	(state) => state.lastActiveTopicsState,
+	(getLastActiveTopics) => getLastActiveTopics
+);
+
 export const createTopicSelector = createSelector(
 	(state) => state.createTopicState,
 	(createTopic) => createTopic

@@ -1,14 +1,31 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { getAllTopic, createTopic, updateTopicTitle, deleteTopic } from "../actions/topicActions";
+import { getAllTopic, createTopic, updateTopicTitle, deleteTopic, getLastActiveTopics } from "../actions/topicActions";
 
 const initialState = {
 	loading: false,
 	error: false,
-	allTopicState : {},
-	createTopicState : {},
+	allTopicState: {},
+	createTopicState: {},
 	updateTopicTile: {},
-	deleteTopicState: {}
+	deleteTopicState: {},
+	lastActiveTopicsState: {}
 };
+
+export const getLastActiveTopicsReducer = createReducer(initialState, builder => {
+	builder.addCase(getLastActiveTopics.pending, (state, action) => {
+		state.loading = true;
+		state.error = false;
+	});
+	builder.addCase(getLastActiveTopics.fulfilled, (state, action) => {
+		state.loading = false;
+		state.error = false;
+		state.lastActiveTopicsState = action.payload;
+	});
+	builder.addCase(getLastActiveTopics.rejected, (state, action) => {
+		state.loading = false;
+		state.error = action.payload;
+	});
+});
 
 export const getAllTopicReducer = createReducer(initialState, builder => {
 	builder.addCase(getAllTopic.pending, (state, action) => {
@@ -23,7 +40,7 @@ export const getAllTopicReducer = createReducer(initialState, builder => {
 	builder.addCase(getAllTopic.rejected, (state, action) => {
 		state.loading = false;
 		state.error = action.payload;
-	})
+	});
 });
 
 export const createTopicReducer = createReducer(initialState, builder => {
@@ -40,7 +57,7 @@ export const createTopicReducer = createReducer(initialState, builder => {
 	builder.addCase(createTopic.rejected, (state, action) => {
 		state.loading = false;
 		state.error = action.payload;
-	})
+	});
 });
 export const updateTopicTitleReducer = createReducer(initialState, builder => {
 	builder.addCase(updateTopicTitle.pending, (state, action) => {
@@ -56,7 +73,7 @@ export const updateTopicTitleReducer = createReducer(initialState, builder => {
 	builder.addCase(updateTopicTitle.rejected, (state, action) => {
 		state.loading = false;
 		state.error = action.payload;
-	})
+	});
 });
 export const deleteTopicReducer = createReducer(initialState, builder => {
 	builder.addCase(deleteTopic.pending, (state, action) => {
@@ -72,5 +89,5 @@ export const deleteTopicReducer = createReducer(initialState, builder => {
 	builder.addCase(deleteTopic.rejected, (state, action) => {
 		state.loading = false;
 		state.error = action.payload;
-	})
+	});
 });
