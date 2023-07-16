@@ -45,15 +45,21 @@ export default function NewTopic() {
           onChange={(e) => {
             setTopicTitle(e.target.value);
           }}
-        />{
-          <TextField
-            id="contentPost"
-            label="Contenido del Post"
-            required
-            onChange={(e) => {
-              setPostContent(e.target.value);
-            }}
-          />}
+        />
+        <TextField
+          id="contentPost"
+          label="Contenido del Post"
+          required
+          onChange={(e) => {
+            setPostContent(e.target.value);
+          }}
+          multiline
+          sx={{
+            "& textarea": {
+              minHeight: '60vh'
+            }
+          }}
+        />
         <Button type="submit" color="secondary">Crear Topic!</Button>
       </Box>
     </>

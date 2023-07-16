@@ -11,7 +11,8 @@ import {
 	createTopicReducer,
 	updateTopicTitleReducer,
 	deleteTopicReducer,
-	getLastActiveTopicsReducer
+	getLastActiveTopicsReducer,
+	getTopicByIdReducer
 } from './reducers/topicReducer';
 import {
 	getAllPostReducer,
@@ -49,6 +50,7 @@ const reducers = combineReducers({
 	createPostState: createPostReducer,
 	lastActiveTopicsState: getLastActiveTopicsReducer,
 	updatePostState: updatePostReducer,
+	topicByIdState: getTopicByIdReducer,
 });
 
 export const store = configureStore({

@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { getAllTopic, createTopic, updateTopicTitle, deleteTopic, getLastActiveTopics } from "../actions/topicActions";
+import { getAllTopic, createTopic, updateTopicTitle, deleteTopic, getLastActiveTopics, getTopicById } from "../actions/topicActions";
 
 const initialState = {
 	loading: false,
@@ -8,7 +8,8 @@ const initialState = {
 	createTopicState: {},
 	updateTopicTile: {},
 	deleteTopicState: {},
-	lastActiveTopicsState: {}
+	lastActiveTopicsState: {},
+	topicByIdState: {}
 };
 
 export const getLastActiveTopicsReducer = createReducer(initialState, builder => {
@@ -38,6 +39,22 @@ export const getAllTopicReducer = createReducer(initialState, builder => {
 		state.allTopicState = action.payload;
 	});
 	builder.addCase(getAllTopic.rejected, (state, action) => {
+		state.loading = false;
+		state.error = action.payload;
+	});
+});
+
+export const getTopicByIdReducer = createReducer(initialState, builder => {
+	builder.addCase(getTopicById.pending, (state, action) => {
+		state.loading = true;
+		state.error = false;
+	});
+	builder.addCase(getTopicById.fulfilled, (state, action) => {
+		state.loading = false;
+		state.error = false;
+		state.topicByIdState = action.payload;
+	});
+	builder.addCase(getTopicById.rejected, (state, action) => {
 		state.loading = false;
 		state.error = action.payload;
 	});

@@ -19,7 +19,7 @@ export default function App() {
       <Routes>
         <Route path="/profile/:id" element={<ProtectedRoute><Nav /><Profile /></ProtectedRoute>} />
         <Route path="/topic/:id" element={<ProtectedRoute><Nav /><Topic /></ProtectedRoute>} />
-        <Route path="/editpost" element={<ProtectedRoute><Nav /><EditPost /></ProtectedRoute>} />
+        <Route path="/editpost/:id" element={<ProtectedRoute><Nav /><EditPost /></ProtectedRoute>} />
         <Route path="/newtopic" element={<ProtectedRoute><Nav /><NewTopic /></ProtectedRoute>} />
         <Route path="/home" element={<ProtectedRoute><Nav /><Home /></ProtectedRoute>} />
         <Route path="/login" element={<Landing />} />
