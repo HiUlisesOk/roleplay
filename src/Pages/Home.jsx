@@ -113,7 +113,7 @@ export default function Home() {
                                     {
                                         lastActives?.map((item, index) => (
                                             item !== null &&
-                                            <CardSmall key={item.ID + index} title={item.title} user={item.author} date={item.updatedAt} topicID={item.ID} />
+                                            <CardSmall key={item.ID + index} title={item.title} user={item.lastAuthor} date={item.updatedAt} topicID={item.ID} />
                                         ))
                                     }
                                 </Box>

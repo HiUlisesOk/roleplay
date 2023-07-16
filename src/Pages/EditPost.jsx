@@ -1,27 +1,39 @@
 import { Box, Button, TextField } from "@mui/material";
-import { updatePost } from "../redux/actions/postActions";
+import { getAllPost, updatePost } from "../redux/actions/postActions";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from 'react-router-dom';
+import { getAllPostSelector } from "../redux/selector/postSelector";
 
-export default function EditPost({ topic }) {
-    const [newPost, setNewPost] = useState('');
+export default function EditPost() {
+    const { id } = useParams();
     const dispatch = useDispatch();
     const { userData } = useSelector((state) => state);
     const userId = userData?.userInfo?.ID;
     const navigate = useNavigate();
 
+    useEffect(() => {
+        dispatch(getAllPost());
+    }, [id]);
+
+    const allPostSelector = useSelector(getAllPostSelector);
+    const post = allPostSelector.getAllPostState.length ? allPostSelector.getAllPostState.filter((post) => (post.ID == id)) : false;
+    console.log(post);
+
+    const [newPost, setNewPost] = useState(post[0].content);
     const handleChange = (e) => {
         setNewPost(e.target.value);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         dispatch(updatePost({
-            authorID: topic.authorID,
-            topicID: topic.ID,
-            content: newPost
+            authorID: userId,
+            topicID: post[0].TopicID,
+            content: newPost,
+            postID: id,
         }));
-        console.log(topic.ID, authorID, newTitle);
+        navigate(-1);
     };
 
     return (
@@ -36,7 +48,7 @@ export default function EditPost({ topic }) {
             }}>
                 <TextField
                     id="newTitleTopic"
-                    defaultValue={topic?.title}
+                    defaultValue={post[0].content}
                     onChange={handleChange}
                     autoFocus={true}
                     sx={{

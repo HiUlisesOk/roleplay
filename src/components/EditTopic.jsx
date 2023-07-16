@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
 export default function EditTopic({ topic }) {
-    const [newTitle, setNewTitle] = useState('');
+    const [newTitle, setNewTitle] = useState(topic.title);
 
     const [show, setShow] = useState(false);
 
@@ -24,6 +24,7 @@ export default function EditTopic({ topic }) {
             topicID: topic.ID,
         }));
         setShow(false);
+        window.location.reload();
         console.log(topic.ID, newTitle);
     };
     const handleClick = () => {

@@ -44,11 +44,16 @@ export default function CardSmall({ title = "Titulo del Topic", user = "Username
             <Box sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                width: '100%',
+                width: '300px',
                 p: 1,
                 justifyContent: 'space-between',
             }}>
-                <Typography variant="subtitle1">
+                <Typography sx={{
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                    width: '100%'
+                }} variant="subtitle1">
                     {title}
                 </Typography>
                 <Box sx={{
