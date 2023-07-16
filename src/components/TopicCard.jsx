@@ -12,14 +12,14 @@ import toDate from '../utils/toDate,js';
 
 export default function TopicCard({ topic }) {
     const navigate = useNavigate();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const handleDelete = () => {
-        dispatch(deleteTopic(topic.ID))
-    }
+        dispatch(deleteTopic(topic.ID));
+    };
     return (
         <Box sx={{ display: 'flex', backgroundColor: 'primary.main', width: '400px', }}>
             <Card sx={{ width: '300px', height: 'fit-content', width: '100%' }}>
-                <CardActionArea onClick={() => { navigate(`/topic/${topic.ID}`) }}>
+                <CardActionArea onClick={() => { navigate(`/topic/${topic.ID}`); }}>
                     <CardMedia
                         component="img"
                         height="300"
@@ -47,7 +47,7 @@ export default function TopicCard({ topic }) {
             {topic.users && topic.users.length > 4 &&
                 <Box>
                     <Card sx={{ width: '100px', height: '100px' }}>
-                        <CardActionArea onClick={() => { navigate(topic.users[1].url) }}>
+                        <CardActionArea onClick={() => { navigate(topic.users[1].url); }}>
                             <CardMedia
                                 component="img"
                                 height="100"
@@ -56,7 +56,7 @@ export default function TopicCard({ topic }) {
                         </CardActionArea>
                     </Card>
                     <Card sx={{ width: '100px', height: '100px' }}>
-                        <CardActionArea onClick={() => { navigate(topic.users[2].url) }}>
+                        <CardActionArea onClick={() => { navigate(topic.users[2].url); }}>
                             <CardMedia
                                 component="img"
                                 height="100"
@@ -65,7 +65,7 @@ export default function TopicCard({ topic }) {
                         </CardActionArea>
                     </Card>
                     <Card sx={{ width: '100px', height: '100px' }}>
-                        <CardActionArea onClick={() => { navigate(topic.users[3].url) }}>
+                        <CardActionArea onClick={() => { navigate(topic.users[3].url); }}>
                             <CardMedia
                                 component="img"
                                 height="100"
@@ -74,7 +74,7 @@ export default function TopicCard({ topic }) {
                         </CardActionArea>
                     </Card>
                     <Card sx={{ width: '100px', height: '100px', alignSelf: 'end' }}>
-                        <CardActionArea sx={{ height: '100%' }} onClick={() => { navigate(topic.usersUrl) }} >
+                        <CardActionArea sx={{ height: '100%' }} onClick={() => { navigate(topic.usersUrl); }} >
                             <CardContent>
                                 <Typography align='center' variant="h4">+{topic.users.length - 4}</Typography>
                             </CardContent>

@@ -34,13 +34,27 @@ export const createPost = createAsyncThunk(
     "createPost",
     async (post, { rejectWithValue, dispatch }) => {
         try {
-            const { data } = await axios.post(`/create-post`, post, {
-                withCredentials: true,
-            });
+            const userTokenLocalStorage =
+                typeof window != "undefined"
+                    ? localStorage.getItem("userToken")
+                        ? JSON.parse(localStorage.getItem("userToken"))
+                        : null
+                    : null;
+
+            !userTokenLocalStorage && logout();
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${userTokenLocalStorage}`,
+                    "Content-Type": "application/json",
+                },
+            };
+            const { data } = await axios.post(`/create-post`, post, config);
 
             if (!data.type) {
                 return rejectWithValue(data.message);
             } else {
+                console.log(data, 'action');
                 dispatch(getAllPost());
                 return data;
             }
