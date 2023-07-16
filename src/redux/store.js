@@ -18,6 +18,8 @@ import {
 	getAllPostReducer,
 	createPostReducer,
 	updatePostReducer,
+	getPostByTopicIDReducer,
+	getPostByIdReducer
 } from './reducers/postReducer.js';
 
 const userInfoLocalStorage =
@@ -51,6 +53,8 @@ const reducers = combineReducers({
 	lastActiveTopicsState: getLastActiveTopicsReducer,
 	updatePostState: updatePostReducer,
 	topicByIdState: getTopicByIdReducer,
+	postByTopicIDState: getPostByTopicIDReducer,
+	getPostByIDState: getPostByIdReducer,
 });
 
 export const store = configureStore({

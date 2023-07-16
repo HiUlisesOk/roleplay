@@ -1,9 +1,9 @@
 import { Box, Button, TextField } from "@mui/material";
-import { getAllPost, updatePost } from "../redux/actions/postActions";
+import { getPostByID, updatePost } from "../redux/actions/postActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
-import { getAllPostSelector } from "../redux/selector/postSelector";
+import { getPostByIDSelector } from "../redux/selector/postSelector";
 
 export default function EditPost() {
     const { id } = useParams();
@@ -13,14 +13,14 @@ export default function EditPost() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(getAllPost());
-    }, [id]);
+        dispatch(getPostByID(id));
+    }, []);
 
-    const allPostSelector = useSelector(getAllPostSelector);
-    const post = allPostSelector.getAllPostState.length ? allPostSelector.getAllPostState.filter((post) => (post.ID == id)) : false;
-    console.log(post);
+    const postSelector = useSelector(getPostByIDSelector);
+    const post = postSelector.getPostByIDState;
+    console.log(post, 'post');
 
-    const [newPost, setNewPost] = useState(post[0].content);
+    const [newPost, setNewPost] = useState(post.content);
     const handleChange = (e) => {
         setNewPost(e.target.value);
     };
@@ -29,7 +29,7 @@ export default function EditPost() {
         e.preventDefault();
         dispatch(updatePost({
             authorID: userId,
-            topicID: post[0].TopicID,
+            topicID: post.TopicID,
             content: newPost,
             postID: id,
         }));
@@ -48,7 +48,7 @@ export default function EditPost() {
             }}>
                 <TextField
                     id="newTitleTopic"
-                    defaultValue={post[0].content}
+                    defaultValue={post.content}
                     onChange={handleChange}
                     autoFocus={true}
                     sx={{

@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { deleteTopic, getTopicById } from "../redux/actions/topicActions";
-import { getAllPost } from "../redux/actions/postActions";
+import { getPostByTopicID } from "../redux/actions/postActions";
 import { getTopicByIdSelector } from "../redux/selector/topicSelector";
-import { getAllPostSelector } from "../redux/selector/postSelector";
+import { getPostByTopicIDSelector } from "../redux/selector/postSelector";
 import { Box, Button, Typography } from "@mui/material";
 import NewPost from "../components/Topic/NewPost";
 import Post from "../components/Topic/Post";
@@ -17,17 +17,15 @@ export default function Topic() {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getTopicById(id));
-        dispatch(getAllPost());
+        dispatch(getPostByTopicID(id));
     }, [id]);
     const topicSelector = useSelector(getTopicByIdSelector);
-    const allPostSelector = useSelector(getAllPostSelector);
-
-    console.log(topicSelector, 'topic');
+    const postSelector = useSelector(getPostByTopicIDSelector);
 
     const topic = topicSelector.topicByIdState;
-    const posts = allPostSelector.getAllPostState.length ? allPostSelector.getAllPostState.filter((post) => (post.topicID == id)) : false;
-    console.log(posts);
-    console.log(topic);
+    const posts = postSelector.postByTopicIDState;
+
+    console.log(posts, 'posts');
 
     const handleDelete = () => {
         dispatch(deleteTopic(id));
@@ -45,7 +43,7 @@ export default function Topic() {
                     <Button onClick={handleDelete} variant='contained' color="secondary" >Borrar Topic!</Button>
                     <EditTopic topic={topic} />
 
-                    {posts.length > 0 && (
+                    {posts.length && (
                         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '3rem', py: '3rem' }}>
                             {posts.map(
                                 (post => (
