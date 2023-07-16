@@ -30,6 +30,63 @@ export const getAllPost = createAsyncThunk(
         }
     }
 );
+export const getPostByTopicID = createAsyncThunk(
+    "getPostByTopicID",
+    async (id, { rejectWithValue }) => {
+        try {
+            const userTokenLocalStorage =
+                typeof window != "undefined"
+                    ? localStorage.getItem("userToken")
+                        ? JSON.parse(localStorage.getItem("userToken"))
+                        : null
+                    : null;
+
+            !userTokenLocalStorage && logout();
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${userTokenLocalStorage}`,
+                    "Content-Type": "application/json",
+                },
+            };
+            const response = await axios.get(`/get-post-byTopicId?topicId=${id}`, config);
+            const data = response.data;
+            return data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+export const getPostByID = createAsyncThunk(
+    "getPostByID",
+    async (id, { rejectWithValue }) => {
+        try {
+            const userTokenLocalStorage =
+                typeof window != "undefined"
+                    ? localStorage.getItem("userToken")
+                        ? JSON.parse(localStorage.getItem("userToken"))
+                        : null
+                    : null;
+
+            !userTokenLocalStorage && logout();
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${userTokenLocalStorage}`,
+                    "Content-Type": "application/json",
+                },
+            };
+            const response = await axios.get(`/get-post-byId?id=${id}`, config);
+            const data = response.data;
+            return data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
 export const createPost = createAsyncThunk(
     "createPost",
     async (post, { rejectWithValue, dispatch }) => {
