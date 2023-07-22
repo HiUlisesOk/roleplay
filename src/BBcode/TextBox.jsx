@@ -6,9 +6,11 @@ const TextBox = ({ content, setContent }) => {
    const [anchorColor, setAnchorColor] = useState(null);
    const [anchorImg, setAnchorImg] = useState(null);
    const [anchorUrl, setAnchorUrl] = useState(null);
+   const [anchorSpoiler, setAnchorSpoiler] = useState(null);
    const [color, setColor] = useState('');
    const [img, setImg] = useState('');
    const [url, setUrl] = useState('');
+   const [spoiler, setSpoiler] = useState('');
 
    const addTag = (x) => {
       const textarea = textareaRef.current;
@@ -79,12 +81,7 @@ const TextBox = ({ content, setContent }) => {
 
    return (
       <>
-         <TextField
-            inputRef={textareaRef}
-            value={content}
-            multiline
-            onChange={(e) => { setContent(e.target.value); }} />
-         <Box>
+         <Box sx={{ display: 'flex', gap: '0.5rem', width: '100%', justifyContent: 'center', my: '1rem', flexWrap: 'wrap' }}>
             <Button color="secondary" variant='contained' onClick={() => addTag('b')}> B </Button>
             <Button color="secondary" variant='contained' onClick={() => addTag('i')}> I </Button>
             <Button color="secondary" variant='contained' onClick={() => addTag('s')}> S </Button>
@@ -175,7 +172,41 @@ const TextBox = ({ content, setContent }) => {
                   </Box>
                </MenuItem>
             </Menu>
+            <Button color="secondary" variant="contained" id="spoiler-button"
+               aria-controls={open ? 'spoiler-menu' : undefined}
+               aria-haspopup="true"
+               aria-expanded={open ? 'true' : undefined}
+               onClick={(e) => { setAnchorSpoiler(e.currentTarget); }}>SPOILER</Button>
+            <Menu
+               id="url-menu"
+               anchorEl={anchorSpoiler}
+               open={Boolean(anchorSpoiler)}
+               onClose={() => { setAnchorSpoiler(null); }}
+               MenuListProps={{
+                  'aria-labelledby': 'spoiler-button',
+               }}
+            >
+               <MenuItem>
+                  <Box component="form" onSubmit={(e) => {
+                     e.preventDefault();
+                     addTagValue('spoiler', spoiler);
+                     setAnchorSpoiler(null);
+                  }}>
+                     <TextField id="outlined-basic" label="spoiler title" variant="outlined"
+                        value={spoiler}
+                        onChange={(e) => { setSpoiler(e.target.value); }} />
+                     <Button type="submit" color="secondary" variant="text">Submit</Button>
+                  </Box>
+               </MenuItem>
+            </Menu>
          </Box>
+         <TextField
+            fullWidth
+            rows={10}
+            inputRef={textareaRef}
+            value={content}
+            multiline
+            onChange={(e) => { setContent(e.target.value); }} />
       </>
    );
 };

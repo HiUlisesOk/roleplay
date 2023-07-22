@@ -2,6 +2,7 @@ import { Box, Button, TextField } from "@mui/material";
 import { createPost } from "../../redux/actions/postActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import TextBox from "../../BBcode/TextBox";
 
 export default function NewPost({ topicId }) {
   const dispatch = useDispatch();
@@ -30,14 +31,12 @@ export default function NewPost({ topicId }) {
 
   return (
     <>
-      <Box component="form" onSubmit={handleSubmit}>
-        <TextField
-          id="Contenido del post"
-          label="Contenido del post"
-          onChange={handleChange}
-        />
-        <Button type="submit" varian="contained" color="secondary">Post!</Button>
-      </Box>
+      <Box component="form" onSubmit={handleSubmit} sx={{
+        width: '900px', backgroundColor: '#ffffff11', p: '1rem',
+      }}>
+        <TextBox content={postContent} setContent={setPostContent} />
+        <Button type="submit" fullWidth variant='contained' color="secondary"> SEND </Button>
+      </Box >
     </>
   );
 }

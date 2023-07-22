@@ -9,6 +9,7 @@ import { Box, Button, Typography } from "@mui/material";
 import NewPost from "../components/Topic/NewPost";
 import Post from "../components/Topic/Post";
 import EditTopic from "../components/EditTopic";
+import RenderBBcode from "../BBcode/RenderBBcode";
 
 
 export default function Topic() {
