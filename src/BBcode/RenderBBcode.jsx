@@ -25,7 +25,9 @@ parser.registerTag('size', SizeTag);
 
 const RenderBBcode = ({ content }) => {
     return (
-        <p>{parser.toReact(content)}</p>
+        <p style={{
+            whiteSpace: 'break-spaces'
+        }}>{parser.toReact(content)}</p>
     );
 };
 

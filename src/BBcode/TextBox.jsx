@@ -1,8 +1,11 @@
-import { Box, Button, TextField } from "@mui/material";
-import { useRef } from "react";
+import { Box, Button, Menu, MenuItem, TextField } from "@mui/material";
+import { useRef, useState } from "react";
 
 const TextBox = ({ content, setContent }) => {
    const textareaRef = useRef(null);
+   const [anchorEl, setAnchorEl] = useState(null);
+   const [color, setColor] = useState('');
+
    const addTag = (x) => {
       const textarea = textareaRef.current;
       const start = textarea.selectionStart;
@@ -43,6 +46,15 @@ const TextBox = ({ content, setContent }) => {
       }, 0);
    };
 
+   const addTagColor = (color) => {
+      console.log(color);
+   };
+
+   const open = Boolean(anchorEl);
+   const handleClose = () => {
+      setAnchorEl(null);
+   };
+
    return (
       <>
          <TextField
@@ -58,6 +70,33 @@ const TextBox = ({ content, setContent }) => {
             <Button color="secondary" variant='contained' onClick={() => addTag('quote')}> QUOTE </Button>
             <Button color="secondary" variant='contained' onClick={() => addTag('list')}> LIST </Button>
             <Button color="secondary" variant='contained' onClick={() => addSingleTag('*')}> ITEM </Button>
+            <Button color="secondary" variant="contained" id="color-button"
+               aria-controls={open ? 'basic-menu' : undefined}
+               aria-haspopup="true"
+               aria-expanded={open ? 'true' : undefined}
+               onClick={(e) => { setAnchorEl(e.currentTarget); }}>COLOR</Button>
+            <Menu
+               id="basic-menu"
+               anchorEl={anchorEl}
+               open={open}
+               onClose={handleClose}
+               MenuListProps={{
+                  'aria-labelledby': 'color-button',
+               }}
+            >
+               <MenuItem>
+                  <Box component="form" onSubmit={(e) => {
+                     e.preventDefault();
+                     addTag(`color=${color}`);
+                     handleClose();
+                  }}>
+                     <TextField id="outlined-basic" label="Color" variant="outlined"
+                        value={color}
+                        onChange={(e) => { setColor(e.target.value); }} />
+                     <Button type="submit" color="secondary" variant="text">Submit</Button>
+                  </Box>
+               </MenuItem>
+            </Menu>
          </Box>
       </>
    );
