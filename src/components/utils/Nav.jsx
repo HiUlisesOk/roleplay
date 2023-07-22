@@ -10,12 +10,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Link } from "react-router-dom";
 import Tooltip from '@mui/material/Tooltip';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 
 const notisArray = ['Nuevos Mensajes', 'Nuevas Respuestas', 'Nuevo Anuncio'];
 const arrayLinks = [
     { title: "Home", path: "/home", icon: <HomeIcon color="secondary" /> },
     { title: "All Topics", path: "/all-topics", icon: <NewspaperIcon color="secondary" /> },
-    { title: "Tienda", path: "/home2", icon: <ShoppingCartIcon color="secondary" /> },
+    { title: "Playground", path: "/playground", icon: <SportsEsportsIcon color="secondary" /> },
 ];
 
 export default function Nav() {
