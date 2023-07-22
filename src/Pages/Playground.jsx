@@ -5,18 +5,17 @@ import RenderBBcode from "../BBcode/RenderBBcode";
 
 function Playground() {
    const [textContent, setTextContent] = useState('');
-   const handleClick = () => {
-   };
+
    return (
       <>
-         <TextBox content={textContent} setContent={setTextContent} />
-         <Button color="error" variant="contained" onClick={handleClick}> Send </Button>
+         <Box sx={{
+            width: '900px', backgroundColor: '#ffffff11', p: '1rem',
+         }}>
+            <TextBox content={textContent} setContent={setTextContent} />
+            <Button fullWidth variant='contained' color="secondary"> SEND </Button>
+         </Box >
          <Box> <RenderBBcode content={textContent} /> </Box>
       </>
    );
 }
-// [color]
-// [url]
-// [img]
-// SALTOS DE LINEA
 export default Playground;
