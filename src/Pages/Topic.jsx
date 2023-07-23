@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { deleteTopic, getTopicById } from "../redux/actions/topicActions";
@@ -22,9 +22,15 @@ export default function Topic() {
     }, [id]);
     const topicSelector = useSelector(getTopicByIdSelector);
     const postSelector = useSelector(getPostByTopicIDSelector);
-
+    const posts = postSelector.postByTopicIDState;
     const topic = topicSelector.topicByIdState;
-    const posts = [...postSelector.postByTopicIDState].sort((a, b) => a.ID - b.ID);
+    const [orderPosts, setOrderPost] = useState([]);
+
+    useEffect(() => {
+        if (posts.length) {
+            setOrderPost([...posts].sort((a, b) => a.ID - b.ID));
+        }
+    }, [posts]);
 
     console.log(posts, 'posts');
 
@@ -46,7 +52,7 @@ export default function Topic() {
 
                     {posts.length && (
                         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '3rem', py: '3rem' }}>
-                            {posts.map(
+                            {orderPosts.map(
                                 (post => (
                                     <Post key={post.ID} author={post.author} createdAt={post.createdAt} id={post.ID}>
                                         {post.content}

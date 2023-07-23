@@ -26,7 +26,7 @@ class SpoilerTag extends Tag {
         const [show, setShow] = useState(false);
         const title = this.params.spoiler || 'spoiler';
         return (
-            <Box sx={{ display: 'flex', flexDirection: 'column', mx: '1rem', border: '1px solid #1CB251', borderRadius: '5px' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', border: '1px solid #1CB251', borderRadius: '5px' }}>
                 <Button variant="contained" color="secondary" onClick={() => { setShow((show) => (!show)); }}>{title}</Button>
                 {show && <Box sx={{ p: '1rem' }}>{this.getComponents()}</Box>}
             </Box>
@@ -40,9 +40,10 @@ parser.registerTag('spoiler', SpoilerTag);
 
 const RenderBBcode = ({ content }) => {
     return (
-        <p style={{
-            whiteSpace: 'break-spaces'
-        }}>{parser.toReact(content)}</p>
+        <div style={{
+            whiteSpace: 'break-spaces',
+            padding: '1rem'
+        }}>{parser.toReact(content)}</div>
     );
 };
 
