@@ -24,7 +24,7 @@ export default function Topic() {
     const postSelector = useSelector(getPostByTopicIDSelector);
 
     const topic = topicSelector.topicByIdState;
-    const posts = postSelector.postByTopicIDState;
+    const posts = [...postSelector.postByTopicIDState].sort((a, b) => a.ID - b.ID);
 
     console.log(posts, 'posts');
 
