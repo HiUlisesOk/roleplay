@@ -21,6 +21,16 @@ class SizeTag extends Tag {
     }
 }
 
+class AlignTag extends Tag {
+    toReact() {
+        const align = this.params.align;
+        const style = { textAlign: align };
+        return (
+            <div style={style}>{this.getComponents()}</div>
+        );
+    }
+}
+
 class SpoilerTag extends Tag {
     toReact() {
         const [show, setShow] = useState(false);
@@ -37,6 +47,7 @@ class SpoilerTag extends Tag {
 parser.registerTag('color', ColorTag);
 parser.registerTag('size', SizeTag);
 parser.registerTag('spoiler', SpoilerTag);
+parser.registerTag('align', AlignTag);
 
 const RenderBBcode = ({ content }) => {
     return (
