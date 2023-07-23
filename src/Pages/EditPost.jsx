@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import { getPostByIDSelector } from "../redux/selector/postSelector";
+import TextBox from "../BBcode/TextBox";
 
 export default function EditPost() {
     const { id } = useParams();
@@ -11,19 +12,20 @@ export default function EditPost() {
     const { userData } = useSelector((state) => state);
     const userId = userData?.userInfo?.ID;
     const navigate = useNavigate();
+    const postSelector = useSelector(getPostByIDSelector);
+    const post = postSelector.getPostByIDState;
+    const [newPost, setNewPost] = useState('');
 
     useEffect(() => {
         dispatch(getPostByID(id));
     }, []);
 
-    const postSelector = useSelector(getPostByIDSelector);
-    const post = postSelector.getPostByIDState;
-    console.log(post, 'post');
+    useEffect(() => {
+        setNewPost(post.content);
+    }, [post]);
 
-    const [newPost, setNewPost] = useState(post.content);
-    const handleChange = (e) => {
-        setNewPost(e.target.value);
-    };
+
+    console.log(post, 'post');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -38,29 +40,11 @@ export default function EditPost() {
 
     return (
         <>
-            <Box component="form" onSubmit={handleSubmit} sx={{
-                width: '60%',
-                marginTop: 4,
-                marginX: 'auto',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 1,
+            <Box sx={{
+                width: '900px', backgroundColor: '#ffffff11', p: '1rem', m: '1rem auto'
             }}>
-                <TextField
-                    id="newTitleTopic"
-                    defaultValue={post.content}
-                    onChange={handleChange}
-                    autoFocus={true}
-                    sx={{
-                        '& .MuiInputBase-input': {
-                            marginTop: 0,
-                            minHeight: '60vh',
-                        },
-                    }}
-                    multiline
-                />
-                <Button type="submit" color="secondary">Aceptar!</Button>
-
+                <TextBox content={newPost} setContent={setNewPost} />
+                <Button onClick={handleSubmit} color="secondary">Aceptar!</Button>
                 <Button onClick={() => { navigate(-1); }} color="secondary">Cancelar!</Button>
             </Box>
         </>

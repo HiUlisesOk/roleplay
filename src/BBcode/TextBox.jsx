@@ -1,7 +1,7 @@
 import { Box, Button, Menu, MenuItem, TextField } from "@mui/material";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const TextBox = ({ content, setContent }) => {
+const TextBox = ({ content, setContent, }) => {
    const textareaRef = useRef(null);
    const [anchorColor, setAnchorColor] = useState(null);
    const [anchorImg, setAnchorImg] = useState(null);
@@ -11,6 +11,7 @@ const TextBox = ({ content, setContent }) => {
    const [img, setImg] = useState('');
    const [url, setUrl] = useState('');
    const [spoiler, setSpoiler] = useState('');
+
 
    const addTag = (x) => {
       const textarea = textareaRef.current;
@@ -109,7 +110,14 @@ const TextBox = ({ content, setContent }) => {
                      addTagValue('color', color);
                      setAnchorColor(null);
                   }}>
-                     <TextField id="outlined-basic" label="color" variant="outlined"
+                     <TextField
+                        inputProps={{
+                           autocomplete: 'new-password',
+                           form: {
+                              autocomplete: 'off',
+                           },
+                        }}
+                        id="outlined-basic" label="color" variant="outlined"
                         value={color}
                         onChange={(e) => { setColor(e.target.value); }} />
                      <Button type="submit" color="secondary" variant="text">Submit</Button>
@@ -138,7 +146,7 @@ const TextBox = ({ content, setContent }) => {
                      setAnchorImg(null);
                      setImg('');
                   }}>
-                     <TextField id="outlined-basic" label="Img url" variant="outlined"
+                     <TextField type='url' id="outlined-basic" label="Img url" variant="outlined"
                         value={img}
                         onChange={(e) => { setImg(e.target.value); }} />
                      <Button type="submit" color="secondary" variant="text">Submit</Button>
@@ -165,7 +173,7 @@ const TextBox = ({ content, setContent }) => {
                      addTagValue('url', url);
                      setAnchorUrl(null);
                   }}>
-                     <TextField id="outlined-basic" label="url" variant="outlined"
+                     <TextField type='url' id="outlined-basic" label="url" variant="outlined"
                         value={url}
                         onChange={(e) => { setUrl(e.target.value); }} />
                      <Button type="submit" color="secondary" variant="text">Submit</Button>
@@ -178,7 +186,7 @@ const TextBox = ({ content, setContent }) => {
                aria-expanded={open ? 'true' : undefined}
                onClick={(e) => { setAnchorSpoiler(e.currentTarget); }}>SPOILER</Button>
             <Menu
-               id="url-menu"
+               id="spoiler-menu"
                anchorEl={anchorSpoiler}
                open={Boolean(anchorSpoiler)}
                onClose={() => { setAnchorSpoiler(null); }}
@@ -192,7 +200,14 @@ const TextBox = ({ content, setContent }) => {
                      addTagValue('spoiler', spoiler);
                      setAnchorSpoiler(null);
                   }}>
-                     <TextField id="outlined-basic" label="spoiler title" variant="outlined"
+                     <TextField
+                        inputProps={{
+                           autocomplete: 'new-password',
+                           form: {
+                              autocomplete: 'off',
+                           },
+                        }}
+                        id="outlined-basic" label="spoiler title" variant="outlined"
                         value={spoiler}
                         onChange={(e) => { setSpoiler(e.target.value); }} />
                      <Button type="submit" color="secondary" variant="text">Submit</Button>

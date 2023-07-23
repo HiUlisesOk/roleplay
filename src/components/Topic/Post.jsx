@@ -12,6 +12,7 @@ export default function Post({ author, createdAt, children, id }) {
     };
     const borrarPost = () => {
         dispatch(deletePost(id));
+        window.location.reload();
     };
     return (
         <Box>
