@@ -21,6 +21,10 @@ import {
 	getPostByTopicIDReducer,
 	getPostByIdReducer
 } from './reducers/postReducer.js';
+import {
+	createCharacterReducer,
+	getAllCharactersReducer
+} from './reducers/characterReducer.js';
 
 const userInfoLocalStorage =
 	typeof window !== "undefined" && localStorage.getItem("userInfo")
@@ -55,6 +59,8 @@ const reducers = combineReducers({
 	topicByIdState: getTopicByIdReducer,
 	postByTopicIDState: getPostByTopicIDReducer,
 	getPostByIDState: getPostByIdReducer,
+	createCharacterState: createCharacterReducer,
+	getAllCharacterState: getAllCharactersReducer,
 });
 
 export const store = configureStore({
