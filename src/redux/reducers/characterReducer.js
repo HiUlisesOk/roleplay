@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { createCharacter, getAllCharacters } from "../actions/characterActions.js";
+import { createCharacter, getAllCharacters, getCharacterInfo } from "../actions/characterActions.js";
 
 
 const initialState = {
@@ -7,9 +7,9 @@ const initialState = {
     error: false,
     createCharacterState: {},
     getAllCharactersState: {},
+    getCharacterInfoState: {},
     // updatePostState: {},
     // postByTopicIDState: {},
-    // getPostByIDState: {},
 };
 
 export const createCharacterReducer = createReducer(initialState, builder => {
@@ -45,6 +45,24 @@ export const getAllCharactersReducer = createReducer(initialState, builder => {
     });
 });
 
+
+export const getCharacterInfoReducer = createReducer(initialState, builder => {
+    builder.addCase(getCharacterInfo.pending, (state, action) => {
+        state.loading = true;
+        state.error = false;
+    });
+    builder.addCase(getCharacterInfo.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = false;
+        state.getCharacterInfoState = action.payload;
+    });
+    builder.addCase(getCharacterInfo.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    });
+});
+
+
 /*
 
 
@@ -59,22 +77,6 @@ export const getPostByTopicIDReducer = createReducer(initialState, builder => {
         state.postByTopicIDState = action.payload;
     });
     builder.addCase(getPostByTopicID.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-    });
-});
-
-export const getPostByIdReducer = createReducer(initialState, builder => {
-    builder.addCase(getPostByID.pending, (state, action) => {
-        state.loading = true;
-        state.error = false;
-    });
-    builder.addCase(getPostByID.fulfilled, (state, action) => {
-        state.loading = false;
-        state.error = false;
-        state.getPostByIDState = action.payload;
-    });
-    builder.addCase(getPostByID.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
     });
