@@ -10,15 +10,17 @@ export const getAllCharacterSelector = createSelector(
     (getAllCharacters) => getAllCharacters
 );
 
+export const getCharacterInfoSelector = createSelector(
+    (state) => state.getCharacterInfoState,
+    (getCharacterInfo) => getCharacterInfo
+);
+
+
 /*
 
 export const getPostByTopicIDSelector = createSelector(
     (state) => state.postByTopicIDState,
     (getPostByTopicID) => getPostByTopicID
-);
-export const getPostByIDSelector = createSelector(
-    (state) => state.getPostByIDState,
-    (getPostByID) => getPostByID
 );
 
 export const updatePostSelector = createSelector(

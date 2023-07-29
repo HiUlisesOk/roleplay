@@ -23,7 +23,8 @@ import {
 } from './reducers/postReducer.js';
 import {
 	createCharacterReducer,
-	getAllCharactersReducer
+	getAllCharactersReducer,
+	getCharacterInfoReducer
 } from './reducers/characterReducer.js';
 
 const userInfoLocalStorage =
@@ -61,6 +62,7 @@ const reducers = combineReducers({
 	getPostByIDState: getPostByIdReducer,
 	createCharacterState: createCharacterReducer,
 	getAllCharacterState: getAllCharactersReducer,
+	getCharacterInfoState: getCharacterInfoReducer,
 });
 
 export const store = configureStore({
