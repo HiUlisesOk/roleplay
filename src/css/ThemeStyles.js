@@ -26,6 +26,7 @@ const theme = createTheme({
 	typography: {
 		fontSize: 12,
 		fontFamily: 'Poppins, sans-serif',
+
 		h1: {
 			fontSize: 32,
 			fontWeight: 700,
@@ -61,6 +62,12 @@ const theme = createTheme({
 			fontWeight: 400,
 			fontStyle: 'italic',
 		},
+
+		Bold20px: {
+			fontWeight: 'bold',
+			fontSize: '20px'
+		}
+
 	},
 	components: {
 		MuiTextField: {

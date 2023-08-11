@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { createCharacter, getAllCharacters, getCharacterInfo } from "../actions/characterActions.js";
+import { createCharacter, getAllCharacters, getCharacterInfo, updateCharacter } from "../actions/characterActions.js";
 
 
 const initialState = {
@@ -8,7 +8,7 @@ const initialState = {
     createCharacterState: {},
     getAllCharactersState: {},
     getCharacterInfoState: {},
-    // updatePostState: {},
+    updateCharacterState: {},
     // postByTopicIDState: {},
 };
 
@@ -62,7 +62,22 @@ export const getCharacterInfoReducer = createReducer(initialState, builder => {
     });
 });
 
-
+export const updateCharacterReducer = createReducer(initialState, builder => {
+    builder.addCase(updateCharacter.pending, (state, action) => {
+        state.loading = true;
+        state.error = false;
+    });
+    builder.addCase(updateCharacter.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = false;
+        state.updateCharacterState = action.payload;
+        console.log(action);
+    });
+    builder.addCase(updateCharacter.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    });
+});
 /*
 
 
@@ -84,19 +99,4 @@ export const getPostByTopicIDReducer = createReducer(initialState, builder => {
 
 
 
-export const updatePostReducer = createReducer(initialState, builder => {
-    builder.addCase(updatePost.pending, (state, action) => {
-        state.loading = true;
-        state.error = false;
-    });
-    builder.addCase(updatePost.fulfilled, (state, action) => {
-        state.loading = false;
-        state.error = false;
-        state.updatePostState = action.payload;
-        console.log(action);
-    });
-    builder.addCase(updatePost.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-    });
-});*/
+*/
