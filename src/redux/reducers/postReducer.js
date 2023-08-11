@@ -1,12 +1,15 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { getAllPost , createPost } from "../actions/postActions.js"
+import { getAllPost, createPost, updatePost, getPostByTopicID, getPostByID } from "../actions/postActions.js";
 
 
 const initialState = {
 	loading: false,
 	error: false,
-	getAllPostState : {},
+	getAllPostState: {},
 	createPostState: {},
+	updatePostState: {},
+	postByTopicIDState: {},
+	getPostByIDState: {},
 };
 
 export const getAllPostReducer = createReducer(initialState, builder => {
@@ -22,7 +25,39 @@ export const getAllPostReducer = createReducer(initialState, builder => {
 	builder.addCase(getAllPost.rejected, (state, action) => {
 		state.loading = false;
 		state.error = action.payload;
-	})
+	});
+});
+
+export const getPostByTopicIDReducer = createReducer(initialState, builder => {
+	builder.addCase(getPostByTopicID.pending, (state, action) => {
+		state.loading = true;
+		state.error = false;
+	});
+	builder.addCase(getPostByTopicID.fulfilled, (state, action) => {
+		state.loading = false;
+		state.error = false;
+		state.postByTopicIDState = action.payload;
+	});
+	builder.addCase(getPostByTopicID.rejected, (state, action) => {
+		state.loading = false;
+		state.error = action.payload;
+	});
+});
+
+export const getPostByIdReducer = createReducer(initialState, builder => {
+	builder.addCase(getPostByID.pending, (state, action) => {
+		state.loading = true;
+		state.error = false;
+	});
+	builder.addCase(getPostByID.fulfilled, (state, action) => {
+		state.loading = false;
+		state.error = false;
+		state.getPostByIDState = action.payload;
+	});
+	builder.addCase(getPostByID.rejected, (state, action) => {
+		state.loading = false;
+		state.error = action.payload;
+	});
 });
 
 export const createPostReducer = createReducer(initialState, builder => {
@@ -39,41 +74,22 @@ export const createPostReducer = createReducer(initialState, builder => {
 	builder.addCase(createPost.rejected, (state, action) => {
 		state.loading = false;
 		state.error = action.payload;
-	})
+	});
 });
 
-
-
-/*
-export const updateTopicTitleReducer = createReducer(initialState, builder => {
-	builder.addCase(updateTopicTitle.pending, (state, action) => {
+export const updatePostReducer = createReducer(initialState, builder => {
+	builder.addCase(updatePost.pending, (state, action) => {
 		state.loading = true;
 		state.error = false;
 	});
-	builder.addCase(updateTopicTitle.fulfilled, (state, action) => {
+	builder.addCase(updatePost.fulfilled, (state, action) => {
 		state.loading = false;
 		state.error = false;
-		state.updateTopicTitle = action.payload;
+		state.updatePostState = action.payload;
 		console.log(action);
 	});
-	builder.addCase(updateTopicTitle.rejected, (state, action) => {
+	builder.addCase(updatePost.rejected, (state, action) => {
 		state.loading = false;
 		state.error = action.payload;
-	})
+	});
 });
-export const deleteTopicReducer = createReducer(initialState, builder => {
-	builder.addCase(deleteTopic.pending, (state, action) => {
-		state.loading = true;
-		state.error = false;
-	});
-	builder.addCase(deleteTopic.fulfilled, (state, action) => {
-		state.loading = false;
-		state.error = false;
-		state.deleteTopic = action.payload;
-		console.log(action);
-	});
-	builder.addCase(deleteTopic.rejected, (state, action) => {
-		state.loading = false;
-		state.error = action.payload;
-	})
-});*/

@@ -4,19 +4,19 @@ export const getAllPostSelector = createSelector(
 	(state) => state.getAllPostState,
 	(getAllPost) => getAllPost
 );
-
+export const getPostByTopicIDSelector = createSelector(
+	(state) => state.postByTopicIDState,
+	(getPostByTopicID) => getPostByTopicID
+);
+export const getPostByIDSelector = createSelector(
+	(state) => state.getPostByIDState,
+	(getPostByID) => getPostByID
+);
 export const createPostSelector = createSelector(
 	(state) => state.createPostState,
 	(createPost) => createPost
 );
-
-/*
-export const updateTopicTitleSelector = createSelector(
-	(state) => state.updateTopicTitleState,
-	(updateTopicTitle) => updateTopicTitle
+export const updatePostSelector = createSelector(
+	(state) => state.updatePostState,
+	(updatePost) => updatePost
 );
-
-export const deleteTopicSelector = createSelector(
-	(state) => state.deleteTopicState,
-	(deleteTopic) => deleteTopic
-);*/

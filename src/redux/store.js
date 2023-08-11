@@ -11,12 +11,21 @@ import {
 	createTopicReducer,
 	updateTopicTitleReducer,
 	deleteTopicReducer,
-	getLastActiveTopicsReducer
+	getLastActiveTopicsReducer,
+	getTopicByIdReducer
 } from './reducers/topicReducer';
 import {
 	getAllPostReducer,
 	createPostReducer,
+	updatePostReducer,
+	getPostByTopicIDReducer,
+	getPostByIdReducer
 } from './reducers/postReducer.js';
+import {
+	createCharacterReducer,
+	getAllCharactersReducer,
+	getCharacterInfoReducer
+} from './reducers/characterReducer.js';
 
 const userInfoLocalStorage =
 	typeof window !== "undefined" && localStorage.getItem("userInfo")
@@ -47,6 +56,13 @@ const reducers = combineReducers({
 	getAllPostState: getAllPostReducer,
 	createPostState: createPostReducer,
 	lastActiveTopicsState: getLastActiveTopicsReducer,
+	updatePostState: updatePostReducer,
+	topicByIdState: getTopicByIdReducer,
+	postByTopicIDState: getPostByTopicIDReducer,
+	getPostByIDState: getPostByIdReducer,
+	createCharacterState: createCharacterReducer,
+	getAllCharacterState: getAllCharactersReducer,
+	getCharacterInfoState: getCharacterInfoReducer,
 });
 
 export const store = configureStore({

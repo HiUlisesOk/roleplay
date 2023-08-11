@@ -1,13 +1,10 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { logout } from '../../utils/Logout';
-// axios.defaults.baseURL = import.meta.env.VITE_BASE_API_URL;
 
-
-
-export const getLastActiveTopics = createAsyncThunk(
-    "getLastActiveTopics",
-    async (params, { rejectWithValue }) => {
+export const createCharacter = createAsyncThunk(
+    "createCharacter",
+    async (character, { rejectWithValue, dispatch }) => {
         try {
             const userTokenLocalStorage =
                 typeof window != "undefined"
@@ -24,87 +21,12 @@ export const getLastActiveTopics = createAsyncThunk(
                     "Content-Type": "application/json",
                 },
             };
-            const response = await axios.get(`/getLastActiveTopics`, config);
-            const data = response.data;
-            console.log(data);
-            return data;
-        } catch (error) {
-            console.log(error);
-            return rejectWithValue(error.message);
-        }
-    }
-);
-export const getAllTopic = createAsyncThunk(
-    "getAllTopic",
-    async (params, { rejectWithValue }) => {
-        try {
-            const userTokenLocalStorage =
-                typeof window != "undefined"
-                    ? localStorage.getItem("userToken")
-                        ? JSON.parse(localStorage.getItem("userToken"))
-                        : null
-                    : null;
+            const { data } = await axios.post(`/create-character`, character, config);
 
-            !userTokenLocalStorage && logout();
-
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${userTokenLocalStorage}`,
-                    "Content-Type": "application/json",
-                },
-            };
-            const response = await axios.get(`/get-all-topics`, config);
-            const data = response.data;
-            console.log(data);
-            return data;
-        } catch (error) {
-            console.log(error);
-            return rejectWithValue(error.message);
-        }
-    }
-);
-
-export const getTopicById = createAsyncThunk(
-    "getTopicById",
-    async (topicID, { rejectWithValue }) => {
-        try {
-            const userTokenLocalStorage =
-                typeof window != "undefined"
-                    ? localStorage.getItem("userToken")
-                        ? JSON.parse(localStorage.getItem("userToken"))
-                        : null
-                    : null;
-
-            !userTokenLocalStorage && logout();
-
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${userTokenLocalStorage}`,
-                    "Content-Type": "application/json",
-                },
-            };
-            const response = await axios.get(`/get-topic?id=${topicID}`, config);
-            const data = response.data;
-            console.log(data);
-            return data;
-        } catch (error) {
-            console.log(error);
-            return rejectWithValue(error.message);
-        }
-    }
-);
-export const createTopic = createAsyncThunk(
-    "createTopic",
-    async (topic, { rejectWithValue, dispatch }) => {
-        try {
-            const { data } = await axios.post(`/create-topic`, topic, {
-                withCredentials: true,
-            });
-
-            if (data.type) {
+            if (!data.type) {
                 return rejectWithValue(data.message);
             } else {
-                dispatch(getAllTopic());
+                console.log(data, 'action');
                 return data;
             }
         } catch (error) {
@@ -113,10 +35,10 @@ export const createTopic = createAsyncThunk(
         }
     }
 );
-export const deleteTopic = createAsyncThunk(
-    "deleteTopic",
 
-    async (topicID, { rejectWithValue, dispatch }) => {
+export const getAllCharacters = createAsyncThunk(
+    "getAllCharacters",
+    async (params, { rejectWithValue }) => {
         try {
             const userTokenLocalStorage =
                 typeof window != "undefined"
@@ -133,9 +55,9 @@ export const deleteTopic = createAsyncThunk(
                     "Content-Type": "application/json",
                 },
             };
-            await axios.delete(`/delete-topic?ID=${topicID}`, config);
-            dispatch(getAllTopic());
-            return topicID;
+            const response = await axios.get(`/get-all-characters`, config);
+            const data = response.data;
+            return data;
         } catch (error) {
             console.log(error);
             return rejectWithValue(error.message);
@@ -144,8 +66,99 @@ export const deleteTopic = createAsyncThunk(
 );
 
 
-export const updateTopicTitle = createAsyncThunk(
-    "updateTopicTitle",
+export const getCharacterInfo = createAsyncThunk(
+    "getCharacterInfo",
+    async (id, { rejectWithValue }) => {
+        try {
+            const userTokenLocalStorage =
+                typeof window != "undefined"
+                    ? localStorage.getItem("userToken")
+                        ? JSON.parse(localStorage.getItem("userToken"))
+                        : null
+                    : null;
+
+            !userTokenLocalStorage && logout();
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${userTokenLocalStorage}`,
+                    "Content-Type": "application/json",
+                },
+            };
+            const response = await axios.get(`get-character-info/${id}`, config);
+            const data = response.data;
+            return data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+export const deleteCharacter = createAsyncThunk(
+    "deleteCharacter",
+
+    async (characterID, { rejectWithValue }) => {
+        try {
+            const userTokenLocalStorage =
+                typeof window != "undefined"
+                    ? localStorage.getItem("userToken")
+                        ? JSON.parse(localStorage.getItem("userToken"))
+                        : null
+                    : null;
+
+            !userTokenLocalStorage && logout();
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${userTokenLocalStorage}`,
+                    "Content-Type": "application/json",
+                },
+            };
+            await axios.delete(`/delete-character?ID=${characterID}`, config);
+            return characterID;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+/*
+
+export const getPostByTopicID = createAsyncThunk(
+    "getPostByTopicID",
+    async (id, { rejectWithValue }) => {
+        try {
+            const userTokenLocalStorage =
+                typeof window != "undefined"
+                    ? localStorage.getItem("userToken")
+                        ? JSON.parse(localStorage.getItem("userToken"))
+                        : null
+                    : null;
+
+            !userTokenLocalStorage && logout();
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${userTokenLocalStorage}`,
+                    "Content-Type": "application/json",
+                },
+            };
+            const response = await axios.get(`/get-post-byTopicId?topicId=${id}`, config);
+            const data = response.data;
+            return data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+
+
+export const updatePost = createAsyncThunk(
+    "updatePost",
     async (params, { rejectWithValue, dispatch }) => {
         try {
             const userTokenLocalStorage =
@@ -163,8 +176,7 @@ export const updateTopicTitle = createAsyncThunk(
                     "Content-Type": "application/json",
                 },
             };
-            const { data } = await axios.put(`/update-topic`, params, config);
-            dispatch(getAllTopic());
+            const { data } = await axios.put(`/update-post`, params, config);
             return data;
 
         } catch (error) {
@@ -172,4 +184,4 @@ export const updateTopicTitle = createAsyncThunk(
             return rejectWithValue(error.message);
         }
     }
-);
+); */
