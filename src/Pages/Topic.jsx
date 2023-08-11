@@ -13,8 +13,11 @@ import RenderBBcode from "../BBcode/RenderBBcode";
 
 
 export default function Topic() {
-    const { id } = useParams();
 
+    const { userData } = useSelector((state) => state);
+    const userId = userData?.userInfo?.ID;
+
+    const { id } = useParams();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getTopicById(id));
@@ -24,6 +27,8 @@ export default function Topic() {
     const postSelector = useSelector(getPostByTopicIDSelector);
     const posts = postSelector.postByTopicIDState;
     const topic = topicSelector.topicByIdState;
+    console.log(topic, 'topic');
+    console.log(userId, 'userID');
     const [orderPosts, setOrderPost] = useState([]);
 
     useEffect(() => {
@@ -47,14 +52,16 @@ export default function Topic() {
             {topic ? (
                 <>
                     <Typography variant="h2">{topic.title}</Typography>
-                    <Button onClick={handleDelete} variant='contained' color="secondary" >Borrar Topic!</Button>
-                    <EditTopic topic={topic} />
+                    <Box sx={{ display: userId == topic.authorID ? 'flex' : 'none', }} >
+                        <Button onClick={handleDelete} variant='contained' color="secondary" >Borrar Topic!</Button>
+                        <EditTopic topic={topic} />
+                    </Box>
 
                     {posts.length && (
                         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '3rem', py: '3rem' }}>
                             {orderPosts.map(
                                 (post => (
-                                    <Post key={post.ID} author={post.author} createdAt={post.createdAt} id={post.ID}>
+                                    <Post key={post.ID} author={post.author} authorID={post.authorID} createdAt={post.createdAt} id={post.ID}>
                                         {post.content}
                                     </Post>
                                 ))

@@ -15,6 +15,10 @@ export const getCharacterInfoSelector = createSelector(
     (getCharacterInfo) => getCharacterInfo
 );
 
+export const updateCharacterSelector = createSelector(
+    (state) => state.updateCharacterState,
+    (updateCharacter) => updateCharacter
+);
 
 /*
 
@@ -23,7 +27,4 @@ export const getPostByTopicIDSelector = createSelector(
     (getPostByTopicID) => getPostByTopicID
 );
 
-export const updatePostSelector = createSelector(
-    (state) => state.updatePostState,
-    (updatePost) => updatePost
-);*/
+*/

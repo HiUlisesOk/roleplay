@@ -24,7 +24,8 @@ import {
 import {
 	createCharacterReducer,
 	getAllCharactersReducer,
-	getCharacterInfoReducer
+	getCharacterInfoReducer,
+	updateCharacterReducer
 } from './reducers/characterReducer.js';
 
 const userInfoLocalStorage =
@@ -63,6 +64,8 @@ const reducers = combineReducers({
 	createCharacterState: createCharacterReducer,
 	getAllCharacterState: getAllCharactersReducer,
 	getCharacterInfoState: getCharacterInfoReducer,
+
+	updateCharacterState: updateCharacterReducer,
 });
 
 export const store = configureStore({
