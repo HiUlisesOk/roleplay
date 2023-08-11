@@ -36,6 +36,36 @@ export const createCharacter = createAsyncThunk(
     }
 );
 
+
+export const updateCharacter = createAsyncThunk(
+    "updateCharacter",
+    async (params, { rejectWithValue, dispatch }) => {
+        try {
+            const userTokenLocalStorage =
+                typeof window != "undefined"
+                    ? localStorage.getItem("userToken")
+                        ? JSON.parse(localStorage.getItem("userToken"))
+                        : null
+                    : null;
+
+            !userTokenLocalStorage && logout();
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${userTokenLocalStorage}`,
+                    "Content-Type": "application/json",
+                },
+            };
+            const { data } = await axios.put(`/update-character`, params, config);
+            return data;
+
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
 export const getAllCharacters = createAsyncThunk(
     "getAllCharacters",
     async (params, { rejectWithValue }) => {

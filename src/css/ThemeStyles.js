@@ -25,6 +25,10 @@ const theme = createTheme({
 	},
 	typography: {
 		fontFamily: 'Poppins, sans-serif',
+		Bold20px: {
+			fontWeight: 'bold',
+			fontSize: '20px'
+		}
 	},
 	components: {
 		MuiTextField: {
@@ -34,7 +38,7 @@ const theme = createTheme({
 						'-webkitBoxShadow': '0 0 0 100px #312E2D inset',
 						borderRadius: '0px',
 					},
-					'.css-78t69-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill' : {
+					'.css-78t69-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill': {
 						'-webkitBoxShadow': '0 0 0 100px #312E2D inset',
 						borderRadius: '0px',
 					}
