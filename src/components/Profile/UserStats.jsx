@@ -21,8 +21,8 @@ const UserStats = () => {
 					alignItems="center"
 					spacing={0}
 				>
-					<Typography style={ProfileStyles.userStats} variant="h4" color="primary.primary">11798</Typography>
-					<Typography style={ProfileStyles.userStatsLabels} variant="h10" color="text.secondary"><StickyNote2Icon style={ProfileStyles.userStatsIcons} />Posts</Typography>
+					<Typography style={ProfileStyles.userStats} variant="h2" color="primary.primary">11798</Typography>
+					<Typography style={ProfileStyles.userStatsLabels} variant="body1" color="text.secondary"><StickyNote2Icon style={ProfileStyles.userStatsIcons} />Posts</Typography>
 				</Stack>
 				<Stack
 					direction="column"
@@ -30,8 +30,8 @@ const UserStats = () => {
 					alignItems="center"
 					spacing={0}
 				>
-					<Typography style={ProfileStyles.userStats} variant="h4" color="text.primary">1571</Typography>
-					<Typography style={ProfileStyles.userStatsLabels} variant="h10" color="text.secondary"><MilitaryTechIcon style={ProfileStyles.userStatsIcons} />Battles</Typography>
+					<Typography style={ProfileStyles.userStats} variant="h2" color="text.primary">1571</Typography>
+					<Typography style={ProfileStyles.userStatsLabels} variant="body1" color="text.secondary"><MilitaryTechIcon style={ProfileStyles.userStatsIcons} />Battles</Typography>
 				</Stack>
 				<Stack
 					direction="column"
@@ -39,8 +39,8 @@ const UserStats = () => {
 					alignItems="center"
 					spacing={0}
 				>
-					<Typography style={ProfileStyles.userStats} variant="h4" color="text.primary">1.5k</Typography>
-					<Typography style={ProfileStyles.userStatsLabels} variant="h10" color="text.secondary"><PersonIcon style={ProfileStyles.userStatsIcons} />Followers</Typography>
+					<Typography style={ProfileStyles.userStats} variant="h2" color="text.primary">1.5k</Typography>
+					<Typography style={ProfileStyles.userStatsLabels} variant="body1" color="text.secondary"><PersonIcon style={ProfileStyles.userStatsIcons} />Followers</Typography>
 				</Stack>
 			</Stack>
 		</div>

@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 import { useTheme } from '@emotion/react';
 import UserInformation from '../components/Profile/UserInformation';
 import { ProfileStyles } from '../css/ProfileStyles';
+import CharacterInformation from '../components/Profile/CharactersInformation';
 
 function Profile() {
 	const dispatch = useDispatch();
@@ -29,12 +30,12 @@ function Profile() {
 	return (<>
 		<div style={ProfileStyles.banner}></div>
 		<Container style={ProfileStyles.container}>
-			<Grid container spacing={0} style={{ flex: 1 }}>
+			<Grid container spacing={1} style={{ flex: 1 }}>
 				<Grid item xs={6}>
 					<UserInformation />
 				</Grid>
 				<Grid item xs={6}>
-					<Box style={ProfileStyles.section}>Character Info</Box>
+					<CharacterInformation />
 				</Grid>
 			</Grid>
 		</Container>
