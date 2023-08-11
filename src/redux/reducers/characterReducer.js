@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { createCharacter, getAllCharacters, getCharacterInfo, updateCharacter } from "../actions/characterActions.js";
+import { createCharacter, getAllCharacters, getCharacterInfo, updateCharacter, getCharacterByUserId } from "../actions/characterActions.js";
 
 
 const initialState = {
@@ -9,6 +9,7 @@ const initialState = {
     getAllCharactersState: {},
     getCharacterInfoState: {},
     updateCharacterState: {},
+    getCharacterByUserIdState: {},
     // postByTopicIDState: {},
 };
 
@@ -100,3 +101,19 @@ export const getPostByTopicIDReducer = createReducer(initialState, builder => {
 
 
 */
+export const getCharacterByUserIdReducer = createReducer(initialState, builder => {
+    builder.addCase(getCharacterByUserId.pending, (state, action) => {
+        state.loading = true;
+        state.error = false;
+    });
+    builder.addCase(getCharacterByUserId.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = false;
+        state.getCharacterByUserIdState = action.payload;
+        console.log(action);
+    });
+    builder.addCase(getCharacterByUserId.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    });
+});

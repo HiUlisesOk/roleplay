@@ -4,14 +4,24 @@ import { getUserByIdSelector } from '../../redux/selector/userSelector';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 
 import { ProfileStyles } from '../../css/ProfileStyles';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import FollowButton from '../utils/FollowButton';
 import UserStats from './UserStats';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { getCharacterByUserId } from '../../redux/actions/characterActions';
+import { useParams } from 'react-router-dom';
+import { getCharacterByUserIdSelector } from '../../redux/selector/characterSelector';
+import { useEffect } from 'react';
 
 
 const CharacterInformation = () => {
-
+	const dispatch = useDispatch();
+	const { id } = useParams();
+	const { getCharacterByUserIdState } = useSelector(getCharacterByUserIdSelector)
+	useEffect(() => {
+		id && dispatch(getCharacterByUserId(id));
+		console.log(getCharacterByUserIdState);
+	}, [id]);
 	const { getUserByIdState } = useSelector(getUserByIdSelector)
 
 	return (
@@ -29,33 +39,19 @@ const CharacterInformation = () => {
 						<TableContainer component={Paper}>
 							<Table>
 								<TableBody>
-									<TableRow>
-										<TableCell>	<Avatar
-											alt={getUserByIdState.username || "User Profile Picture"}
-											src={getUserByIdState.profilePicture || ""}
-											sx={ProfileStyles.AvatarCharacter}
-										/></TableCell>
-										<TableCell>8 de julio de 2023, 13:25</TableCell>
-										<TableCell> "Llegando a la Ciudad de las Sombras, ¿alguien quiere unirse a mi grupo para explorar las ruinas ancestrales? #aventura #rol"</TableCell>
-									</TableRow>
-									<TableRow>
-										<TableCell>	<Avatar
-											alt={getUserByIdState.username || "User Profile Picture"}
-											src={getUserByIdState.profilePicture || ""}
-											sx={ProfileStyles.AvatarCharacter}
-										/></TableCell>
-										<TableCell>8 de julio de 2023, 13:25</TableCell>
-										<TableCell> "Llegando a la Ciudad de las Sombras, ¿alguien quiere unirse a mi grupo para explorar las ruinas ancestrales? #aventura #rol"</TableCell>
-									</TableRow>
-									<TableRow>
-										<TableCell>	<Avatar
-											alt={getUserByIdState.username || "User Profile Picture"}
-											src={getUserByIdState.profilePicture || ""}
-											sx={ProfileStyles.AvatarCharacter}
-										/></TableCell>
-										<TableCell>8 de julio de 2023, 13:25</TableCell>
-										<TableCell> "Llegando a la Ciudad de las Sombras, ¿alguien quiere unirse a mi grupo para explorar las ruinas ancestrales? #aventura #rol"</TableCell>
-									</TableRow>
+									{getCharacterByUserIdState.map((character) => (
+										<TableRow>
+											<TableCell>	<Avatar
+												alt={character.username || "User Profile Picture"}
+												src={character.avatar || ""}
+												sx={character.AvatarCharacter}
+											/></TableCell>
+											<TableCell>{character.name}</TableCell>
+											<TableCell>{character.charge}</TableCell>
+										</TableRow>
+									))}
+
+
 								</TableBody>
 							</Table>
 						</TableContainer>
