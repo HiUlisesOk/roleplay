@@ -25,7 +25,8 @@ import {
 	createCharacterReducer,
 	getAllCharactersReducer,
 	getCharacterInfoReducer,
-	updateCharacterReducer
+	updateCharacterReducer,
+	getCharacterByUserIdReducer,
 } from './reducers/characterReducer.js';
 import {
 	createSheetReducer,
@@ -68,6 +69,7 @@ const reducers = combineReducers({
 	createCharacterState: createCharacterReducer,
 	getAllCharacterState: getAllCharactersReducer,
 	getCharacterInfoState: getCharacterInfoReducer,
+  getCharacterByUserIdState: getCharacterByUserIdReducer,
 	updateCharacterState: updateCharacterReducer,
 	createSheetState: createSheetReducer,
 	getSheetInfoState: getSheetInfoReducer,
