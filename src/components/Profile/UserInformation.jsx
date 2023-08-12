@@ -20,6 +20,7 @@ const UserInformation = () => {
 			<Grid container spacing={0} style={{ flex: 1 }}>
 				<Grid item xs={12}>
 					<Avatar
+
 						alt={getUserByIdState.username || "User Profile Picture"}
 						src={getUserByIdState.profilePicture || ""}
 						sx={ProfileStyles.Avatar}
@@ -57,18 +58,15 @@ const UserInformation = () => {
 							<Table>
 								<TableBody>
 									<TableRow>
-										<TableCell><LabelImportantIcon style={ProfileStyles.userStatsIcons} color='secondary.main' /></TableCell>
-										<TableCell>8 de julio de 2023, 13:25</TableCell>
+										<TableCell> <LabelImportantIcon style={ProfileStyles.userStatsIcons} color='secondary.main' />  8 de julio de 2023, 13:25</TableCell>
 										<TableCell> "Llegando a la Ciudad de las Sombras, ¿alguien quiere unirse a mi grupo para explorar las ruinas ancestrales? #aventura #rol"</TableCell>
 									</TableRow>
 									<TableRow>
-										<TableCell><LabelImportantIcon style={ProfileStyles.userStatsIcons} color='secondary.main' /></TableCell>
-										<TableCell>8 de julio de 2023, 13:25</TableCell>
+										<TableCell> <LabelImportantIcon style={ProfileStyles.userStatsIcons} color='secondary.main' />  8 de julio de 2023, 13:25</TableCell>
 										<TableCell> "Llegando a la Ciudad de las Sombras, ¿alguien quiere unirse a mi grupo para explorar las ruinas ancestrales? #aventura #rol"</TableCell>
 									</TableRow>
 									<TableRow>
-										<TableCell><LabelImportantIcon style={ProfileStyles.userStatsIcons} color='secondary.main' /></TableCell>
-										<TableCell>8 de julio de 2023, 13:25</TableCell>
+										<TableCell> <LabelImportantIcon style={ProfileStyles.userStatsIcons} color='secondary.main' />  8 de julio de 2023, 13:25</TableCell>
 										<TableCell> "Llegando a la Ciudad de las Sombras, ¿alguien quiere unirse a mi grupo para explorar las ruinas ancestrales? #aventura #rol"</TableCell>
 									</TableRow>
 								</TableBody>
