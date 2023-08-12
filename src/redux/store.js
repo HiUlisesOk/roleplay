@@ -28,7 +28,11 @@ import {
 	updateCharacterReducer,
 	getCharacterByUserIdReducer,
 } from './reducers/characterReducer.js';
-
+import {
+	createSheetReducer,
+	getSheetInfoReducer,
+	getAllSheetsReducer,
+} from './reducers/sheetReducer.js';
 const userInfoLocalStorage =
 	typeof window !== "undefined" && localStorage.getItem("userInfo")
 		? JSON.parse(localStorage.getItem("userInfo"))
@@ -65,8 +69,12 @@ const reducers = combineReducers({
 	createCharacterState: createCharacterReducer,
 	getAllCharacterState: getAllCharactersReducer,
 	getCharacterInfoState: getCharacterInfoReducer,
-	getCharacterByUserIdState: getCharacterByUserIdReducer,
+  getCharacterByUserIdState: getCharacterByUserIdReducer,
 	updateCharacterState: updateCharacterReducer,
+	createSheetState: createSheetReducer,
+	getSheetInfoState: getSheetInfoReducer,
+	getAllSheetsState: getAllSheetsReducer,
+
 });
 
 export const store = configureStore({
