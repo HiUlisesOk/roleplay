@@ -1,8 +1,9 @@
 import { deleteCharacter } from "../../redux/actions/characterActions";
 import { Box, Button, Typography } from '@mui/material';
 import { useDispatch, } from 'react-redux';
+import { deleteSheet } from "../../redux/actions/sheetActions";
 
-export default function EliminarPersonaje({ character, deletOpen, setDeletOpen }) {
+export default function EliminarPersonaje({ character, roleplaySheet, deletOpen, setDeletOpen }) {
     const dispatch = useDispatch();
     return (
         <Box
@@ -17,7 +18,10 @@ export default function EliminarPersonaje({ character, deletOpen, setDeletOpen }
                 py: '2vh',
                 px: '1vw'
             }}
-            onSubmit={() => { dispatch(deleteCharacter(character.ID)); }}
+            onSubmit={() => {
+                dispatch(deleteCharacter(character.ID));
+                roleplaySheet.ID && dispatch(deleteSheet(roleplaySheet.ID));
+            }}
         >
             <Box sx={{ textAlign: 'center', }}>
                 <Typography>Estás seguro que quieres borrar a: </Typography>

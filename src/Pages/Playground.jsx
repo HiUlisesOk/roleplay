@@ -1,8 +1,8 @@
 import FormControl from '@mui/material/FormControl';
 import { createCharacter, getAllCharacters, deleteCharacter, getCharacterInfo, updateCharacter } from "../redux/actions/characterActions";
 import { getAllCharacterSelector, getCharacterInfoSelector } from '../redux/selector/characterSelector';
-import { createSheet, getSheetInfo, getAllSheets } from '../redux/actions/sheetActions';
-import { getSheetInfoSelector, getAllSheetsSelector } from '../redux/selector/sheetSelector';
+import { createSheet, getSheetInfo, getAllSheets, getSheetByCharId } from '../redux/actions/sheetActions';
+import { getSheetInfoSelector, getAllSheetsSelector, getSheetByCharIdSelector } from '../redux/selector/sheetSelector';
 import { Box, Button, Divider, Grid, IconButton, InputLabel, MenuItem, Select, TextField, Typography, getNativeSelectUtilityClasses } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -13,18 +13,10 @@ import CrearPersonajes from '../components/Personajes/CrearPersonajes';
 import EditarPersonaje from '../components/Personajes/EditarPersonaje';
 import EliminarPersonaje from '../components/Personajes/EliminarPersonaje';
 import CrearRoleplaySheet from '../components/Personajes/CrearRoleplaysheet';
+import RoleplaypSheet from '../components/Personajes/RoleplaySheet';
 
 function Playground() {
    const dispatch = useDispatch();
-
-   const [realAge, setRealAge] = useState('');
-   const [fisicalAge, setFisicalAge] = useState('');
-   const [sexOr, setSexOr] = useState('');
-   const [ocInfo, setOcInfo] = useState('');
-   const [history, setHistory] = useState('');
-   const [extraData, setExtraData] = useState('');
-   const [fisicalDesc, setFisicalDesc] = useState('');
-   const [psicology, setPsicology] = useState('');
 
    const [character, setCharacter] = useState(null);
 
@@ -40,43 +32,28 @@ function Playground() {
    const characterInfo = characterInfoSelector.getCharacterInfoState;
    const allSheetsSelector = useSelector(getAllSheetsSelector);
    const allSheets = allSheetsSelector.getAllSheetsState;
-   console.log(allSheets, 'selector');
 
+   const sheetByCharacterIdSelector = useSelector(getSheetByCharIdSelector);
+   const sheetByCharacterId = sheetByCharacterIdSelector.getSheetByCharIdState;
+
+   console.log(sheetByCharacterId);
 
    useEffect(() => {
       dispatch(getAllCharacters());
    }, []);
 
    useEffect(() => {
-      character && dispatch(getCharacterInfo(character));
-      console.log(characterInfo);
+      if (character) {
+         dispatch(getCharacterInfo(character));
+         dispatch(getSheetByCharId(character));
+      }
    }, [character]);
-
-   const handleCreateSheet = () => {
-      dispatch(createSheet({
-         realAge: realAge,
-         fisicalAge: fisicalAge,
-         sexOrientation: sexOr,
-         ocInfo: ocInfo,
-         reputation: 1,
-         isDead: false,
-         theme: "string",
-         history: history,
-         extraData: extraData,
-         fisicalDesc: fisicalDesc,
-         Psicology: psicology,
-         CharacterID: character
-      }));
-      window.location.reload();
-   };
-
 
    return (
       <>
          <Grid container md={12} sx={{ height: '90vh' }}>
             <Grid item md={6} sx={{ backgroundColor: '#1e1e1e', padding: '10px 100px', }}>
                <CrearPersonajes />
-
                <Typography sx={{ textAlign: 'center', mb: '1rem' }}>Seleccionar Personaje</Typography>
                <Divider />
                {allCharacters.length > 0 ?
@@ -143,7 +120,6 @@ function Playground() {
                      </Box>
                      <Button fullWidth color="secondary" variant="outlined"
                         onClick={() => {
-                           dispatch(getAllSheets());
                            setSheetOpen(true);
                            setDeletOpen(false);
                            setEditOpen(false);
@@ -157,8 +133,27 @@ function Playground() {
             </Grid>
             <Grid item md={6} sx={{ backgroundColor: '#137c38', }}>
                <EditarPersonaje characterInfo={characterInfo} editOpen={editOpen} />
-               <EliminarPersonaje character={characterInfo} deletOpen={deletOpen} setDeletOpen={setDeletOpen} />
-               <CrearRoleplaySheet characterInfo={characterInfo} sheetOpen={sheetOpen} setSheetOpen={setSheetOpen} />
+               <EliminarPersonaje character={characterInfo} roleplaySheet={sheetByCharacterId[0]} deletOpen={deletOpen} setDeletOpen={setDeletOpen} />
+               <Box
+                  component="form"
+                  sx={{
+                     display: sheetOpen ? 'flex' : 'none',
+                     flexDirection: 'column',
+                     m: '1rem',
+                     backgroundColor: '#1e1e1e',
+                     borderRadius: '10px',
+                     gap: '2vh',
+                     py: '2vh',
+                     px: '1vw',
+                     height: '84vh',
+                     overflow: 'auto'
+                  }}>
+                  {
+                     sheetByCharacterId.length > 0 ?
+                        <RoleplaypSheet roleplaySheet={sheetByCharacterId[0]} setSheetOpen={setSheetOpen} />
+                        : <CrearRoleplaySheet characterInfo={characterInfo} setSheetOpen={setSheetOpen} />
+                  }
+               </Box>
             </Grid>
          </Grid >
       </>

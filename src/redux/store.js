@@ -31,6 +31,8 @@ import {
 	createSheetReducer,
 	getSheetInfoReducer,
 	getAllSheetsReducer,
+	getSheetByCharIdReducer,
+	updateSheetReducer
 } from './reducers/sheetReducer.js';
 const userInfoLocalStorage =
 	typeof window !== "undefined" && localStorage.getItem("userInfo")
@@ -72,6 +74,8 @@ const reducers = combineReducers({
 	createSheetState: createSheetReducer,
 	getSheetInfoState: getSheetInfoReducer,
 	getAllSheetsState: getAllSheetsReducer,
+	getSheetByCharIdState: getSheetByCharIdReducer,
+	updateSheetState: updateSheetReducer,
 
 });
 
