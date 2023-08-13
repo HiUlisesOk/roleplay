@@ -44,7 +44,7 @@ const CharacterInformation = () => {
 												<Avatar
 													alt={character.username || "User Profile Picture"}
 													src={character.avatar || ""}
-													sx={{ ...character.AvatarCharacter, height: 90, width: 90, margin: 1, mr: 2 }}
+													sx={{ ...ProfileStyles.AvatarCharacter, height: 90, width: 90, margin: 1, mr: 2 }}
 												/>
 												<Box style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', }}>
 													<Typography variant="h2" color="secondary.main">{character.name}</Typography>
