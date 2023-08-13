@@ -215,3 +215,32 @@ export const updatePost = createAsyncThunk(
         }
     }
 ); */
+
+export const getCharacterByUserId = createAsyncThunk(
+    "getCharacterByUserId",
+    async (id, { rejectWithValue }) => {
+        try {
+            const userTokenLocalStorage =
+                typeof window != "undefined"
+                    ? localStorage.getItem("userToken")
+                        ? JSON.parse(localStorage.getItem("userToken"))
+                        : null
+                    : null;
+
+            !userTokenLocalStorage && logout();
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${userTokenLocalStorage}`,
+                    "Content-Type": "application/json",
+                },
+            };
+            const response = await axios.get(`get-character-by-UserID?UserID=${id}`, config);
+            const data = response.data;
+            return data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);

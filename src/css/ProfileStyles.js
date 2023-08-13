@@ -28,8 +28,8 @@ export const ProfileStyles = {
 		display: 'flex', // Added to enable centering
 		justifyContent: 'center'
 	},
-	Avatar: { width: 150, height: 150, mt: -10, mb: 2, ml: -1.5, border: 'solid 8px', borderColor: 'secondary.main' },
-	AvatarCharacter: { width: 70, height: 70, mt: 1, mb: 1, ml: 1, border: 'solid 3px', borderColor: 'secondary.main' },
+	Avatar: { width: 150, height: 150, mt: -10, mb: 2, ml: -1.5, border: 'solid 6px', borderColor: 'secondary.main', '& img': { objectPosition: 'top' } },
+	AvatarCharacter: { width: 70, height: 70, mt: 1, mb: 1, ml: 1, border: 'solid 3px', borderColor: 'secondary.main', '& img': { objectPosition: 'top' } },
 	userName: { m: 0, p: 0, fontWeight: 600 },
 	userPrimarySection: { display: 'flex', flexDirection: 'column', width: '100%', },
 	userStats: { m: 0, p: 0, fontWeight: 600, },

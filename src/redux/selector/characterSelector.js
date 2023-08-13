@@ -28,3 +28,8 @@ export const getPostByTopicIDSelector = createSelector(
 );
 
 */
+
+export const getCharacterByUserIdSelector = createSelector(
+    (state) => state.getCharacterByUserIdState,
+    (getCharacterByUserId) => getCharacterByUserId
+);
