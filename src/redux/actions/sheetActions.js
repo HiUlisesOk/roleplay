@@ -65,6 +65,35 @@ export const getSheetInfo = createAsyncThunk(
     }
 );
 
+export const getSheetByCharId = createAsyncThunk(
+    "getSheetByCharId",
+    async (id, { rejectWithValue }) => {
+        try {
+            const userTokenLocalStorage =
+                typeof window != "undefined"
+                    ? localStorage.getItem("userToken")
+                        ? JSON.parse(localStorage.getItem("userToken"))
+                        : null
+                    : null;
+
+            !userTokenLocalStorage && logout();
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${userTokenLocalStorage}`,
+                    "Content-Type": "application/json",
+                },
+            };
+            const response = await axios.get(`get-sheet-getSheetByCharId/${id}`, config);
+            const data = response.data;
+            return data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
 
 export const getAllSheets = createAsyncThunk(
     "getAllSheets",
@@ -95,6 +124,64 @@ export const getAllSheets = createAsyncThunk(
     }
 );
 
+
+export const updateSheet = createAsyncThunk(
+    "updateSheet",
+    async (params, { rejectWithValue, dispatch }) => {
+        try {
+            const userTokenLocalStorage =
+                typeof window != "undefined"
+                    ? localStorage.getItem("userToken")
+                        ? JSON.parse(localStorage.getItem("userToken"))
+                        : null
+                    : null;
+
+            !userTokenLocalStorage && logout();
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${userTokenLocalStorage}`,
+                    "Content-Type": "application/json",
+                },
+            };
+            const { data } = await axios.put(`/update-sheet`, params, config);
+            return data;
+
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+
+export const deleteSheet = createAsyncThunk(
+    "deleteSheet",
+    async (roleplaySheetID, { rejectWithValue }) => {
+        try {
+            const userTokenLocalStorage =
+                typeof window != "undefined"
+                    ? localStorage.getItem("userToken")
+                        ? JSON.parse(localStorage.getItem("userToken"))
+                        : null
+                    : null;
+
+            !userTokenLocalStorage && logout();
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${userTokenLocalStorage}`,
+                    "Content-Type": "application/json",
+                },
+            };
+            await axios.delete(`/delete-sheet?ID=${roleplaySheetID}`, config);
+            return roleplaySheetID;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
 
 /*
 export const updateCharacter = createAsyncThunk(
@@ -129,34 +216,6 @@ export const updateCharacter = createAsyncThunk(
 
 
 
-export const deleteCharacter = createAsyncThunk(
-    "deleteCharacter",
-
-    async (characterID, { rejectWithValue }) => {
-        try {
-            const userTokenLocalStorage =
-                typeof window != "undefined"
-                    ? localStorage.getItem("userToken")
-                        ? JSON.parse(localStorage.getItem("userToken"))
-                        : null
-                    : null;
-
-            !userTokenLocalStorage && logout();
-
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${userTokenLocalStorage}`,
-                    "Content-Type": "application/json",
-                },
-            };
-            await axios.delete(`/delete-character?ID=${characterID}`, config);
-            return characterID;
-        } catch (error) {
-            console.log(error);
-            return rejectWithValue(error.message);
-        }
-    }
-);
 
 export const getPostByTopicID = createAsyncThunk(
     "getPostByTopicID",

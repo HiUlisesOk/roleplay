@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { createSheet, getSheetInfo, getAllSheets } from "../actions/sheetActions.js";
+import { createSheet, getSheetInfo, getAllSheets, getSheetByCharId, updateSheet } from "../actions/sheetActions.js";
 
 
 const initialState = {
@@ -8,7 +8,8 @@ const initialState = {
     createSheetState: {},
     getSheetInfoState: {},
     getAllSheetsState: {},
-    // updateSheetState: {},
+    getSheetByCharIdState: {},
+    updateSheetState: {},
     // postByTopicIDState: {},
 };
 
@@ -44,6 +45,21 @@ export const getSheetInfoReducer = createReducer(initialState, builder => {
         state.error = action.payload;
     });
 });
+export const getSheetByCharIdReducer = createReducer(initialState, builder => {
+    builder.addCase(getSheetByCharId.pending, (state, action) => {
+        state.loading = true;
+        state.error = false;
+    });
+    builder.addCase(getSheetByCharId.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = false;
+        state.getSheetByCharIdState = action.payload;
+    });
+    builder.addCase(getSheetByCharId.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    });
+});
 
 export const getAllSheetsReducer = createReducer(initialState, builder => {
     builder.addCase(getAllSheets.pending, (state, action) => {
@@ -60,28 +76,29 @@ export const getAllSheetsReducer = createReducer(initialState, builder => {
         state.error = action.payload;
     });
 });
+
+export const updateSheetReducer = createReducer(initialState, builder => {
+    builder.addCase(updateSheet.pending, (state, action) => {
+        state.loading = true;
+        state.error = false;
+    });
+    builder.addCase(updateSheet.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = false;
+        state.updateSheetState = action.payload;
+        console.log(action);
+    });
+    builder.addCase(updateSheet.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    });
+});
 /*
 
 
 
 
 
-export const updateCharacterReducer = createReducer(initialState, builder => {
-    builder.addCase(updateCharacter.pending, (state, action) => {
-        state.loading = true;
-        state.error = false;
-    });
-    builder.addCase(updateCharacter.fulfilled, (state, action) => {
-        state.loading = false;
-        state.error = false;
-        state.updateCharacterState = action.payload;
-        console.log(action);
-    });
-    builder.addCase(updateCharacter.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-    });
-});
 
 export const getPostByTopicIDReducer = createReducer(initialState, builder => {
     builder.addCase(getPostByTopicID.pending, (state, action) => {
