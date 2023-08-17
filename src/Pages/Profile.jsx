@@ -14,6 +14,7 @@ import { useTheme } from '@emotion/react';
 import UserInformation from '../components/Profile/UserInformation';
 import { ProfileStyles } from '../css/ProfileStyles';
 import CharacterInformation from '../components/Profile/CharactersInformation';
+import { ModalProvider } from '../components/utils/ModalContext';
 
 function Profile() {
 	const dispatch = useDispatch();
@@ -29,16 +30,19 @@ function Profile() {
 	console.log(theme);
 	return (<>
 		<div style={ProfileStyles.banner}></div>
-		<Container style={ProfileStyles.container}>
-			<Grid container spacing={1} style={{ flex: 1 }}>
-				<Grid item xs={6}>
-					<UserInformation />
+		<ModalProvider>
+			<Container style={ProfileStyles.container}>
+				<Grid container spacing={1} style={{ flex: 1 }}>
+					<Grid item xs={6}>
+
+						<UserInformation />
+					</Grid>
+					<Grid item xs={6}>
+						<CharacterInformation />
+					</Grid>
 				</Grid>
-				<Grid item xs={6}>
-					<CharacterInformation />
-				</Grid>
-			</Grid>
-		</Container>
+			</Container>
+		</ModalProvider>
 	</>
 	);
 }
