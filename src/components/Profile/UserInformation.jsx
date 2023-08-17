@@ -16,7 +16,7 @@ import ProfileAvatarWithCamera from './UploadProfilePicture';
 const UserInformation = () => {
 
 	const { getUserByIdState } = useSelector(getUserByIdSelector)
-	const { openModal } = useModal();
+	const { openModal, closeModal } = useModal();
 
 	return (
 		<div>
@@ -30,7 +30,7 @@ const UserInformation = () => {
 						sx={ProfileStyles.Avatar}
 					/>
 					<BasicModal>
-						<ProfileAvatarWithCamera />
+						<ProfileAvatarWithCamera ID={getUserByIdState.ID} userData={getUserByIdState} closeModal={closeModal} />
 					</BasicModal>
 				</Grid>
 				<Grid item xs={8}>
