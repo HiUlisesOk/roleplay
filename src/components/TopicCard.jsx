@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteTopic } from '../redux/actions/topicActions';
 import EditTopic from './EditTopic';
-import toDate from '../utils/toDate,js';
+import toDate from '../utils/toDate.js';
 
 export default function TopicCard({ topic }) {
     const navigate = useNavigate();

@@ -47,47 +47,6 @@ export const Register = createAsyncThunk(
 	}
 );
 
-export const uploadImage = createAsyncThunk(
-	"uploadImage",
-	async (imagen64, { rejectWithValue }) => {
-		try {
-			const { data } = await axios.post(`/upload-image`, imagen64, {
-				withCredentials: true,
-			});
-
-			if (!data.type) {
-				return rejectWithValue(data.message);
-			} else {
-				return data;
-			}
-		} catch (error) {
-			console.log(error);
-			return rejectWithValue(error.message);
-		}
-	}
-);
-
-export const updateProfilePicture = createAsyncThunk(
-	"updateProfilePicture",
-	async (params, { rejectWithValue }) => {
-		try {
-			const { imagen64 = "", ID = "", username = "", Email = "" } = params
-			const { data } = await axios.put(`/upload-image`, imagen64, {
-				withCredentials: true,
-			});
-
-			if (!data.type) {
-				return rejectWithValue(data.message);
-			} else {
-				return data;
-			}
-		} catch (error) {
-			console.log(error);
-			return rejectWithValue(error.message);
-		}
-	}
-);
-
 export const getUserById = createAsyncThunk(
 	"getUserById",
 	async (id, { rejectWithValue, getState, dispatch }) => {
@@ -124,3 +83,63 @@ export const getUserById = createAsyncThunk(
 		}
 	}
 );
+
+export const uploadImage = createAsyncThunk(
+	"uploadImage",
+	async (imagen64, { rejectWithValue }) => {
+		try {
+			const { data } = await axios.post(`/upload-image`, imagen64, {
+				withCredentials: true,
+			});
+
+			if (!data.type) {
+				return rejectWithValue(data.message);
+			} else {
+				return data;
+			}
+		} catch (error) {
+			console.log(error);
+			return rejectWithValue(error.message);
+		}
+	}
+);
+
+export const updateProfilePicture = createAsyncThunk(
+	"updateProfilePicture",
+	async (params, { rejectWithValue, dispatch }) => {
+		try {
+
+			const userTokenLocalStorage =
+				typeof window != "undefined"
+					? localStorage.getItem("userToken")
+						? JSON.parse(localStorage.getItem("userToken"))
+						: null
+					: null;
+
+			!userTokenLocalStorage && logout()
+
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userTokenLocalStorage}`,
+					"Content-Type": "application/json",
+				},
+			};
+
+
+			const { imagen64 = "", ID = "" } = params
+			const { data } = await axios.post(`/update-profilePicture`, { imagen64, ID }, config);
+			dispatch(getUserById(ID))
+
+			if (!data.type) {
+				return rejectWithValue(data.message);
+			} else {
+				return data;
+			}
+		} catch (error) {
+			console.log(error);
+			return rejectWithValue(error.message);
+		}
+	}
+);
+
+

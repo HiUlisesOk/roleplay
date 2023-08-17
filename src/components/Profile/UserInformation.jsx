@@ -8,11 +8,15 @@ import { useSelector } from 'react-redux';
 import FollowButton from '../utils/FollowButton';
 import UserStats from './UserStats';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import BasicModal from '../utils/BasicModal';
+import { useModal } from '../utils/ModalContext';
+import ProfileAvatarWithCamera from './UploadProfilePicture';
 
 
 const UserInformation = () => {
 
 	const { getUserByIdState } = useSelector(getUserByIdSelector)
+	const { openModal, closeModal } = useModal();
 
 	return (
 		<div>
@@ -20,11 +24,14 @@ const UserInformation = () => {
 			<Grid container spacing={0} style={{ flex: 1 }}>
 				<Grid item xs={12}>
 					<Avatar
-
+						onClick={openModal}
 						alt={getUserByIdState.username || "User Profile Picture"}
 						src={getUserByIdState.profilePicture || ""}
 						sx={ProfileStyles.Avatar}
 					/>
+					<BasicModal>
+						<ProfileAvatarWithCamera ID={getUserByIdState.ID} userData={getUserByIdState} closeModal={closeModal} />
+					</BasicModal>
 				</Grid>
 				<Grid item xs={8}>
 					<Box style={ProfileStyles.userPrimarySection}>
