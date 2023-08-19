@@ -11,6 +11,8 @@ import Topic from "./Pages/Topic.jsx";
 import NewTopic from "./Pages/NewTopic.jsx";
 import AllTopic from "./Pages/AllTopic.jsx";
 import Nav from "./components/utils/Nav.jsx";
+import FichaDePersonaje from "./Pages/fichaDePersonaje.jsx";
+import CrearPersonaje from "./Pages/CrearPersonaje.jsx";
 
 
 export default function App() {
@@ -20,7 +22,9 @@ export default function App() {
         <Route path="/profile/:id" element={<ProtectedRoute><Nav /><Profile /></ProtectedRoute>} />
         <Route path="/topic/:id" element={<ProtectedRoute><Nav /><Topic /></ProtectedRoute>} />
         <Route path="/editpost/:id" element={<ProtectedRoute><Nav /><EditPost /></ProtectedRoute>} />
+        <Route path="/ficha-de-personaje/:id" element={<ProtectedRoute><Nav /><FichaDePersonaje /></ProtectedRoute>} />
         <Route path="/newtopic" element={<ProtectedRoute><Nav /><NewTopic /></ProtectedRoute>} />
+        <Route path="/crear-personaje" element={<ProtectedRoute><Nav /><CrearPersonaje /></ProtectedRoute>} />
         <Route path="/home" element={<ProtectedRoute><Nav /><Home /></ProtectedRoute>} />
         <Route path="/login" element={<Landing />} />
         <Route path="/all-topics" element={<><Nav /><AllTopic /></>} />
