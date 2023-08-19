@@ -11,6 +11,7 @@ import { getLastActiveTopicsSelector } from "../redux/selector/topicSelector.js"
 import CardSmall from "../components/Home_/CardSmall.jsx";
 import SimpleCard from "../components/Home_/SimpleCard.jsx";
 import { useSpring, animated } from 'react-spring';
+import DisplayPersonajes from "../components/Home_/DisplayPersonajes.jsx";
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -27,9 +28,9 @@ export default function Home() {
     const lastActives = LastActiveTopics?.lastActiveTopicsState?.lastActiveTopics;
     const [buttons, setButtons] = useState([
         {
-            text: 'Button 1',
+            text: 'Personajes',
             variant: 'disabled',
-            content: '1'
+            content: <DisplayPersonajes />
         },
         {
             text: 'Button 2',

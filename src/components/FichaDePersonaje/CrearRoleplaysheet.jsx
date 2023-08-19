@@ -1,12 +1,16 @@
 import { createSheet } from '../../redux/actions/sheetActions';
-import { Box, Button, Divider, IconButton, TextField, Typography } from '@mui/material';
+import { Box, Button, TextField, } from '@mui/material';
 import { useState } from 'react';
-import CloseIcon from '@mui/icons-material/Close';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import SaveIcon from '@mui/icons-material/Save';
+import ClearIcon from '@mui/icons-material/Clear';
 
-export default function CrearRoleplaySheet({ setSheetOpen, characterInfo }) {
+export default function CrearRoleplaySheet({ close, characterInfo }) {
 
    const dispatch = useDispatch();
+
+   const { userData } = useSelector((state) => state);
+   const userId = userData?.userInfo?.ID;
 
    const [realAge, setRealAge] = useState('');
    const [fisicalAge, setFisicalAge] = useState('');
@@ -19,6 +23,7 @@ export default function CrearRoleplaySheet({ setSheetOpen, characterInfo }) {
 
    const handleCreateSheet = () => {
       dispatch(createSheet({
+         userID: userId,
          realAge: realAge,
          fisicalAge: fisicalAge,
          sexOrientation: sexOr,
@@ -40,49 +45,40 @@ export default function CrearRoleplaySheet({ setSheetOpen, characterInfo }) {
       <>
          <Box sx={{
             display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center'
-         }}>
-            <Typography>Create Roleplay Sheet</Typography>
-            <IconButton onClick={() => {
-               setSheetOpen(false);
-            }}>
-               <CloseIcon />
-            </IconButton>
-         </Box>
-         <Divider />
-         <Box sx={{
-            display: 'flex',
             flexDirection: 'column',
             gap: '1vh',
+            width: '75%'
          }}>
-            <Box sx={{ display: 'flex', gap: '5%' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                <TextField label="Real Age"
-                  sx={{ width: '20%' }}
+                  sx={{ width: '15%' }}
                   type="number"
                   value={realAge}
                   onChange={(e) => {
                      setRealAge(e.target.value);
                   }} />
                <TextField label="Fisical Age"
-                  sx={{ width: '20%' }}
+                  sx={{ width: '15%' }}
                   type="number"
                   value={fisicalAge}
                   onChange={(e) => {
                      setFisicalAge(e.target.value);
                   }} />
                <TextField label="Sex Orientation"
-                  sx={{ width: '50%' }}
+                  sx={{ width: '30%' }}
                   value={sexOr}
                   onChange={(e) => {
                      setSexOr(e.target.value);
                   }} />
+               <TextField label="Oc Info"
+
+                  sx={{ width: '30%' }}
+                  value={ocInfo}
+                  onChange={(e) => {
+                     setOcInfo(e.target.value);
+                  }} />
             </Box>
-            <TextField label="Oc Info"
-               value={ocInfo}
-               onChange={(e) => {
-                  setOcInfo(e.target.value);
-               }} />
+
             <TextField label="Fisical Description"
                value={fisicalDesc}
                multiline
@@ -108,7 +104,12 @@ export default function CrearRoleplaySheet({ setSheetOpen, characterInfo }) {
                   setExtraData(e.target.value);
                }} />
          </Box>
-         <Button onClick={handleCreateSheet} variant="outlined" color="secondary"> Submit </Button>
+         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2vh' }}>
+            <Button onClick={handleCreateSheet}
+               variant="outlined" color="secondary" startIcon={<SaveIcon />}>
+               Crear Hoja de Personaje
+            </Button>
+         </Box>
       </>
 
    );

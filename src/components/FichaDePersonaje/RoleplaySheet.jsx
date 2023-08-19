@@ -1,13 +1,19 @@
 import { updateSheet } from '../../redux/actions/sheetActions';
 import { Box, Button, Divider, IconButton, TextField, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import CloseIcon from '@mui/icons-material/Close';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import SaveIcon from '@mui/icons-material/Save';
+
 import EditIcon from '@mui/icons-material/Edit';
 
-export default function RoleplaypSheet({ setSheetOpen, roleplaySheet }) {
+import ClearIcon from '@mui/icons-material/Clear';
+
+export default function RoleplaySheet({ roleplaySheet, editOpen, setEditOpen, canEdit }) {
 
     const dispatch = useDispatch();
+
+    const { userData } = useSelector((state) => state);
+    const userId = userData?.userInfo?.ID;
 
     const [newRealAge, setNewRealAge] = useState('');
     const [newFisicalAge, setNewFisicalAge] = useState('');
@@ -31,10 +37,10 @@ export default function RoleplaypSheet({ setSheetOpen, roleplaySheet }) {
         }
     }, [roleplaySheet]);
 
-    const [editOpen, setEditOpen] = useState(Boolean(false));
-
     const handleUpdateSheet = () => {
         dispatch(updateSheet({
+
+            userID: userId,
             ID: roleplaySheet.ID,
             realAge: newRealAge,
             fisicalAge: newFisicalAge,
@@ -54,30 +60,10 @@ export default function RoleplaypSheet({ setSheetOpen, roleplaySheet }) {
     return (
         <>
             <Box sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center'
-            }}>
-                <Typography>Roleplay Sheet</Typography>
-                <Box sx={{ display: 'flex', gap: '1vw' }}>
-                    <IconButton onClick={() => {
-                        setEditOpen(prevOpen => !prevOpen);
-                    }}>
-                        <EditIcon />
-                    </IconButton>
-
-                    <IconButton onClick={() => {
-                        setSheetOpen(false);
-                    }}>
-                        <CloseIcon />
-                    </IconButton>
-                </Box>
-            </Box>
-            <Divider />
-            <Box sx={{
                 display: editOpen ? 'none' : 'flex',
                 flexDirection: 'column',
                 gap: '1vh',
+                width: '63vw'
             }}>
                 <Box sx={{ display: 'flex', gap: '3vh' }}>
                     <Typography>Real Age:</Typography>
@@ -86,11 +72,10 @@ export default function RoleplaypSheet({ setSheetOpen, roleplaySheet }) {
                     <Typography sx={{ color: '#1CB251' }}>{roleplaySheet.fisicalAge}</Typography>
                     <Typography>Orientacion Sexual:</Typography>
                     <Typography sx={{ color: '#1CB251' }}>{roleplaySheet.sexOrientation}</Typography>
-                </Box>
-                <Box sx={{ display: 'flex', gap: '3vh' }}>
                     <Typography>Oc Info:</Typography>
                     <Typography sx={{ color: '#1CB251' }}>{roleplaySheet.ocInfo}</Typography>
                 </Box>
+
                 <Typography>Descripcion Fisica:</Typography>
                 <Typography sx={{ color: '#1CB251' }}>{roleplaySheet.fisicalDesc}</Typography>
                 <Typography>Descripcion Psicologica:</Typography>
@@ -101,39 +86,42 @@ export default function RoleplaypSheet({ setSheetOpen, roleplaySheet }) {
                 <Typography sx={{ color: '#1CB251' }}>{roleplaySheet.extraData}</Typography>
 
             </Box>
-
             <Box sx={{
                 display: editOpen ? 'flex' : 'none',
                 flexDirection: 'column',
                 gap: '2vh',
+
+                width: '63vw'
             }}>
-                <Box sx={{ display: 'flex', gap: '5%' }}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <TextField label="Real Age"
-                        sx={{ width: '20%' }}
+                        sx={{ width: '15%' }}
                         type="number"
                         value={newRealAge}
                         onChange={(e) => {
                             setNewRealAge(e.target.value);
                         }} />
                     <TextField label="Fisical Age"
-                        sx={{ width: '20%' }}
+                        sx={{ width: '15%' }}
                         type="number"
                         value={newFisicalAge}
                         onChange={(e) => {
                             setNewFisicalAge(e.target.value);
                         }} />
                     <TextField label="Sex Orientation"
-                        sx={{ width: '50%' }}
+                        sx={{ width: '30%' }}
                         value={newSexOr}
                         onChange={(e) => {
                             setNewSexOr(e.target.value);
                         }} />
+                    <TextField label="Oc Info"
+                        sx={{ width: '30%' }}
+                        value={newOcInfo}
+                        onChange={(e) => {
+                            setNewOcInfo(e.target.value);
+                        }} />
                 </Box>
-                <TextField label="Oc Info"
-                    value={newOcInfo}
-                    onChange={(e) => {
-                        setNewOcInfo(e.target.value);
-                    }} />
+
                 <TextField label="Fisical Description"
                     value={newFisicalDesc}
                     multiline
@@ -158,7 +146,20 @@ export default function RoleplaypSheet({ setSheetOpen, roleplaySheet }) {
                     onChange={(e) => {
                         setNewExtraData(e.target.value);
                     }} />
-                <Button onClick={handleUpdateSheet} variant="outlined" color="secondary"> Guardar </Button>
+            </Box>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2vh', width: '16vw' }}>
+                <Button sx={{ display: editOpen || canEdit ? 'none' : 'flex', textWrap: 'nowrap' }} onClick={() => setEditOpen(true)}
+                    variant="outlined" color="secondary" startIcon={<EditIcon />}>
+                    Editar Hoja de Personaje
+                </Button>
+                <Button sx={{ display: editOpen ? 'flex' : 'none', textWrap: 'nowrap' }} onClick={handleUpdateSheet}
+                    variant="outlined" color="secondary" startIcon={<SaveIcon />}>
+                    Guardar Cambios
+                </Button>
+                <Button sx={{ display: editOpen ? 'flex' : 'none', textWrap: 'nowrap' }} onClick={() => setEditOpen(false)}
+                    variant="outlined" color="secondary" startIcon={<ClearIcon />}>
+                    Cancelar
+                </Button>
             </Box>
 
         </>
