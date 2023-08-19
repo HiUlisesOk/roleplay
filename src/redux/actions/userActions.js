@@ -30,6 +30,8 @@ export const Login = createAsyncThunk(
 	}
 );
 
+
+
 export const Register = createAsyncThunk(
 	"Register",
 	async (user, { rejectWithValue }) => {
@@ -56,6 +58,43 @@ export const getUserById = createAsyncThunk(
 		try {
 
 
+			const userTokenLocalStorage =
+				typeof window != "undefined"
+					? localStorage.getItem("userToken")
+						? JSON.parse(localStorage.getItem("userToken"))
+						: null
+					: null;
+
+			!userTokenLocalStorage && logout()
+
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userTokenLocalStorage}`,
+					"Content-Type": "application/json",
+				},
+			};
+
+			const response = await axios.get(`/get-user-info/${id}`, config);
+
+			const data = response.data;
+
+
+
+			return data;
+
+		} catch (error) {
+			console.log(error);
+			return rejectWithValue(error.message);
+		}
+	}
+);
+
+export const getMyInfo = createAsyncThunk(
+	"getMyInfo",
+	async ({ rejectWithValue, getState, dispatch }) => {
+		try {
+			const { ID } = JSON.parse(localStorage.getItem('userInfo'));
+			console.log('ID', ID)
 			const userTokenLocalStorage =
 				typeof window != "undefined"
 					? localStorage.getItem("userToken")

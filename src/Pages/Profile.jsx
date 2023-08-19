@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { useParams } from 'react-router-dom';
+import { json, useParams } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 
@@ -15,13 +15,16 @@ import UserInformation from '../components/Profile/UserInformation';
 import { ProfileStyles } from '../css/ProfileStyles';
 import CharacterInformation from '../components/Profile/CharactersInformation';
 import { ModalProvider } from '../components/utils/ModalContext';
+import { loginSelector } from '../redux/selector/userSelector';
 
 function Profile() {
 	const dispatch = useDispatch();
 	const theme = useTheme();
 
 	const { id } = useParams();
+	const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
+	console.log('state', userInfo)
 	useEffect(() => {
 		dispatch(getUserById(id));
 	}, [id]);

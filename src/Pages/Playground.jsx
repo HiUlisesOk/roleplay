@@ -1,5 +1,5 @@
 import FormControl from '@mui/material/FormControl';
-import { getCharacterInfo, } from "../redux/actions/characterActions";
+import { getAllCharacters, getCharacterInfo, } from "../redux/actions/characterActions";
 import { getAllCharacterSelector, getCharacterInfoSelector } from '../redux/selector/characterSelector';
 import { getAllSheetsSelector, getSheetByCharIdSelector } from '../redux/selector/sheetSelector';
 import { Box, Divider, Grid, IconButton, InputLabel, MenuItem, Select, Typography } from '@mui/material';
