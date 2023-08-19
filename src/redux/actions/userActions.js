@@ -91,7 +91,7 @@ export const getUserById = createAsyncThunk(
 
 export const getMyInfo = createAsyncThunk(
 	"getMyInfo",
-	async ({ rejectWithValue, getState, dispatch }) => {
+	async (params, { rejectWithValue, getState, dispatch }) => {
 		try {
 			const { ID } = JSON.parse(localStorage.getItem('userInfo'));
 			console.log('ID', ID)
@@ -111,11 +111,11 @@ export const getMyInfo = createAsyncThunk(
 				},
 			};
 
-			const response = await axios.get(`/get-user-info/${id}`, config);
+			const response = await axios.get(`/get-user-info/${ID}`, config);
 
 			const data = response.data;
 
-
+			console.log('dataFromAction', response)
 
 			return data;
 
