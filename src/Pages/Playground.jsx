@@ -53,7 +53,6 @@ function Playground() {
       <>
          <Grid container md={12} sx={{ height: '90vh' }}>
             <Grid item md={6} sx={{ backgroundColor: '#1e1e1e', padding: '10px 100px', }}>
-
                <Typography sx={{ textAlign: 'center', mb: '1rem' }}>Seleccionar Personaje</Typography>
                <Divider />
                {allCharacters.length > 0 ?
