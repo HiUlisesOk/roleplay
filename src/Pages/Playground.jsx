@@ -1,19 +1,12 @@
 import FormControl from '@mui/material/FormControl';
-import { createCharacter, getAllCharacters, deleteCharacter, getCharacterInfo, updateCharacter } from "../redux/actions/characterActions";
+import { getCharacterInfo, } from "../redux/actions/characterActions";
 import { getAllCharacterSelector, getCharacterInfoSelector } from '../redux/selector/characterSelector';
-import { createSheet, getSheetInfo, getAllSheets, getSheetByCharId } from '../redux/actions/sheetActions';
-import { getSheetInfoSelector, getAllSheetsSelector, getSheetByCharIdSelector } from '../redux/selector/sheetSelector';
-import { Box, Button, Divider, Grid, IconButton, InputLabel, MenuItem, Select, TextField, Typography, getNativeSelectUtilityClasses } from '@mui/material';
+import { getAllSheetsSelector, getSheetByCharIdSelector } from '../redux/selector/sheetSelector';
+import { Box, Divider, Grid, IconButton, InputLabel, MenuItem, Select, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import CloseIcon from '@mui/icons-material/Close';
-import CrearPersonajes from '../components/Personajes/CrearPersonajes';
-import EditarPersonaje from '../components/Personajes/EditarPersonaje';
-import EliminarPersonaje from '../components/Personajes/EliminarPersonaje';
-import CrearRoleplaySheet from '../components/Personajes/CrearRoleplaysheet';
-import RoleplaypSheet from '../components/Personajes/RoleplaySheet';
 
 function Playground() {
    const dispatch = useDispatch();
@@ -53,7 +46,6 @@ function Playground() {
       <>
          <Grid container md={12} sx={{ height: '90vh' }}>
             <Grid item md={6} sx={{ backgroundColor: '#1e1e1e', padding: '10px 100px', }}>
-
                <Typography sx={{ textAlign: 'center', mb: '1rem' }}>Seleccionar Personaje</Typography>
                <Divider />
                {allCharacters.length > 0 ?
