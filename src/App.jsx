@@ -11,6 +11,8 @@ import Topic from "./Pages/Topic.jsx";
 import NewTopic from "./Pages/NewTopic.jsx";
 import AllTopic from "./Pages/AllTopic.jsx";
 import Nav from "./components/utils/Nav.jsx";
+import IsAllowed from "./utils/isAllowed.jsx";
+import { user, admin } from "./utils/allowedRoles.js";
 
 
 export default function App() {
@@ -25,11 +27,12 @@ export default function App() {
         <Route path="/login" element={<Landing />} />
         <Route path="/all-topics" element={<><Nav /><AllTopic /></>} />
         <Route path="/register" element={<Register />} />
-        <Route path="/playground" element={<><Nav /><Playground /></>} />
-        <Route path="/" element={<Landing />} />
+        <Route path="/playground" element={<><Nav /><IsAllowed roles={[user]} ><Playground /></IsAllowed></>} />
+        <Route index element={<Landing />} />
 
       </Routes>
     </>
 
   );
 }
+

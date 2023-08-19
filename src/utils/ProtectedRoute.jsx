@@ -20,9 +20,12 @@ const ProtectedRoute = (props) => {
     const checkUserToken = () => {
         const userToken = localStorage.getItem('userToken');
         const userInfo = localStorage.getItem('userInfo');
+        const userRoles = localStorage.getItem('userRoles');
+        const login = localStorage.getItem('Login');
 
         !user && dispatch(getUserById(user.ID))
-        if (!userToken || userToken === 'undefined' || !userInfo) {
+        if (!userToken || userToken === 'undefined' || !userInfo || !userRoles || !login) {
+            localStorage.setItem("Login", JSON.stringify(false));
             setIsLoggedIn(false);
             logout();
             return navigate('/login');
@@ -31,7 +34,7 @@ const ProtectedRoute = (props) => {
     }
     useEffect(() => {
         checkUserToken();
-    }, [isLoggedIn]);
+    }, [isLoggedIn, user]);
     return (
         <React.Fragment>
             {

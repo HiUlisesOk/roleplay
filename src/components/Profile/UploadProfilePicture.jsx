@@ -12,10 +12,7 @@ const styles = {
 		display: 'inline-block',
 		position: 'relative',
 	},
-	avatar: {
-		width: '150px', /* Ajusta el tamaño del avatar según tus necesidades */
-		height: '150px', /* Ajusta el tamaño del avatar según tus necesidades */
-	},
+	Avatar: { width: 250, height: 250, mt: -10, mb: 2, ml: -1.5, border: 'solid 6px', cursor: 'pointer', borderColor: 'secondary.main', '& img': { objectPosition: 'top' } },
 	cameraIcon: {
 		position: 'absolute',
 		bottom: '0',
@@ -87,7 +84,7 @@ function ProfileAvatarWithCamera({ ID, userData, closeModal }) {
 	return (
 		<div style={styles.avatarContainer} >
 
-			<Avatar style={ProfileStyles.Avatar} alt="Profile Image" src={picture} onClick={handleUploadPicture} />
+			<Avatar style={styles.Avatar} alt="Profile Image" src={picture} onClick={handleUploadPicture} />
 			<IconButton style={styles.cameraIcon} onClick={handleUploadPicture}>
 				<PhotoCameraIcon />
 			</IconButton>
