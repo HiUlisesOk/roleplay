@@ -16,7 +16,7 @@ export default function DisplayPersonajes({ }) {
     const characters = charactersSelector.getCharacterByUserIdState;
     useEffect(() => {
         dispatch(getCharacterByUserId(userId));
-    }, []);
+    }, [userId]);
     console.log(characters);
     return (
         <Box sx={{ display: 'flex', justifyContent: 'space-between', height: '100%' }}>

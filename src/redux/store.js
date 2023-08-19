@@ -36,6 +36,13 @@ import {
 	getSheetByCharIdReducer,
 	updateSheetReducer
 } from './reducers/sheetReducer.js';
+import {
+	getAllStatsReducer,
+	getStatsInfoReducer
+} from './reducers/statsReducer.js';
+import {
+	startBattleReducer
+} from "./reducers/battleReducer";
 const userInfoLocalStorage =
 	typeof window !== "undefined" && localStorage.getItem("userInfo")
 		? JSON.parse(localStorage.getItem("userInfo"))
@@ -80,6 +87,9 @@ const reducers = combineReducers({
 	getSheetByCharIdState: getSheetByCharIdReducer,
 	updateSheetState: updateSheetReducer,
 	getUserRolesByIdState: getUserRolesByIdReducer,
+	getAllStatsState: getAllStatsReducer,
+	getStatsInfoState: getStatsInfoReducer,
+	startBattleState: startBattleReducer,
 });
 
 export const store = configureStore({
