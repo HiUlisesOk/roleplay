@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react'
 import { logout } from '../../utils/Logout'
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginSelector, getUserByIdSelector } from '../../redux/selector/userSelector';
-import { getUserById } from '../../redux/actions/userActions'
+import { loginSelector, getUserByIdSelector, getMyInfoSelector } from '../../redux/selector/userSelector';
+import { getMyInfo, getUserById } from '../../redux/actions/userActions'
 export default function AvatarMenu() {
   const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = useState(null);
@@ -19,18 +19,17 @@ export default function AvatarMenu() {
     setAnchorEl(null);
   };
 
-  const { userData, loginInfo } = useSelector((state) => state);
-  const userId = loginInfo?.loginInfo?.user?.ID || userData?.userInfo?.ID;
 
-  const { getUserByIdState } = useSelector(getUserByIdSelector)
+  const { getMyInfoState } = useSelector(getMyInfoSelector);
+  const userId = getMyInfoState?.ID
 
   useEffect(() => {
-    dispatch(getUserById(userId))
-  }, [getUserByIdSelector, userId])
-  console.log(userId)
+    dispatch(getMyInfo());
+  }, [getMyInfoSelector, userId])
+  console.log(getMyInfoState)
 
   const AvatarStyle = { width: 40, height: 40 };
-  const ProfilePicture = getUserByIdState?.profilePicture || "";
+  const ProfilePicture = getMyInfoState?.profilePicture || "";
 
   return (
 

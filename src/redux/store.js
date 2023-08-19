@@ -6,6 +6,7 @@ import {
 	updateProfilePictureReducer,
 	getUserByIdReducer,
 	getUserRolesByIdReducer,
+	getMyInfoReducer,
 } from "./reducers/userReducer";
 import {
 	getAllTopicReducer,
@@ -90,6 +91,7 @@ const reducers = combineReducers({
 	getAllStatsState: getAllStatsReducer,
 	getStatsInfoState: getStatsInfoReducer,
 	startBattleState: startBattleReducer,
+	getMyInfoState: getMyInfoReducer,
 });
 
 export const store = configureStore({
