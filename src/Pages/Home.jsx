@@ -11,7 +11,6 @@ import { getLastActiveTopicsSelector } from "../redux/selector/topicSelector.js"
 import CardSmall from "../components/Home_/CardSmall.jsx";
 import SimpleCard from "../components/Home_/SimpleCard.jsx";
 import { useSpring, animated } from 'react-spring';
-import CrearPersonajes from '../components/Personajes/CrearPersonajes.jsx';
 import DisplayPersonajes from "../components/Home_/DisplayPersonajes.jsx";
 
 export default function Home() {
