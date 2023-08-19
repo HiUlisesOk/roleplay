@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 
-import { Login, Register, uploadImage, updateProfilePicture, getUserById } from "../actions/userActions";
+import { Login, Register, uploadImage, updateProfilePicture, getUserById, getUserRolesById } from "../actions/userActions";
 
 const initialState = {
 	loading: false,
@@ -10,6 +10,7 @@ const initialState = {
 	uploadImageState: {},
 	updateProfilePictureState: {},
 	getUserByIdState: {},
+	getUserRolesByIdState: {},
 };
 
 export const loginReducer = createReducer(initialState, builder => {
@@ -93,6 +94,23 @@ export const getUserByIdReducer = createReducer(initialState, builder => {
 		console.log(action);
 	});
 	builder.addCase(getUserById.rejected, (state, action) => {
+		state.loading = false;
+		state.error = action.payload;
+	})
+});
+
+export const getUserRolesByIdReducer = createReducer(initialState, builder => {
+	builder.addCase(getUserRolesById.pending, (state, action) => {
+		state.loading = true;
+		state.error = false;
+	});
+	builder.addCase(getUserRolesById.fulfilled, (state, action) => {
+		state.loading = false;
+		state.error = false;
+		state.getUserRolesByIdState = action.payload;
+		console.log(action);
+	});
+	builder.addCase(getUserRolesById.rejected, (state, action) => {
 		state.loading = false;
 		state.error = action.payload;
 	})
