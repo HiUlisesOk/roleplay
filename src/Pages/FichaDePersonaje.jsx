@@ -3,6 +3,8 @@ import { getCharacterInfo, updateCharacter, deleteCharacter } from "../redux/act
 import { getSheetByCharId, deleteSheet } from "../redux/actions/sheetActions.js";
 import { getCharacterInfoSelector } from '../redux/selector/characterSelector.js';
 import { getSheetByCharIdSelector } from "../redux/selector/sheetSelector.js";
+import { getStatsInfo } from '../redux/actions/statsActions.js';
+import { getStatsInfoSelector } from '../redux/selector/statsSelector.js';
 import { useParams } from 'react-router-dom';
 import { Avatar, Box, Button, Divider, IconButton, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,12 +27,14 @@ export default function FichaDePersonaje({ }) {
     const userId = userData?.userInfo?.ID;
 
     const characterInfoSelector = useSelector(getCharacterInfoSelector);
-    const characterInfo = characterInfoSelector.getCharacterInfoState;
+    const characterInfo = characterInfoSelector.getCharacterInfoState.dataValues;
 
     const sheetInfoSelector = useSelector(getSheetByCharIdSelector);
     const sheetInfo = sheetInfoSelector.getSheetByCharIdState;
 
-    console.log(sheetInfo);
+
+    const statsInfoSelector = useSelector(getStatsInfoSelector);
+    const statsInfo = statsInfoSelector.getStatsInfoState;
 
     const [editCharOpen, setEditCharOpen] = useState(false);
     const [editSheetOpen, setEditSheetOpen] = useState(false);
@@ -46,6 +50,7 @@ export default function FichaDePersonaje({ }) {
     useEffect(() => {
         dispatch(getCharacterInfo(id));
         dispatch(getSheetByCharId(id));
+        dispatch(getStatsInfo(id));
     }, [id]);
 
     useEffect(() => {
@@ -78,8 +83,11 @@ export default function FichaDePersonaje({ }) {
             userID: userId,
             ID: sheetInfo.ID
         }));
-
     };
+
+    console.log(statsInfoSelector, 'selector');
+
+    console.log(statsInfo);
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1rem', pb: '1rem', mx: '10vw', mt: '2vh' }}   >
@@ -105,10 +113,64 @@ export default function FichaDePersonaje({ }) {
                         pl: '2vw',
                         gap: '2vh'
                     }}>
-                        <Typography sx={{ fontSize: '40px' }}>{characterInfo?.name}</Typography>
-                        <Typography sx={{ fontSize: '30px' }}>{characterInfo?.guildName || "Sin Gremio"}</Typography>
+                        <Typography sx={{ fontSize: '25px' }}>{characterInfo?.name}</Typography>
+                        <Typography sx={{ fontSize: '25px' }}>{characterInfo?.guildName || "Sin Gremio"}</Typography>
                         <Typography sx={{ fontSize: '25px' }}>{characterInfo?.charge}</Typography>
                         <Typography sx={{ fontSize: '25px' }}>{characterInfo?.rank}</Typography>
+                    </Box>
+                    <Box sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        pl: '2vw',
+                        gap: '1vh'
+                    }}><Box sx={{ display: 'flex', gap: '1vw' }}>
+                            <Typography sx={{ fontSize: '15px' }}>Nivel</Typography>
+                            <Typography sx={{ fontSize: '15px' }}>{statsInfo.level || 0}</Typography>
+                        </Box>
+
+                        <Box sx={{ display: 'flex', gap: '1vw' }}>
+                            <Typography sx={{ fontSize: '15px' }}>HP</Typography>
+                            <Typography sx={{ fontSize: '15px' }}>{statsInfo.HP || 0}</Typography>
+                        </Box>
+
+                        <Box sx={{ display: 'flex', gap: '1vw' }}>
+                            <Typography sx={{ fontSize: '15px' }}>STR</Typography>
+                            <Typography sx={{ fontSize: '15px' }}>{statsInfo.STR || 0}</Typography>
+                        </Box>
+
+                        <Box sx={{ display: 'flex', gap: '1vw' }}>
+                            <Typography sx={{ fontSize: '15px' }}>RES</Typography>
+                            <Typography sx={{ fontSize: '15px' }}>{statsInfo.RES || 0}</Typography>
+                        </Box>
+
+                        <Box sx={{ display: 'flex', gap: '1vw' }}>
+                            <Typography sx={{ fontSize: '15px' }}>INT</Typography>
+                            <Typography sx={{ fontSize: '15px' }}>{statsInfo.INT || 0}</Typography>
+                        </Box>
+                        <Box sx={{ display: 'flex', gap: '1vw' }}>
+                            <Typography sx={{ fontSize: '15px' }}>WIS</Typography>
+                            <Typography sx={{ fontSize: '15px' }}>{statsInfo.WIS || 0}</Typography>
+                        </Box>
+                        <Box sx={{ display: 'flex', gap: '1vw' }}>
+                            <Typography sx={{ fontSize: '15px' }}>AGI</Typography>
+                            <Typography sx={{ fontSize: '15px' }}>{statsInfo.AGI || 0}</Typography>
+                        </Box>
+                        <Box sx={{ display: 'flex', gap: '1vw' }}>
+                            <Typography sx={{ fontSize: '15px' }}>CHARM</Typography>
+                            <Typography sx={{ fontSize: '15px' }}>{statsInfo.CHARM || 0}</Typography>
+                        </Box>
+                        <Box sx={{ display: 'flex', gap: '1vw' }}>
+                            <Typography sx={{ fontSize: '15px' }}>EXP</Typography>
+                            <Typography sx={{ fontSize: '15px' }}>{statsInfo.EXP || 0}</Typography>
+                        </Box>
+                        <Box sx={{ display: 'flex', gap: '1vw' }}>
+                            <Typography sx={{ fontSize: '15px' }}>Nombre del dado</Typography>
+                            <Typography sx={{ fontSize: '15px' }}>{statsInfo.diceName || "default"}</Typography>
+                        </Box>
+                        <Box sx={{ display: 'flex', gap: '1vw' }}>
+                            <Typography sx={{ fontSize: '15px' }}>Valor del dado</Typography>
+                            <Typography sx={{ fontSize: '15px' }}>{statsInfo.diceValue || 0}</Typography>
+                        </Box>
                     </Box>
 
                     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
