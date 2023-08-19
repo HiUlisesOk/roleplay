@@ -53,7 +53,7 @@ function Playground() {
       <>
          <Grid container md={12} sx={{ height: '90vh' }}>
             <Grid item md={6} sx={{ backgroundColor: '#1e1e1e', padding: '10px 100px', }}>
-               <CrearPersonajes />
+
                <Typography sx={{ textAlign: 'center', mb: '1rem' }}>Seleccionar Personaje</Typography>
                <Divider />
                {allCharacters.length > 0 ?
@@ -82,7 +82,7 @@ function Playground() {
                   :
                   <></>
                }
-               {characterInfo.ID ?
+               {characterInfo.ID &&
                   <>
                      <Box sx={{ m: '1rem', display: 'flex', justifyContent: 'space-between', border: '1px solid #707070', flexGrow: 1, borderRadius: '10px', overflow: 'hidden', }}>
                         <Box sx={{ display: 'flex' }}>
@@ -118,43 +118,10 @@ function Playground() {
                               <DeleteIcon color="secondary" /></IconButton>
                         </Box>
                      </Box>
-                     <Button fullWidth color="secondary" variant="outlined"
-                        onClick={() => {
-                           setSheetOpen(true);
-                           setDeletOpen(false);
-                           setEditOpen(false);
-                        }}>
-                        Roleplay Sheet
-                     </Button>
                   </>
-                  :
-                  null
                }
             </Grid>
-            <Grid item md={6} sx={{ backgroundColor: '#137c38', }}>
-               <EditarPersonaje characterInfo={characterInfo} editOpen={editOpen} />
-               <EliminarPersonaje character={characterInfo} roleplaySheet={sheetByCharacterId[0]} deletOpen={deletOpen} setDeletOpen={setDeletOpen} />
-               <Box
-                  component="form"
-                  sx={{
-                     display: sheetOpen ? 'flex' : 'none',
-                     flexDirection: 'column',
-                     m: '1rem',
-                     backgroundColor: '#1e1e1e',
-                     borderRadius: '10px',
-                     gap: '2vh',
-                     py: '2vh',
-                     px: '1vw',
-                     height: '84vh',
-                     overflow: 'auto'
-                  }}>
-                  {
-                     sheetByCharacterId.length > 0 ?
-                        <RoleplaypSheet roleplaySheet={sheetByCharacterId[0]} setSheetOpen={setSheetOpen} />
-                        : <CrearRoleplaySheet characterInfo={characterInfo} setSheetOpen={setSheetOpen} />
-                  }
-               </Box>
-            </Grid>
+
          </Grid >
       </>
    );
