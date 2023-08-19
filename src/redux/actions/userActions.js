@@ -11,13 +11,16 @@ export const Login = createAsyncThunk(
 			const { data } = await axios.post(`/login`, user, {
 				withCredentials: true,
 			});
-
+			console.log('Login', data)
 			if (!data.passwordsMatch) {
+				localStorage.setItem("Login", JSON.stringify(false));
 				return rejectWithValue(data.message);
 			} else {
 				localStorage.clear();
 				localStorage.setItem("userInfo", JSON.stringify(data.user));
 				localStorage.setItem("userToken", JSON.stringify(data.token));
+				localStorage.setItem("userRoles", JSON.stringify(data?.user?.roles));
+				localStorage.setItem("Login", JSON.stringify(true));
 				return data;
 			}
 		} catch (error) {
@@ -142,4 +145,39 @@ export const updateProfilePicture = createAsyncThunk(
 	}
 );
 
+export const getUserRolesById = createAsyncThunk(
+	"getUserRolesById",
+	async (id, { rejectWithValue, getState, dispatch }) => {
+		try {
 
+
+			const userTokenLocalStorage =
+				typeof window != "undefined"
+					? localStorage.getItem("userToken")
+						? JSON.parse(localStorage.getItem("userToken"))
+						: null
+					: null;
+
+			!userTokenLocalStorage && logout()
+
+			const config = {
+				headers: {
+					Authorization: `Bearer ${userTokenLocalStorage}`,
+					"Content-Type": "application/json",
+				},
+			};
+
+			const response = await axios.get(`/get-user-roles?id=${id}`, config);
+
+			const data = response.data;
+
+
+
+			return data;
+
+		} catch (error) {
+			console.log(error);
+			return rejectWithValue(error.message);
+		}
+	}
+);

@@ -4,7 +4,8 @@ import {
 	registerReducer,
 	uploadImageReducer,
 	updateProfilePictureReducer,
-	getUserByIdReducer
+	getUserByIdReducer,
+	getUserRolesByIdReducer,
 } from "./reducers/userReducer";
 import {
 	getAllTopicReducer,
@@ -71,14 +72,14 @@ const reducers = combineReducers({
 	createCharacterState: createCharacterReducer,
 	getAllCharacterState: getAllCharactersReducer,
 	getCharacterInfoState: getCharacterInfoReducer,
-  getCharacterByUserIdState: getCharacterByUserIdReducer,
+	getCharacterByUserIdState: getCharacterByUserIdReducer,
 	updateCharacterState: updateCharacterReducer,
 	createSheetState: createSheetReducer,
 	getSheetInfoState: getSheetInfoReducer,
 	getAllSheetsState: getAllSheetsReducer,
 	getSheetByCharIdState: getSheetByCharIdReducer,
 	updateSheetState: updateSheetReducer,
-
+	getUserRolesByIdState: getUserRolesByIdReducer,
 });
 
 export const store = configureStore({
