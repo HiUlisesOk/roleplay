@@ -25,6 +25,11 @@ export const getUserByIdSelector = createSelector(
 	(getUserById) => getUserById
 );
 
+export const getMyInfoSelector = createSelector(
+	(state) => state.getMyInfoState,
+	(getMyInfo) => getMyInfo
+);
+
 export const getUserRolesByIdSelector = createSelector(
 	(state) => state.getUserRolesByIdState,
 	(getUserRolesById) => getUserRolesById
