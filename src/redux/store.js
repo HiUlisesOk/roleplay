@@ -42,7 +42,8 @@ import {
 	getStatsInfoReducer
 } from './reducers/statsReducer.js';
 import {
-	startBattleReducer
+	startBattleReducer,
+	takeTurnReducer
 } from "./reducers/battleReducer";
 const userInfoLocalStorage =
 	typeof window !== "undefined" && localStorage.getItem("userInfo")
@@ -91,6 +92,7 @@ const reducers = combineReducers({
 	getAllStatsState: getAllStatsReducer,
 	getStatsInfoState: getStatsInfoReducer,
 	startBattleState: startBattleReducer,
+	takeTurnState: takeTurnReducer,
 	getMyInfoState: getMyInfoReducer,
 });
 

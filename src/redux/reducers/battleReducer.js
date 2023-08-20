@@ -1,10 +1,11 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { startBattle } from "../actions/battleActions";
+import { startBattle, takeTurn } from "../actions/battleActions";
 
 const initialState = {
     loading: false,
     error: false,
     startBattleState: {},
+    takeTurnState: {}
     // postByTopicIDState: {},
 };
 
@@ -17,9 +18,24 @@ export const startBattleReducer = createReducer(initialState, builder => {
         state.loading = false;
         state.error = false;
         state.startBattleState = action.payload;
-        console.log(action);
     });
     builder.addCase(startBattle.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+    });
+});
+
+export const takeTurnReducer = createReducer(initialState, builder => {
+    builder.addCase(takeTurn.pending, (state, action) => {
+        state.loading = true;
+        state.error = false;
+    });
+    builder.addCase(takeTurn.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = false;
+        state.takeTurnState = action.payload;
+    });
+    builder.addCase(takeTurn.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
     });
