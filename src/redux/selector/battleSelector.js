@@ -4,6 +4,12 @@ export const startBattleSelector = createSelector(
     (state) => state.startBattleState,
     (startBattle) => startBattle
 );
+
+export const takeTurnSelector = createSelector(
+    (state) => state.takeTurnState,
+    (takeTurn) => takeTurn
+);
+
 /* 
 export const getPostByTopicIDSelector = createSelector(
     (state) => state.postByTopicIDState,

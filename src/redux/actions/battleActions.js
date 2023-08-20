@@ -26,7 +26,44 @@ export const startBattle = createAsyncThunk(
             };
             const { data } = await axios.post(`/start-battle?CharID=${CharID}&objectiveID=${objectiveID}&actionTypes=${actionTypes}`, {}, config);
 
-            if (!data.type) {
+            if (!data) {
+                return rejectWithValue(data.message);
+            } else {
+                console.log(data, 'action');
+                return data;
+            }
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+export const takeTurn = createAsyncThunk(
+    "takeTurn",
+    async (battle, { rejectWithValue, dispatch }) => {
+
+        try {
+            const { CharID, BattleID, action, action2, objectiveID } = battle;
+
+            const userTokenLocalStorage =
+                typeof window != "undefined"
+                    ? localStorage.getItem("userToken")
+                        ? JSON.parse(localStorage.getItem("userToken"))
+                        : null
+                    : null;
+
+            !userTokenLocalStorage && logout();
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${userTokenLocalStorage}`,
+                    "Content-Type": "application/json",
+                },
+            };
+            const { data } = await axios.post(`take-turn?CharID=${CharID}&BattleID=${BattleID}&action=${action}&action2=${action2}&objectiveID=${objectiveID}`, {}, config);
+
+            if (!data) {
                 return rejectWithValue(data.message);
             } else {
                 console.log(data, 'action');
