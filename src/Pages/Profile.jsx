@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { useParams } from 'react-router-dom';
+import { json, useParams } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 
 import { Box, Typography } from '@mui/material';
 
-import { getUserById } from '../redux/actions/userActions';
+import { getMyInfo, getUserById } from '../redux/actions/userActions';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -15,6 +15,7 @@ import UserInformation from '../components/Profile/UserInformation';
 import { ProfileStyles } from '../css/ProfileStyles';
 import CharacterInformation from '../components/Profile/CharactersInformation';
 import { ModalProvider } from '../components/utils/ModalContext';
+import { getMyInfoSelector, loginSelector } from '../redux/selector/userSelector';
 
 function Profile() {
 	const dispatch = useDispatch();
@@ -22,8 +23,11 @@ function Profile() {
 
 	const { id } = useParams();
 
+
+
 	useEffect(() => {
 		dispatch(getUserById(id));
+
 	}, [id]);
 
 

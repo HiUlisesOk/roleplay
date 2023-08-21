@@ -48,11 +48,10 @@ const CharacterInformation = () => {
 												/>
 												<Box style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', }}>
 													<Typography variant="h2" color="secondary.main">{character.name}</Typography>
-													<Typography variant="body1" color="text.secondary">{character.charge}</Typography>
+													<Typography variant="body1" color="primary.contrastText">{character?.CharacterStat?.EXP} XP</Typography>
+													<Typography variant="body1" color="primary.contrastText">Nivel {character?.CharacterStat?.level}</Typography>
 												</Box>
 											</TableCell>
-											<TableCell><Typography variant="body1" color="primary.contrastText">Nivel {character?.CharacterStat?.level}</Typography></TableCell>
-											<TableCell><Typography variant="body1" color="primary.contrastText">{character?.CharacterStat?.EXP} Xp</Typography></TableCell>
 										</TableRow>
 									))}
 								</TableBody>
