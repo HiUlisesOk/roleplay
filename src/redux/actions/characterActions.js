@@ -128,7 +128,7 @@ export const getCharacterInfo = createAsyncThunk(
 export const deleteCharacter = createAsyncThunk(
     "deleteCharacter",
 
-    async (characterID, { rejectWithValue }) => {
+    async ({ userID, ID }, { rejectWithValue }) => {
         try {
             const userTokenLocalStorage =
                 typeof window != "undefined"
@@ -145,7 +145,7 @@ export const deleteCharacter = createAsyncThunk(
                     "Content-Type": "application/json",
                 },
             };
-            await axios.delete(`/delete-character?ID=${characterID}`, config);
+            await axios.delete(`/delete-character?ID=${ID}&userID=${userID}`, config);
             return characterID;
         } catch (error) {
             console.log(error);
