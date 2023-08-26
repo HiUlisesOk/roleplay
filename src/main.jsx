@@ -9,6 +9,7 @@ import { store } from './redux/store.js';
 import { Provider } from 'react-redux';
 import theme from './css/ThemeStyles.js';
 import Nav from './components/utils/Nav.jsx';
+import { UserProvider } from './components/utils/userContext.jsx';
 
 
 
@@ -18,7 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <BrowserRouter>
         <CssBaseline />
         <Provider store={store}>
-          <App />
+          <UserProvider><App /></UserProvider>
         </Provider>
       </BrowserRouter>
     </ThemeProvider>

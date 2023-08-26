@@ -8,7 +8,13 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSelector, getUserByIdSelector, getMyInfoSelector } from '../../redux/selector/userSelector';
 import { getMyInfo, getUserById } from '../../redux/actions/userActions'
-export default function AvatarMenu() {
+import { Box, Typography } from '@mui/material';
+import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
+import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
+import { getUserContext } from '../utils/userContext';
+
+
+export default function AvatarMenu({ styles }) {
   const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -20,26 +26,31 @@ export default function AvatarMenu() {
   };
 
 
-  const { getMyInfoState } = useSelector(getMyInfoSelector);
-  const userId = getMyInfoState?.ID
+  const { userID, username, email, userAvatar } = getUserContext()
+  const userId = userID
 
-  useEffect(() => {
-    dispatch(getMyInfo());
-  }, [getMyInfoSelector, userId])
-  console.log(getMyInfoState)
 
   const AvatarStyle = { width: 40, height: 40 };
-  const ProfilePicture = getMyInfoState?.profilePicture || "";
+  const ProfilePicture = userAvatar || "";
 
   return (
 
     <div>
-      <IconButton
-        sx={{ width: 50, height: 50 }}
+      <Box
+        sx={{ cursor: 'pointer' }}
         onClick={handleClick}>
-        <Avatar sx={AvatarStyle} src={ProfilePicture}></Avatar>
-      </IconButton>
+        <Box sx={styles.avatarContainer} >
+
+          <Avatar sx={AvatarStyle} src={ProfilePicture}></Avatar>
+          <Box style={{ display: 'flex', flexDirection: 'column' }}>
+            <Typography variant="userName"> {username}</Typography>
+            <Typography variant="userEmail">  {email}</Typography>
+          </Box>
+          {open ? <KeyboardArrowUpRoundedIcon sx={{ mt: 1 }} /> : <KeyboardArrowDownRoundedIcon sx={{ mt: 1 }} />}
+        </Box>
+      </Box>
       <Menu
+        sx={{ mt: '15px' }}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'right',
@@ -52,7 +63,7 @@ export default function AvatarMenu() {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}><Link to={`/profile/${userId}`}>Perfil</Link> </MenuItem>
+        <MenuItem sx={{ minWidth: '230px' }} onClick={handleClose}><Link to={`/profile/${userId}`}>Perfil</Link> </MenuItem>
         <MenuItem onClick={handleClose}>Personajes</MenuItem>
         <MenuItem onClick={handleClose}>Mensajes</MenuItem>
         <MenuItem onClick={() => {

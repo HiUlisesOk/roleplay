@@ -15,6 +15,8 @@ import FichaDePersonaje from "./Pages/fichaDePersonaje.jsx";
 import CrearPersonaje from "./Pages/CrearPersonaje.jsx";
 import IsAllowed from "./utils/isAllowed.jsx";
 import { user, admin } from "./utils/allowedRoles.js";
+import HomeBoard from "./Pages/HomeBoard.jsx";
+
 
 
 export default function App() {
@@ -28,6 +30,7 @@ export default function App() {
         <Route path="/newtopic" element={<ProtectedRoute><Nav /><NewTopic /></ProtectedRoute>} />
         <Route path="/crear-personaje" element={<ProtectedRoute><Nav /><CrearPersonaje /></ProtectedRoute>} />
         <Route path="/home" element={<ProtectedRoute><Nav /><Home /></ProtectedRoute>} />
+        <Route path="/homeboard" element={<ProtectedRoute><Nav /><HomeBoard /></ProtectedRoute>} />
         <Route path="/login" element={<Landing />} />
         <Route path="/all-topics" element={<><Nav /><AllTopic /></>} />
         <Route path="/register" element={<Register />} />

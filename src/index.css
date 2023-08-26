@@ -24,7 +24,8 @@ html {
    */
 
 body {
-  margin: 0;
+  width: 92vw;
+  margin: 0px 6vw !important;
 }
 
 /**
