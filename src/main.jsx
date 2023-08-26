@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 import theme from './css/ThemeStyles.js';
 import Nav from './components/utils/Nav.jsx';
 import { UserProvider } from './components/utils/userContext.jsx';
+import { ModalProvider } from './components/utils/ModalContext.jsx';
 
 
 
@@ -19,7 +20,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <BrowserRouter>
         <CssBaseline />
         <Provider store={store}>
-          <UserProvider><App /></UserProvider>
+          <UserProvider>
+            <ModalProvider>
+              <App />
+            </ModalProvider>
+          </UserProvider>
         </Provider>
       </BrowserRouter>
     </ThemeProvider>

@@ -157,7 +157,7 @@ export const updateSheet = createAsyncThunk(
 
 export const deleteSheet = createAsyncThunk(
     "deleteSheet",
-    async (roleplaySheetID, { rejectWithValue }) => {
+    async ({ userID, ID }, { rejectWithValue }) => {
         try {
             const userTokenLocalStorage =
                 typeof window != "undefined"
@@ -174,7 +174,7 @@ export const deleteSheet = createAsyncThunk(
                     "Content-Type": "application/json",
                 },
             };
-            await axios.delete(`/delete-sheet?ID=${roleplaySheetID}`, config);
+            await axios.delete(`/delete-sheet?userID=${userID}&ID=${ID}`, config);
             return roleplaySheetID;
         } catch (error) {
             console.log(error);
