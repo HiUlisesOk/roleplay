@@ -7,10 +7,14 @@ export const {
 	statSquares,
 	statBox,
 	nameBox,
-	ranking
+	ranking,
+	buttonsContainer,
+	buttonsContainer_sm,
+	MenuPanelContainer,
 } =
 {
 	container: {
+		overflow: 'hidden',
 		margin: 'auto',
 		marginTop: '3vh',
 		width: "76.7vw",
@@ -25,8 +29,9 @@ export const {
 		width: "25vw",
 		height: "74.8vh",
 		flexShrink: 0,
-		borderRadius: "16px",
-		border: "1px solid #499CE9",
+		borderRadius: "2vh 0vh 0vh 2vh",
+		border: "0px solid #499CE9",
+		borderRight: "1px solid #499CE9",
 		background: "linear-gradient(160deg, #051524 18%, rgba(16, 73, 127, 0.37) 100%,rgba(16, 73, 127, 0.01) 100%)",
 		marginTop: '-0.1vh',
 		marginLeft: '-0.1vw',
@@ -118,5 +123,32 @@ export const {
 		justifyContent: "space-around",
 		alignItems: "flex-end",
 	},
+	buttonsContainer: {
+		width: "11vw",
+		height: "50vh",
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "space-around",
+		alignItems: "left",
+		flexWrap: "wrap",
+	},
+	buttonsContainer_sm: {
+		width: "11vw",
+		height: "15vh",
+		marginTop: "-2vh",
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "space-around",
+		alignItems: "left",
+		flexWrap: "wrap",
+	},
+	MenuPanelContainer: {
+		width: "15vw",
+		height: "75vh",
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "space-around",
+		alignItems: "center",
+	}
 }
 
