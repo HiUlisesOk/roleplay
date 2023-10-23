@@ -171,6 +171,7 @@ export const updateProfilePicture = createAsyncThunk(
 			const { imagen64 = "", ID = "" } = params
 			const { data } = await axios.post(`/update-profilePicture`, { imagen64, ID }, config);
 			dispatch(getUserById(ID))
+			dispatch(getMyInfo())
 
 			if (!data.type) {
 				return rejectWithValue(data.message);

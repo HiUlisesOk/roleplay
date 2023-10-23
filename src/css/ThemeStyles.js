@@ -4,44 +4,122 @@ const theme = createTheme({
 	palette: {
 		mode: 'dark',
 		primary: {
-			dark: '#171312',
+			dark: '#312E2D',
 			main: '#1F1B1A',
-			light: '#312E2D',
-			contrastText: '#f5f5f5',
+			light: '#171312',
+			contrastText: '#DCDCDC',
 		},
 		secondary: {
-			main: '#a712a7',
-			contrastText: '#f5f5f5',
+			main: '#10497F',
+			contrastText: '#DCDCDC',
 		},
 		accent: {
-			main: '#f6aa53',
-			contrastText: '#f5f5f5',
+			main: '#145C9E',
+			contrastText: '#DCDCDC',
+		},
+		light: {
+			main: '#499CE9',
+			contrastText: '#DCDCDC',
+		},
+		dark: {
+			main: '#051524',
+			contrastText: '#DCDCDC',
 		},
 		background: {
-			default: '#171312',
-			paper: '#1f1b1a',
+			default: '#1F1B1A',
+			paper: '#171312',
 		},
 		text: {
-			primary: '#F5F5F5',
-			secondary: '#dfd9d8',
-			disabled: '#707070',
+			primary: '#DCDCDC',
+			secondary: '#ECEBEB',
+			disabled: '#312E2D',
 		},
 	},
 	typography: {
 		fontSize: 12,
 		fontFamily: 'Poppins, sans-serif',
 
-		h1: {
-			fontSize: 32,
-			fontWeight: 700,
-			lineHeight: 1.2,
-			letterSpacing: '-0.02em',
-		},
-		h2: {
-			fontSize: 24,
+		Poppins36px: {
+			margin: '1vh',
+			color: "text.primary",
+			textAlign: "center",
+			fontFamily: "Poppins",
+			fontSize: "2vw",
+			fontStyle: "normal",
 			fontWeight: 600,
-			lineHeight: 1.3,
-			letterSpacing: '-0.01em',
+			lineHeight: "4vh",
+
+		},
+		Poppins18px: {
+			color: "text.primary",
+			fontFamily: "Poppins",
+			fontSize: "3vh",
+			fontStyle: "normal",
+			fontWeight: 400,
+			lineHeight: "28px /* 155.556% */",
+		},
+		Poppins18left: {
+			color: "text.primary",
+			fontFamily: "Poppins",
+			fontSize: "3vh",
+			fontStyle: "normal",
+			fontWeight: 700,
+			lineHeight: "normal",
+			textAlign: "left",
+			marginRight: "auto",
+		},
+		Poppins16px: {
+			color: "text.primary",
+			fontFamily: "Poppins",
+			fontSize: "2.5vh",
+			fontStyle: "normal",
+			fontWeight: 700,
+			lineHeight: "normal",
+		},
+		Poppins16left: {
+			color: "text.primary",
+			fontFamily: "Poppins",
+			fontSize: "2.5vh",
+			fontStyle: "normal",
+			fontWeight: 700,
+			lineHeight: "normal",
+			textAlign: "left",
+			marginRight: "auto",
+		},
+		Poppins10left: {
+			color: "text.primary",
+			fontFamily: "Poppins",
+			fontSize: "1.5vh",
+			fontStyle: "normal",
+			fontWeight: 700,
+			lineHeight: "normal",
+			textAlign: "left",
+			marginRight: "auto",
+		},
+		Quicksand24px: {
+			margin: '2vw',
+			color: "text.primary",
+			fontFamily: "Quicksand",
+			fontSize: "3.4vh",
+			fontStyle: "normal",
+			fontWeight: 400,
+			lineHeight: "5vh",
+		},
+		Quicksand14px: {
+			color: "text.primary",
+			fontFamily: "Quicksand",
+			fontSize: "2vh",
+			fontStyle: "normal",
+			fontWeight: 700,
+			lineHeight: "2.5vh",
+		},
+		Quicksand14light: {
+			color: "text.primary",
+			fontFamily: "Quicksand",
+			fontSize: "2vh",
+			fontStyle: "normal",
+			fontWeight: "normal",
+			lineHeight: "2.5vh",
 		},
 		body1: {
 			fontSize: 16,
@@ -58,6 +136,20 @@ const theme = createTheme({
 			fontWeight: 200,
 			lineHeight: 1,
 		},
+		userName: {
+			fontFamily: 'Poppins',
+			color: '#E2E4E9',
+			fontSize: 18,
+			fontWeight: 600,
+			lineHeight: 'normal',
+		},
+		userEmail: {
+			fontFamily: 'Quicksand',
+			color: '#93C5FD',
+			fontSize: 14,
+			fontWeight: 400,
+			lineHeight: 0,
+		},
 		button: {
 
 		},
@@ -67,12 +159,14 @@ const theme = createTheme({
 			fontStyle: 'italic',
 		},
 
+
 		Bold20px: {
 			fontWeight: 'bold',
 			fontSize: '20px'
 		}
 
 	},
+
 	components: {
 		MuiTextField: {
 			styleOverrides: {
@@ -84,11 +178,39 @@ const theme = createTheme({
 					'.css-78t69-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill': {
 						'-webkitBoxShadow': '0 0 0 100px #312E2D inset',
 						borderRadius: '0px',
-					},
+					}
+				},
+			},
+		},
+
+		MuiButtonBase: {
+			defaultProps: {
+				disableRipple: true,
+				disableTouchRipple: true,
+				focusRipple: false,
+				TouchRippleProps: { background: 'red' },
+			},
+		},
+
+		MuiButton: {
+			defaultProps: {
+				disableRipple: true,
+				disableTouchRipple: true,
+				focusRipple: false,
+				TouchRippleProps: { background: 'red' },
+			},
+		},
+
+
+		MuiAppBar: {
+			styleOverrides: {
+				root: {
+					'-webkitBoxShadow': '0 0 0 0px inset',
 				},
 			},
 		},
 	},
+
 });
 
 export default theme;
