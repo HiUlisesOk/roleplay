@@ -6,9 +6,9 @@ import { getActivity, getLastActivity, getMostActiveUsers } from "../actions/act
 const initialState = {
 	loading: false,
 	error: false,
-	getActivityState: {},
-	getLastActivityState: {},
-	getMostActiveUsersState: {}
+	getActivityState: [],
+	getLastActivityState: [],
+	getMostActiveUsersState: []
 };
 
 

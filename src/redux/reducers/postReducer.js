@@ -5,11 +5,11 @@ import { getAllPost, createPost, updatePost, getPostByTopicID, getPostByID } fro
 const initialState = {
 	loading: false,
 	error: false,
-	getAllPostState: {},
-	createPostState: {},
-	updatePostState: {},
-	postByTopicIDState: {},
-	getPostByIDState: {},
+	getAllPostState: [],
+	createPostState: [],
+	updatePostState: [],
+	postByTopicIDState: [],
+	getPostByIDState: [],
 };
 
 export const getAllPostReducer = createReducer(initialState, builder => {

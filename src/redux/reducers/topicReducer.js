@@ -4,13 +4,13 @@ import { getAllTopic, createTopic, updateTopicTitle, deleteTopic, getLastActiveT
 const initialState = {
 	loading: false,
 	error: false,
-	allTopicState: {},
-	createTopicState: {},
-	updateTopicTile: {},
-	deleteTopicState: {},
-	lastActiveTopicsState: {},
-	topicByIdState: {},
-	topicByUserIdState: {},
+	allTopicState: [],
+	createTopicState: [],
+	updateTopicTile: [],
+	deleteTopicState: [],
+	lastActiveTopicsState: [],
+	topicByIdState: [],
+	topicByUserIdState: [],
 };
 
 export const getLastActiveTopicsReducer = createReducer(initialState, builder => {
