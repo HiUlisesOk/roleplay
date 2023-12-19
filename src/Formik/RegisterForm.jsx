@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Link } from "react-router-dom";
 import * as Yup from 'yup';
 import { Box, Typography, TextField, Button, InputAdornment, IconButton } from '@mui/material';
-import BG from '../img/medieval_street.jpg';
+import BG from '../img/30.jpg';
 import { useDispatch } from 'react-redux';
 import { Register } from '../redux/actions/userActions';
 import VisibilityIcon from '@mui/icons-material/Visibility';

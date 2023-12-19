@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { getAllTopic, createTopic, updateTopicTitle, deleteTopic, getLastActiveTopics, getTopicById } from "../actions/topicActions";
+import { getAllTopic, createTopic, updateTopicTitle, deleteTopic, getLastActiveTopics, getTopicById, getTopicByUserId } from "../actions/topicActions";
 
 const initialState = {
 	loading: false,
@@ -9,7 +9,8 @@ const initialState = {
 	updateTopicTile: {},
 	deleteTopicState: {},
 	lastActiveTopicsState: {},
-	topicByIdState: {}
+	topicByIdState: {},
+	topicByUserIdState: {},
 };
 
 export const getLastActiveTopicsReducer = createReducer(initialState, builder => {
@@ -104,6 +105,22 @@ export const deleteTopicReducer = createReducer(initialState, builder => {
 		console.log(action);
 	});
 	builder.addCase(deleteTopic.rejected, (state, action) => {
+		state.loading = false;
+		state.error = action.payload;
+	});
+});
+
+export const getTopicByUserIdReducer = createReducer(initialState, builder => {
+	builder.addCase(getTopicByUserId.pending, (state, action) => {
+		state.loading = true;
+		state.error = false;
+	});
+	builder.addCase(getTopicByUserId.fulfilled, (state, action) => {
+		state.loading = false;
+		state.error = false;
+		state.topicByUserIdState = action.payload;
+	});
+	builder.addCase(getTopicByUserId.rejected, (state, action) => {
 		state.loading = false;
 		state.error = action.payload;
 	});

@@ -1,7 +1,7 @@
 import RegistrationForm from "../Formik/RegisterForm";
 import React, { useEffect, useState } from 'react';
 import { Box, Typography, ThemeProvider, createTheme, } from '@mui/material';
-import BG from '../img/medieval_street.jpg';
+import BG from '../img/13.jpg';
 import { registerSelector } from "../redux/selector/userSelector";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
@@ -11,7 +11,7 @@ export default function Home() {
 
     const { registerState } = useSelector(registerSelector);
     const [message, setMessage] = useState('');
-    console.log(registerState?.message);
+    // console.log(registerState?.message);
 
     useEffect(() => {
         registerState?.message && setMessage(registerState?.message);

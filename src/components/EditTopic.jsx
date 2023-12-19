@@ -25,7 +25,7 @@ export default function EditTopic({ topic }) {
         }));
         setShow(false);
         window.location.reload();
-        console.log(topic.ID, newTitle);
+        // console.log(topic.ID, newTitle);
     };
     const handleClick = () => {
         setShow(true);

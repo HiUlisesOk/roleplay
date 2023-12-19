@@ -1,5 +1,5 @@
 import { Avatar, Box, Grid, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
 	container,
 	CharacterPanel,
@@ -25,11 +25,51 @@ import InsightsOutlinedIcon from '@mui/icons-material/InsightsOutlined';
 import DonutSmallOutlinedIcon from '@mui/icons-material/DonutSmallOutlined';
 import { useState } from 'react';
 import ActivityTable from './ActivityTable';
+import UserStats from '../UiKit/UserStats';
+import { useUserContext } from '../utils/userContext';
+import { useDispatch, useSelector } from 'react-redux'
+import getTimeDifferenceString from '../../utils/TimeAgo';
+import { getLastActivitySelector } from '../../redux/selector/activitySelector';
+import { getLastActivity } from '../../redux/actions/activityActions';
 
 const Dashboard = ({ guild }) => {
 
 	const [showPanel, setShowPanel] = useState(1)
-	console.log('showPanel', showPanel)
+	const { ID, username, email, profilePicture } = useUserContext()
+	// console.log('showPanel', showPanel)
+
+	const dispatch = useDispatch()
+
+
+
+	const { getLastActivityState } = useSelector(getLastActivitySelector)
+
+
+	const [info, setInfo] = useState([])
+	// console.log(info)
+
+
+	useEffect(() => {
+		!getLastActivityState.length && dispatch(getLastActivity())
+
+		if (getLastActivityState.length > 0) {
+			const mapInfo = getLastActivityState?.map((item, index) => {
+				return {
+					ID: item.user_id,
+					avatar: item?.avatar,
+					action: item?.action_desc,
+					username: item.name || 'unknown',
+					preview: item.info,
+					timeAgo: getTimeDifferenceString(item.createdAt),
+					topics: "60 Topics"
+				}
+			})
+
+			const filterInfo = mapInfo.filter((item) => ID == item.ID && item)
+			// console.log(getLastActivityState)
+			setInfo(filterInfo)
+		}
+	}, [getLastActivityState])
 
 	const options = {
 		Activity: 1,
@@ -43,53 +83,22 @@ const Dashboard = ({ guild }) => {
 	}
 
 	return (
-		<Box sx={container}>
+		<Box id="dashboardContainer" sx={container}>
 
-			<Box sx={CharacterPanel}>
+			<Box id="CharacterPanel" sx={CharacterPanel}>
 
 				<Box sx={nameBox}>
-					<Typography variant="Poppins36px" component="div" >{guild || "Liam Fenix Vortex"}</Typography>
+					<Typography variant="Poppins36px" component="div" >{username || "Liam Fenix Vortex"}</Typography>
 				</Box>
 
 
 				<Box sx={Outline}>
-					<Avatar sx={AvatarStyles} />
+					<Avatar sx={AvatarStyles} src={profilePicture} />
 				</Box>
 
-				<Typography variant="Quicksand24px" component="div">{guild || "Rising Phoenix Legion"}</Typography>
+				<Typography variant="GuildNameBig" component="div">{guild || "Rising Phoenix Legion"}</Typography>
 
-				<Box sx={statsContainer}>
-
-
-					<Box sx={statBox}>
-						<Box sx={statSquares}>
-							<Typography variant="Poppins18px" component="div">16</Typography>
-						</Box>
-						<Typography variant="Quicksand14px" component="div">Level</Typography>
-					</Box>
-
-					<Box sx={statBox}>
-						<Box sx={statSquares}>
-							<Typography variant="Poppins18px" component="div">16</Typography>
-						</Box>
-						<Typography variant="Quicksand14px" component="div">Topics</Typography>
-					</Box>
-
-					<Box sx={statBox}>
-						<Box sx={statSquares}>
-							<Typography variant="Poppins18px" component="div">16k</Typography>
-						</Box>
-						<Typography variant="Quicksand14px" component="div">Experiencia</Typography>
-					</Box>
-
-					<Box sx={statBox}>
-						<Box sx={statSquares}>
-							<Typography variant="Poppins18px" component="div">16</Typography>
-						</Box>
-						<Typography variant="Quicksand14px" component="div">Battles</Typography>
-					</Box>
-
-				</Box>
+				<UserStats stat={1.5} title={1} />
 
 				<Box sx={ranking}>
 					<Typography variant="Quicksand14px" color="light.main" component="div" >{guild || "Ranking #1234"}</Typography>
@@ -120,7 +129,7 @@ const Dashboard = ({ guild }) => {
 
 			<Box sx={showPanel == options?.Activity ? { display: "flex" } : { display: "none" }}>
 
-				<ActivityTable rows={[{ avatar: 'https://i.pravatar.cc/150?ana', action: 'New response', username: 'Leia Blaz', preview: 'They lean in, eager to learn...', timeAgo: '2 mins ago' }, { avatar: 'https://i.imgur.com/2AH91i1.jpg', action: 'You posted', username: 'Liam Vortex Khaler', preview: 'Admist the shadow of the...', timeAgo: '2 mins ago' }]} />
+				<ActivityTable rows={info} />
 			</Box>
 
 

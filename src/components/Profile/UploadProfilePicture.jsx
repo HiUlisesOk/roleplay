@@ -53,7 +53,7 @@ function ProfileAvatarWithCamera({ ID, userData, closeModal }) {
 		// Manejar el evento de cambio cuando se selecciona un archivo
 		input.onchange = (event) => {
 			const selectedFile = event.target.files[0];
-			console.log(selectedFile);
+			// console.log(selectedFile);
 
 			if (selectedFile) {
 				const fileReader = new FileReader();

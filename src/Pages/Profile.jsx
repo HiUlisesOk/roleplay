@@ -16,6 +16,10 @@ import { ProfileStyles } from '../css/ProfileStyles';
 import CharacterInformation from '../components/Profile/CharactersInformation';
 import { ModalProvider } from '../components/utils/ModalContext';
 import { getMyInfoSelector, loginSelector } from '../redux/selector/userSelector';
+import ProfileFeed from '../components/Profile/ProfileFeed';
+import SavedShowCase from '../components/ShowCase/SavedShowCase';
+import { getTopicByUserId } from '../redux/actions/topicActions'
+import { getTopicByUserIdSelector } from '../redux/selector/topicSelector'
 
 function Profile() {
 	const dispatch = useDispatch();
@@ -23,6 +27,8 @@ function Profile() {
 
 	const { id } = useParams();
 
+	const [userTopics, setUserTopics] = useState([])
+	const { topicByUserIdState } = useSelector(getTopicByUserIdSelector)
 
 
 	useEffect(() => {
@@ -30,23 +36,45 @@ function Profile() {
 
 	}, [id]);
 
+	useEffect(() => {
 
-	console.log(theme);
+		id && dispatch(getTopicByUserId(id))
+
+		const newTopicsList = topicByUserIdState && topicByUserIdState?.length > 0 && topicByUserIdState?.map((item) => {
+			return {
+				avatar: item?.avatar,
+				action: item?.title,
+				username: item?.author,
+				preview: 'They lean in, eager to learn...',
+				timeAgo: item?.updatedAt
+
+			}
+		})
+
+		newTopicsList.length && setUserTopics(newTopicsList)
+
+		console.log(userTopics)
+
+	}, [id])
+
+
+	// console.log(theme);
 	return (<>
 		<div style={ProfileStyles.banner}></div>
 		<ModalProvider>
 			<Container style={ProfileStyles.container}>
-				<Grid container spacing={1} style={{ flex: 1 }}>
-					<Grid item xs={6}>
-
+				<Grid container spacing={0} style={{ flex: 1 }}>
+					<Grid style={ProfileStyles.userInfo} item xs={3}>
 						<UserInformation />
 					</Grid>
-					<Grid item xs={6}>
-						<CharacterInformation />
+					<Grid id="InfoProfileContainer" sx={{ ml: 1, }} item xs={8}>
+						<ProfileFeed />
+						<SavedShowCase info={userTopics} />
+						{/* <CharacterInformation /> */}
 					</Grid>
 				</Grid>
 			</Container>
-		</ModalProvider>
+		</ModalProvider >
 	</>
 	);
 }

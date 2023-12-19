@@ -13,7 +13,7 @@ import SimpleCard from "../components/Home_/SimpleCard.jsx";
 import { useSpring, animated } from 'react-spring';
 import DisplayPersonajes from "../components/Home_/DisplayPersonajes.jsx";
 
-export default function Home() {
+export default function Home({ children }) {
     const dispatch = useDispatch();
 
     const LastActiveTopics = useSelector(getLastActiveTopicsSelector);
@@ -22,23 +22,23 @@ export default function Home() {
         dispatch(getLastActiveTopics());
     }, []);
 
-    console.log('Last', LastActiveTopics.lastActiveTopicsState);
+    // console.log('Last', LastActiveTopics.lastActiveTopicsState);
 
     const anunciosArray = ['Anuncio 1', 'Anuncio 2', 'Anuncio 3', 'Anuncio 4', 'Anuncio 5'];
     const lastActives = LastActiveTopics?.lastActiveTopicsState?.lastActiveTopics;
     const [buttons, setButtons] = useState([
         {
-            text: 'Personajes',
+            text: 'Dashboard',
             variant: 'disabled',
+            content: children
+        },
+        {
+            text: 'Personajes',
+            variant: 'text',
             content: <DisplayPersonajes />
         },
         {
-            text: 'Button 2',
-            variant: 'text',
-            content: '2'
-        },
-        {
-            text: 'Button 3',
+            text: 'Roleando ahora',
             variant: 'text',
             content: '3'
         },
@@ -72,7 +72,7 @@ export default function Home() {
     return (
 
         <>
-            <Box
+            <Box id="containerHome"
                 sx={styles.box1}
             >
                 <Box
@@ -86,7 +86,7 @@ export default function Home() {
                                 ))
                             }
                         </Box>
-                        <Box sx={styles.tablonSection}>
+                        <Box id="innerContainerHome" sx={styles.tablonSection}>
                             {
                                 buttons.map(
                                     (item) => (
@@ -103,7 +103,7 @@ export default function Home() {
                     </Box>
                 </Box>
                 <Box>
-                    <Box sx={styles.containerSection2}>
+                    {/* <Box sx={styles.containerSection2}>
                         <Box sx={styles.section}>
 
                             <animated.div style={animStyles}>
@@ -122,7 +122,7 @@ export default function Home() {
                             {//<Slide arrayItems={postsArray} column={false} element='cardsmall' />
                             }
                         </Box>
-                    </Box>
+                    </Box> */}
                 </Box>
             </Box>
         </>

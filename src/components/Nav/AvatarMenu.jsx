@@ -11,7 +11,7 @@ import { getMyInfo, getUserById } from '../../redux/actions/userActions'
 import { Box, Typography } from '@mui/material';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
-import { getUserContext } from '../utils/userContext';
+import { useUserContext } from '../utils/userContext';
 
 
 export default function AvatarMenu({ styles }) {
@@ -25,14 +25,10 @@ export default function AvatarMenu({ styles }) {
     setAnchorEl(null);
   };
 
-
-  const { userID, username, email, userAvatar } = getUserContext()
-  const userId = userID
-
-
-  const AvatarStyle = { width: 40, height: 40 };
-  const ProfilePicture = userAvatar || "";
-
+  const { ID, username, email, profilePicture } = useUserContext()
+  const userId = ID
+  const ProfilePicture = profilePicture || "";
+  // console.log(ID)
   return (
 
     <div>
@@ -41,7 +37,7 @@ export default function AvatarMenu({ styles }) {
         onClick={handleClick}>
         <Box sx={styles.avatarContainer} >
 
-          <Avatar sx={AvatarStyle} src={ProfilePicture}></Avatar>
+          <Avatar sx={{ width: 40, height: 40 }} src={ProfilePicture}></Avatar>
           <Box style={{ display: 'flex', flexDirection: 'column' }}>
             <Typography variant="userName"> {username}</Typography>
             <Typography variant="userEmail">  {email}</Typography>

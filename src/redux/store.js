@@ -14,7 +14,8 @@ import {
 	updateTopicTitleReducer,
 	deleteTopicReducer,
 	getLastActiveTopicsReducer,
-	getTopicByIdReducer
+	getTopicByIdReducer,
+	getTopicByUserIdReducer
 } from './reducers/topicReducer';
 import {
 	getAllPostReducer,
@@ -45,6 +46,9 @@ import {
 	startBattleReducer,
 	takeTurnReducer
 } from "./reducers/battleReducer";
+import { getActivityReducer, getLastActivityReducer, getMostActiveUsersReducer } from "./reducers/ActivityReducer.js";
+
+
 const userInfoLocalStorage =
 	typeof window !== "undefined" && localStorage.getItem("userInfo")
 		? JSON.parse(localStorage.getItem("userInfo"))
@@ -94,6 +98,10 @@ const reducers = combineReducers({
 	startBattleState: startBattleReducer,
 	takeTurnState: takeTurnReducer,
 	getMyInfoState: getMyInfoReducer,
+	getActivityState: getActivityReducer,
+	getLastActivityState: getLastActivityReducer,
+	getMostActiveUsersState: getMostActiveUsersReducer,
+	topicByUserIdState: getTopicByUserIdReducer,
 });
 
 export const store = configureStore({

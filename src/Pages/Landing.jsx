@@ -1,7 +1,7 @@
 import { Box, Typography, TextField, InputAdornment, IconButton } from '@mui/material';
 import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
-import BG from '../img/bg.jpg';
+import BG from '../img/5.jpg';
 import React, { useDebugValue, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';

@@ -34,6 +34,7 @@ export const getLastActiveTopics = createAsyncThunk(
         }
     }
 );
+
 export const getAllTopic = createAsyncThunk(
     "getAllTopic",
     async (params, { rejectWithValue }) => {
@@ -93,6 +94,7 @@ export const getTopicById = createAsyncThunk(
         }
     }
 );
+
 export const createTopic = createAsyncThunk(
     "createTopic",
     async (topic, { rejectWithValue, dispatch }) => {
@@ -167,6 +169,36 @@ export const updateTopicTitle = createAsyncThunk(
             dispatch(getAllTopic());
             return data;
 
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+export const getTopicByUserId = createAsyncThunk(
+    "getTopicByUserId",
+    async (id, { rejectWithValue }) => {
+        try {
+            const userTokenLocalStorage =
+                typeof window != "undefined"
+                    ? localStorage.getItem("userToken")
+                        ? JSON.parse(localStorage.getItem("userToken"))
+                        : null
+                    : null;
+
+            !userTokenLocalStorage && logout();
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${userTokenLocalStorage}`,
+                    "Content-Type": "application/json",
+                },
+            };
+            const response = await axios.get(`/get-topicByUserID?userID=${id}`, config);
+            const data = response.data;
+            console.log(data);
+            return data;
         } catch (error) {
             console.log(error);
             return rejectWithValue(error.message);

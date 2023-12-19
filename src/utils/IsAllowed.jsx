@@ -21,7 +21,7 @@ const IsAllowed = ({ roles, children }) => {
 	const dispatch = useDispatch()
 	useEffect(() => {
 		if (user) {
-			dispatch(getUserRolesById(user.ID))
+			user.ID && dispatch(getUserRolesById(user.ID))
 		}
 	}, [dispatch, user])
 

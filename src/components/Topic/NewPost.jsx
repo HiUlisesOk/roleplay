@@ -21,11 +21,11 @@ export default function NewPost({ topicId }) {
       authorID: userId,
       topicID: topicId,
     }));
-    console.log({
-      content: postContent,
-      authorID: userId,
-      topicID: topicId,
-    });
+    // console.log({
+    //   content: postContent,
+    //   authorID: userId,
+    //   topicID: topicId,
+    // });
   };
 
 

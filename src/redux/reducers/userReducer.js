@@ -109,7 +109,7 @@ export const getMyInfoReducer = createReducer(initialState, builder => {
 		state.loading = false;
 		state.error = false;
 		state.getMyInfoState = action.payload;
-		console.log(action);
+
 	});
 	builder.addCase(getMyInfo.rejected, (state, action) => {
 		state.loading = false;
