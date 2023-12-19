@@ -6,7 +6,7 @@ import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import { ProfileStyles } from '../../css/ProfileStyles';
 import { useDispatch, useSelector } from 'react-redux';
 import FollowButton from '../utils/FollowButton';
-import UserStats from './UserStats';
+
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, } from '@mui/material';
 import { getCharacterByUserId } from '../../redux/actions/characterActions';
 import { useParams } from 'react-router-dom';
@@ -20,7 +20,7 @@ const CharacterInformation = () => {
 	const { getCharacterByUserIdState } = useSelector(getCharacterByUserIdSelector)
 	useEffect(() => {
 		id && dispatch(getCharacterByUserId(id));
-		console.log(getCharacterByUserIdState);
+		// console.log(getCharacterByUserIdState);
 	}, [id]);
 	const { getUserByIdState } = useSelector(getUserByIdSelector)
 

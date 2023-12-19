@@ -27,8 +27,8 @@ export default function Topic() {
     const postSelector = useSelector(getPostByTopicIDSelector);
     const posts = postSelector.postByTopicIDState;
     const topic = topicSelector.topicByIdState;
-    console.log(topic, 'topic');
-    console.log(userId, 'userID');
+    // console.log(topic, 'topic');
+    // console.log(userId, 'userID');
     const [orderPosts, setOrderPost] = useState([]);
 
     useEffect(() => {
@@ -37,7 +37,7 @@ export default function Topic() {
         }
     }, [posts]);
 
-    console.log(posts, 'posts');
+    // console.log(posts, 'posts');
 
     const handleDelete = () => {
         dispatch(deleteTopic(id));

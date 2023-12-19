@@ -1,34 +1,11 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { logout } from '../../utils/Logout'
+import { getLastActivity } from "./activityActions";
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_API_URL;
 
-export const Login = createAsyncThunk(
-	"Login",
-	async (user, { rejectWithValue }) => {
-		try {
-			const { data } = await axios.post(`/login`, user, {
-				withCredentials: true,
-			});
-			console.log('Login', data)
-			if (!data.passwordsMatch) {
-				localStorage.setItem("Login", JSON.stringify(false));
-				return rejectWithValue(data.message);
-			} else {
-				localStorage.clear();
-				localStorage.setItem("userInfo", JSON.stringify(data.user));
-				localStorage.setItem("userToken", JSON.stringify(data.token));
-				localStorage.setItem("userRoles", JSON.stringify(data?.user?.roles));
-				localStorage.setItem("Login", JSON.stringify(true));
-				return data;
-			}
-		} catch (error) {
-			console.log(error);
-			return rejectWithValue(error.message);
-		}
-	}
-);
+
 
 
 
@@ -91,7 +68,7 @@ export const getUserById = createAsyncThunk(
 
 export const getMyInfo = createAsyncThunk(
 	"getMyInfo",
-	async (params, { rejectWithValue, getState, dispatch }) => {
+	async (id, { rejectWithValue, getState, dispatch }) => {
 		try {
 			const { ID } = JSON.parse(localStorage.getItem('userInfo'));
 			console.log('ID', ID)
@@ -111,17 +88,18 @@ export const getMyInfo = createAsyncThunk(
 				},
 			};
 
-			const response = await axios.get(`/get-user-info/${ID}`, config);
+			const response = await axios.get(`/get-user-info/${ID || id}`, config);
 
 			const data = response.data;
 
-			console.log('dataFromAction', response)
+			// console.log('DATA DE GET MY INFO' + data)
 
 			return data;
 
 		} catch (error) {
-			console.log(error);
-			return rejectWithValue(error.message);
+
+			console.log({ message: error?.message, status: error?.response?.status });
+			return ({ message: error?.message, status: error?.response?.status });
 		}
 	}
 );
@@ -172,6 +150,7 @@ export const updateProfilePicture = createAsyncThunk(
 			const { data } = await axios.post(`/update-profilePicture`, { imagen64, ID }, config);
 			dispatch(getUserById(ID))
 			dispatch(getMyInfo())
+			dispatch(getLastActivity())
 
 			if (!data.type) {
 				return rejectWithValue(data.message);
@@ -215,6 +194,33 @@ export const getUserRolesById = createAsyncThunk(
 
 			return data;
 
+		} catch (error) {
+			console.log(error);
+			return rejectWithValue(error.message);
+		}
+	}
+);
+
+export const Login = createAsyncThunk(
+	"Login",
+	async (user, { rejectWithValue, dispatch }) => {
+		try {
+			const { data } = await axios.post(`/login`, user, {
+				withCredentials: true,
+			});
+			console.log('Login', data)
+			if (!data.passwordsMatch) {
+				localStorage.setItem("Login", JSON.stringify(false));
+				return rejectWithValue(data.message);
+			} else {
+				localStorage.clear();
+				localStorage.setItem("userInfo", JSON.stringify(data.user));
+				localStorage.setItem("userToken", JSON.stringify(data.token));
+				localStorage.setItem("userRoles", JSON.stringify(data?.user?.roles));
+				localStorage.setItem("Login", JSON.stringify(true));
+				dispatch(getMyInfo())
+				return data;
+			}
 		} catch (error) {
 			console.log(error);
 			return rejectWithValue(error.message);

@@ -1,117 +1,79 @@
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Dashboard from '../components/dashboard/Dashboard'
 import { Box } from '@mui/material'
 import FollowDash from '../components/FollowDash/FollowDash'
 import ActivityTableBasic from '../components/UiKit/ActivityTableBasic'
+import { useDispatch, useSelector } from 'react-redux'
 
-const info = [
-	{
-		avatar: 'https://i.pravatar.cc/150?ana',
-		action: 'New response',
-		username: 'Leia Blaz',
-		preview: 'They lean in, eager to learn...',
-		timeAgo: '2 mins ago',
-		topics: '60 Topics'
-	},
-	{
-		avatar: 'https://i.imgur.com/2AH91i1.jpg',
-		action: 'You posted',
-		username: 'Liam Vortex Khaler',
-		preview: 'Amidst the shadow of the...',
-		timeAgo: '2 mins ago',
-		topics: '60 Topics'
-	},
-	{
-		avatar: 'https://i.pravatar.cc/150?john',
-		action: 'New response',
-		username: 'John Doe',
-		preview: 'Exploring new horizons...',
-		timeAgo: '5 mins ago',
-		topics: '45 Topics'
-	},
-	{
-		avatar: 'https://i.pravatar.cc/150?jane',
-		action: 'You posted',
-		username: 'Jane Smith',
-		preview: 'Discovering the beauty of...',
-		timeAgo: '10 mins ago',
-		topics: '30 Topics'
-	},
-	{
-		avatar: 'https://i.pravatar.cc/150?alex',
-		action: 'New response',
-		username: 'Alex Johnson',
-		preview: 'Sharing insights and knowledge...',
-		timeAgo: '15 mins ago',
-		topics: '55 Topics'
-	},
-	{
-		avatar: 'https://i.pravatar.cc/150?emily',
-		action: 'You posted',
-		username: 'Emily Davis',
-		preview: 'Reflecting on the wonders of...',
-		timeAgo: '20 mins ago',
-		topics: '40 Topics'
-	},
-	{
-		avatar: 'https://i.pravatar.cc/150?william',
-		action: 'New response',
-		username: 'William Turner',
-		preview: 'Embracing the journey ahead...',
-		timeAgo: '25 mins ago',
-		topics: '50 Topics'
-	},
-	{
-		avatar: 'https://i.pravatar.cc/150?olivia',
-		action: 'You posted',
-		username: 'Olivia Walker',
-		preview: 'Inspiring others through...',
-		timeAgo: '30 mins ago',
-		topics: '35 Topics'
-	},
-	{
-		avatar: 'https://i.pravatar.cc/150?michael',
-		action: 'New response',
-		username: 'Michael Brown',
-		preview: 'Connecting with like-minded...',
-		timeAgo: '35 mins ago',
-		topics: '48 Topics'
-	},
-	{
-		avatar: 'https://i.pravatar.cc/150?ava',
-		action: 'You posted',
-		username: 'Ava White',
-		preview: 'Exploring the mysteries of...',
-		timeAgo: '40 mins ago',
-		topics: '42 Topics'
-	},
-	{
-		avatar: 'https://i.pravatar.cc/150?liam',
-		action: 'New response',
-		username: 'Liam Jackson',
-		preview: 'Collaborating for a brighter...',
-		timeAgo: '45 mins ago',
-		topics: '53 Topics'
-	},
-	{
-		avatar: 'https://i.pravatar.cc/150?sophia',
-		action: 'You posted',
-		username: 'Sophia Hall',
-		preview: 'Nurturing creativity and innovation...',
-		timeAgo: '50 mins ago',
-		topics: '38 Topics'
-	}
-];
+
+import { getLastActivitySelector, getMostActiveUsersSelector } from '../redux/selector/activitySelector'
+import { getLastActivity, getMostActiveUsers } from '../redux/actions/activityActions'
+import getTimeDifferenceString from '../utils/TimeAgo'
+import Home from './Home'
 
 
 const HomeBoard = () => {
+	const dispatch = useDispatch()
+
+
+
+	const { getLastActivityState } = useSelector(getLastActivitySelector)
+	const { getMostActiveUsersState } = useSelector(getMostActiveUsersSelector)
+
+
+	const [infoLastActivity, setInfoLastActivity] = useState([])
+	const [MostActiveUsers, setMostActiveUsers] = useState([])
+
+	useEffect(() => {
+		!getLastActivityState.length && dispatch(getLastActivity())
+		!getMostActiveUsersState.length && dispatch(getMostActiveUsers())
+
+		if (getLastActivityState.length > 0) {
+			const newInfo = getLastActivityState?.map((item, index) => {
+				return {
+					ID: item.user_id,
+					avatar: item.avatar,
+					action: item.action_desc,
+					username: item.name || 'unknown',
+					preview: item.info,
+					timeAgo: getTimeDifferenceString(item.createdAt),
+					topics: "60 Topics"
+				}
+
+			})
+			// console.log(getLastActivityState)
+			setInfoLastActivity(newInfo)
+		}
+		try {
+			if (getMostActiveUsersState.length > 0) {
+				const newInfo = getMostActiveUsersState?.map((item, index) => {
+					return {
+						ID: item?.authorID,
+						avatar: item.avatar,
+						action: item.action_desc || 'unknown',
+						username: item.username || 'unknown',
+						preview: item.info || 'unknown',
+						timeAgo: getTimeDifferenceString(item.createdAt),
+						topics: item?.Cantidad > 1 ? `${item?.Cantidad} Posts` : `${item?.Cantidad} Posts`
+					}
+
+				})
+				// console.log(getLastActivityState)
+				setMostActiveUsers(newInfo)
+			}
+		} catch (error) {
+			console.log(error)
+		}
+
+	}, [getLastActivityState, getMostActiveUsersState])
+
 	return (
 		<div>
-			<Dashboard />
+			<Home ><Dashboard info={infoLastActivity} /></Home>
 			<Box sx={{ display: 'flex' }}>
-				<ActivityTableBasic rows={info} type={true} max={5} />
-				<FollowDash rows={info} desc={true} btnTitle="Follow" title={"Most Active Roleplayers"} max={8} />
+				<ActivityTableBasic rows={infoLastActivity} type={true} />
+				<FollowDash rows={MostActiveUsers} desc={true} btnTitle="Follow" title={"Most Active Roleplayers"} max={8} />
 			</Box>
 
 		</div>

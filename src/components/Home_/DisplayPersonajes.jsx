@@ -15,9 +15,9 @@ export default function DisplayPersonajes({ }) {
     const charactersSelector = useSelector(getCharacterByUserIdSelector);
     const characters = charactersSelector.getCharacterByUserIdState;
     useEffect(() => {
-        dispatch(getCharacterByUserId(userId));
+        userId && dispatch(getCharacterByUserId(userId));
     }, [userId]);
-    console.log(characters);
+    // console.log(characters);
     return (
         <Box sx={{ display: 'flex', justifyContent: 'space-between', height: '100%' }}>
             <PersonajeCard character={characters[0]} />

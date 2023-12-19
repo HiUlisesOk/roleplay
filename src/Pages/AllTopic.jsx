@@ -14,7 +14,7 @@ export default function AllTopic() {
         dispatch(getAllTopic());
     }, []);
 
-    console.log(state.allTopicState);
+    // console.log(state.allTopicState);
     return (
         <>
             <Box sx={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>

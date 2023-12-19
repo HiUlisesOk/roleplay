@@ -28,6 +28,7 @@ const theme = createTheme({
 		background: {
 			default: '#1F1B1A',
 			paper: '#171312',
+			badge: 'rgba(22, 26, 66, 0.70)',
 		},
 		text: {
 			primary: '#DCDCDC',
@@ -38,7 +39,17 @@ const theme = createTheme({
 	typography: {
 		fontSize: 12,
 		fontFamily: 'Poppins, sans-serif',
+		PoppinsLarger: {
+			margin: '0.1vh',
+			color: "text.primary",
+			textAlign: "left",
+			fontFamily: "Poppins",
+			fontSize: "5.6vw",
+			fontStyle: "normal",
+			fontWeight: 600,
+			lineHeight: "12vh",
 
+		},
 		Poppins36px: {
 			margin: '1vh',
 			color: "text.primary",
@@ -86,10 +97,20 @@ const theme = createTheme({
 			textAlign: "left",
 			marginRight: "auto",
 		},
+		Poppins14left: {
+			color: "text.primary",
+			fontFamily: "Poppins",
+			fontSize: "2vh",
+			fontStyle: "normal",
+			fontWeight: 700,
+			lineHeight: "normal",
+			textAlign: "left",
+			marginRight: "auto",
+		},
 		Poppins10left: {
 			color: "text.primary",
 			fontFamily: "Poppins",
-			fontSize: "1.5vh",
+			fontSize: "1.8vh",
 			fontStyle: "normal",
 			fontWeight: 700,
 			lineHeight: "normal",
@@ -97,7 +118,7 @@ const theme = createTheme({
 			marginRight: "auto",
 		},
 		Quicksand24px: {
-			margin: '2vw',
+			margin: '0.5vw',
 			color: "text.primary",
 			fontFamily: "Quicksand",
 			fontSize: "3.4vh",
@@ -121,6 +142,45 @@ const theme = createTheme({
 			fontWeight: "normal",
 			lineHeight: "2.5vh",
 		},
+		Quicksand10light: {
+			color: "text.primary",
+			fontFamily: "Quicksand",
+			fontSize: "1.5vh",
+			fontStyle: "normal",
+			fontWeight: "normal",
+			lineHeight: "2.5vh",
+			flexShrink: 0,
+			color: "#FFF",
+			textAlign: "center",
+		},
+		GuildName: {
+			color: "text.primary",
+			fontFamily: "Quicksand",
+			fontSize: "1.5vh",
+			fontStyle: "normal",
+			fontWeight: "normal",
+			lineHeight: "2vh",
+			flexShrink: 0,
+			color: "#FFF",
+			textAlign: "center",
+			fontFamily: "Poppins",
+			letterSpacing: "1px",
+			textTransform: "uppercase",
+		},
+		GuildNameBig: {
+			color: "text.primary",
+			fontFamily: "Quicksand",
+			fontSize: "2.5vh",
+			fontStyle: "normal",
+			fontWeight: "normal",
+			lineHeight: "2vh",
+			flexShrink: 0,
+			color: "#FFF",
+			textAlign: "center",
+			fontFamily: "Poppins",
+			letterSpacing: "1px",
+			textTransform: "uppercase",
+		},
 		body1: {
 			fontSize: 16,
 			fontWeight: 400,
@@ -137,11 +197,17 @@ const theme = createTheme({
 			lineHeight: 1,
 		},
 		userName: {
-			fontFamily: 'Poppins',
-			color: '#E2E4E9',
-			fontSize: 18,
-			fontWeight: 600,
-			lineHeight: 'normal',
+			display: "flex",
+			flexDirection: "column",
+			justifyContent: "flex-start",
+			flexShrink: 0,
+			color: "#499CE9",
+			textAlign: "center",
+			fontFamily: "Poppins",
+			fontSize: "14px",
+			fontStyle: "normal",
+			fontWeight: 700,
+			lineHeight: "20px /* 142.857% */",
 		},
 		userEmail: {
 			fontFamily: 'Quicksand',
@@ -166,17 +232,16 @@ const theme = createTheme({
 		}
 
 	},
-
 	components: {
 		MuiTextField: {
 			styleOverrides: {
 				root: {
 					'& .css-1t23tt6-MuiInputBase-input-MuiFilledInput-input:-webkit-autofill': {
-						'-webkitBoxShadow': '0 0 0 100px #312E2D inset',
+						'WebkitBoxShadow': '0 0 0 100px #312E2D inset',
 						borderRadius: '0px',
 					},
 					'.css-78t69-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill': {
-						'-webkitBoxShadow': '0 0 0 100px #312E2D inset',
+						'WebkitBoxShadow': '0 0 0 100px #312E2D inset',
 						borderRadius: '0px',
 					}
 				},
@@ -205,12 +270,15 @@ const theme = createTheme({
 		MuiAppBar: {
 			styleOverrides: {
 				root: {
-					'-webkitBoxShadow': '0 0 0 0px inset',
+					'WebkitBoxShadow': '0 0 0 0px inset',
 				},
 			},
 		},
+
 	},
 
 });
+
+
 
 export default theme;

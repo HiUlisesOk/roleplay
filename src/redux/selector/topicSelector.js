@@ -29,3 +29,8 @@ export const deleteTopicSelector = createSelector(
 	(state) => state.deleteTopicState,
 	(deleteTopic) => deleteTopic
 );
+
+export const getTopicByUserIdSelector = createSelector(
+	(state) => state.topicByUserIdState,
+	(getTopicByUserId) => getTopicByUserId
+);

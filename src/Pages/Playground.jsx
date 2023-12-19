@@ -49,7 +49,7 @@ function Playground() {
       if (characterInfo?.ID == character1) {
          setCharacter1Info(characterInfo);
 
-         console.log(character1Info, 'char1 info');
+         // console.log(character1Info, 'char1 info');
       }
       if (characterInfo?.ID == character2) {
          setCharacter2Info(characterInfo);
@@ -154,7 +154,7 @@ function Playground() {
             return "Acción no reconocida";
       }
    };
-   console.log(turn, 'turn');
+   // console.log(turn, 'turn');
 
    return (
       <>

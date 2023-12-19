@@ -22,7 +22,7 @@ export default function NewTopic() {
     }));
   };
 
-  console.log(!response.topic ? response.topic : response.topic.ID);
+  // console.log(!response.topic ? response.topic : response.topic.ID);
 
   useEffect(() => {
     if (response.topic !== undefined) {

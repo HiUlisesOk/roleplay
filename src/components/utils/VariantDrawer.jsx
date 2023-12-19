@@ -31,7 +31,7 @@ import { HomeRepairServiceOutlined } from '@mui/icons-material';
 
 const drawerWidth = 240;
 const arrayLinks = [
-	{ title: "Home", path: "/home", icon: <GridViewRoundedIcon color="secondary" /> },
+	{ title: "Home", path: "/feed", icon: <GridViewRoundedIcon color="secondary" /> },
 	{ title: "All Topics", path: "/all-topics", icon: <WysiwygRoundedIcon color="secondary" /> },
 	{ title: "Playground", path: "/playground", icon: <SportsEsportsIcon color="secondary" /> },
 	{ title: "Home Board", path: "/homeboard", icon: <HomeRepairServiceOutlined color="secondary" /> }

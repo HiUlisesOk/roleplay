@@ -45,17 +45,17 @@ export default function FichaDePersonaje({ }) {
     const [editSheetOpen, setEditSheetOpen] = useState(false);
 
     useEffect(() => {
-        dispatch(getCharacterInfo(id));
-        dispatch(getSheetByCharId(id));
-        dispatch(getStatsInfo(id));
+        id && dispatch(getCharacterInfo(id));
+        id && dispatch(getSheetByCharId(id));
+        id && dispatch(getStatsInfo(id));
     }, [id]);
 
     const handleDelete = () => {
-        dispatch(deleteCharacter({
+        userId && characterInfo.ID && dispatch(deleteCharacter({
             userID: userId,
-            ID: characterInfo.ID
+            ID: characterInfo?.ID
         }));
-        sheetInfo[0].ID && dispatch(deleteSheet({
+        userId && sheetInfo[0].ID && dispatch(deleteSheet({
             userID: userId,
             ID: sheetInfo[0].ID
         }));

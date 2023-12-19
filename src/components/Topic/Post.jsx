@@ -16,8 +16,8 @@ export default function Post({ author, authorID, createdAt, children, id }) {
         dispatch(deletePost(id));
         window.location.reload();
     };
-    console.log(userId, 'UserID');
-    console.log(authorID, 'AuthorID');
+    // console.log(userId, 'UserID');
+    // console.log(authorID, 'AuthorID');
     return (
         <Box>
             <Box sx={{ display: "flex", gap: '5rem' }}>
