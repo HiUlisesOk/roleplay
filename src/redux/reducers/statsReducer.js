@@ -4,13 +4,13 @@ import { getAllStats, getStatsInfo } from "../actions/statsActions";
 const initialState = {
     loading: false,
     error: false,
-    getAllStatsState: {},
-    getStatsInfoState: {},
-    //createStatsState: {}
+    getAllStatsState: [],
+    getStatsInfoState: [],
+    //createStatsState: []
 
-    //updateStatsState: {},
-    //getStatsByUserIdState: {},
-    // postByTopicIDState: {},
+    //updateStatsState: [],
+    //getStatsByUserIdState: [],
+    // postByTopicIDState: [],
 };
 
 export const getAllStatsReducer = createReducer(initialState, builder => {

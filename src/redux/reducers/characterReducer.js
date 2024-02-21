@@ -5,12 +5,12 @@ import { createCharacter, getAllCharacters, getCharacterInfo, updateCharacter, g
 const initialState = {
     loading: false,
     error: false,
-    createCharacterState: {},
-    getAllCharactersState: {},
-    getCharacterInfoState: {},
-    updateCharacterState: {},
-    getCharacterByUserIdState: {},
-    // postByTopicIDState: {},
+    createCharacterState: [],
+    getAllCharactersState: [],
+    getCharacterInfoState: [],
+    updateCharacterState: [],
+    getCharacterByUserIdState: [],
+    // postByTopicIDState: [],
 };
 
 export const createCharacterReducer = createReducer(initialState, builder => {

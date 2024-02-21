@@ -12,7 +12,7 @@ const AvatarStyles = {
 
 }
 const ActivityTable = ({ rows = [] }) => {
-	console.log(rows)
+	// console.log(rows)
 	return (
 		<Box>
 			<BasicSimpleTable>

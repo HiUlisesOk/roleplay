@@ -4,9 +4,9 @@ import { startBattle, takeTurn } from "../actions/battleActions";
 const initialState = {
     loading: false,
     error: false,
-    startBattleState: {},
-    takeTurnState: {}
-    // postByTopicIDState: {},
+    startBattleState: [],
+    takeTurnState: []
+    // postByTopicIDState: [],
 };
 
 export const startBattleReducer = createReducer(initialState, builder => {

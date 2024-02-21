@@ -5,12 +5,12 @@ import { createSheet, getSheetInfo, getAllSheets, getSheetByCharId, updateSheet 
 const initialState = {
     loading: false,
     error: false,
-    createSheetState: {},
-    getSheetInfoState: {},
-    getAllSheetsState: {},
-    getSheetByCharIdState: {},
-    updateSheetState: {},
-    // postByTopicIDState: {},
+    createSheetState: [],
+    getSheetInfoState: [],
+    getAllSheetsState: [],
+    getSheetByCharIdState: [],
+    updateSheetState: [],
+    // postByTopicIDState: [],
 };
 
 export const createSheetReducer = createReducer(initialState, builder => {

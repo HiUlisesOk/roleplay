@@ -5,13 +5,13 @@ import { Login, Register, uploadImage, updateProfilePicture, getUserById, getUse
 const initialState = {
 	loading: false,
 	error: false,
-	loginInfo: {},
-	registerState: {},
-	uploadImageState: {},
-	updateProfilePictureState: {},
-	getUserByIdState: {},
-	getUserRolesByIdState: {},
-	getMyInfoState: {}
+	loginInfo: [],
+	registerState: [],
+	uploadImageState: [],
+	updateProfilePictureState: [],
+	getUserByIdState: [],
+	getUserRolesByIdState: [],
+	getMyInfoState: []
 };
 
 export const loginReducer = createReducer(initialState, builder => {
